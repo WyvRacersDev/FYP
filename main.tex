@@ -1,0 +1,608 @@
+\documentclass{FastFyp}
+\begin{document}
+\newcommand{\supervisor}{SupervisorName}
+\newcommand{\university}{National University of Computer and Emerging Sciences, Lahore}
+\newcommand{\fyptitle}{FYP Report Title}
+\newcommand{\degree}{BS}
+\newcommand{\Studentone}{Name of Student 1     Roll No. 1    BS(CS/DS/SE)} 
+\newcommand{\Studenttwo}{Name of Student 2     Roll No. 2    BS(CS/DS/SE)}
+\newcommand{\Studentthree}{Name of Student 3     Roll No. 3    BS(CS/DS/SE)}
+\date{\today}
+\renewcommand{\contentsname}{Table of Contents}
+
+\makeatletter
+    \begin{titlepage}
+        \includegraphics[width=0.2\linewidth]{Figures/nulogo.png}\hfill
+        \includegraphics[width=0.2\linewidth]{Figures/fast.png}\\
+        \begin{center} 
+            {\large\bfseries \university}\\[7ex]
+            \includegraphics[width=0.4\linewidth]{Figures/fastlogo.png}\\[8ex]
+            {\huge \bfseries  \fyptitle }\\[10ex] 
+            {\Studentone}\\{\Studenttwo}\\{\Studentthree}\\[4ex] 
+            {Supervisor: \supervisor} \\ [10ex]
+            {Final Year Project}\\
+            {\large \@date}
+        \end{center}
+    \end{titlepage}    
+\makeatother
+\frontmatter
+
+\newpage \thispagestyle{empty} \mbox{} \newpage %Aatira
+
+\pagestyle{empty}  %Aatira
+\section*{\begin{center}{Anti-Plagiarism Declaration} \end{center}} %Aatira
+This is to declare that the above publication was produced under the:
+\begin{flushleft}
+\bf Title: \fyptitle
+\end{flushleft}
+
+is the sole contribution of the author(s), and no part hereof has been reproduced as it is the basis (cut and paste) that can be considered Plagiarism. All referenced parts have been used to argue the idea and cited properly. I/We will be responsible and liable for any consequence if a violation of this declaration is determined.
+\\[4ex]
+%% FYPTODO add the date and your names here
+Date: ..........................
+
+\begin{flushright}
+Name: ..........................
+\\[3ex]
+Signature: ..........................
+\\[6ex]
+Name: ..........................
+\\[3ex]
+Signature: ..........................
+\\[6ex]
+Name: ..........................
+\\[3ex]
+Signature: ..........................
+
+\end{flushright} 
+
+\vspace{5 cm} %Aatira
+ 
+\hrule %Aatira
+
+\section*{Author's Declaration}
+This states Authors’ declaration that the work presented in the report is their own, and has not been submitted/presented previously to any other institution or organization.
+\pagebreak
+\section*{Abstract}
+An Abstract is a short summary of the work being reported. Three to five sentences describing the essence of the work. An abstract is a short, 50-125 words summary of a work. An Abstract should state your work's purpose, findings, and conclusion without commenting on or evaluating the work itself.  It should be only one paragraph. Put the abstract on a separate page that follows the title page.
+\pagebreak 
+
+\section*{Executive Summary}
+The executive summary should be one to two pages’ of an overview of the information contained in the FYP report.  It should give the reader an easy reference, in a very brief form, to the important information contained in the report and explained in more detail in the body of the report. People reading the report will use this section as a reference during presentations. 
+\pagebreak
+
+
+\pagestyle{fancy} %Aatira
+\tableofcontents
+
+\pagebreak
+\listoffigures	% comment this if there are no figures
+\addcontentsline{toc}{chapter}{List of Figures}
+\pagebreak
+\listoftables % comment this if there are no tables
+\addcontentsline{toc}{chapter}{List of Tables}
+
+\mainmatter
+
+
+\chapter{Introduction}
+This chapter is mandatory. The introduction should contain a brief overview of the problem being addressed and the background information needed for the reader to understand the work being done and the reasoning behind it.  
+The last paragraph of the introduction chapter should contain an outline of the entire report.  Summarize each chapter in one line to make the last paragraph.
+\section{Purpose of this Document}
+\textbf{Specify the purpose of this Project.}
+The purpose of the document in an FYP report is to clearly and concisely state the main objective and goals of the project, as well as the research question(s) or hypothesis(es) being investigated. It should provide a brief overview of the background and context of the project, and explain why the research is important and relevant. The purpose of the document should be written in a way that is easy for the reader to understand, and should be included at the beginning of the report.\\ In addition to providing an overview of the project, the purpose of the document should also outline the specific objectives and goals of the research, such as what the project aims to achieve and what the research questions or hypotheses are. This will help the reader understand the scope of the project and what to expect from the report. It is also important to include a brief description of the methods and techniques used in the research, as well as any limitations or assumptions of the project. This will provide the reader with a clear understanding of how the research was conducted and what the results and conclusions are based on. Finally, it should be clear what the report is going to cover, what kind of information will be presented, and in what order.\\
+For Example, "The purpose of this document is to present the design, implementation, and evaluation of our Final Year Project (FYP) which aims to develop a web-based application for small businesses to manage their inventory and customer orders. The project will focus on creating a user-friendly interface and providing a seamless user experience. The goal of this research is to provide a Minimum Viable Product (MVP) that can be used by small businesses to improve their inventory management and customer order processing. The research question we aim to answer is: Can we develop a web-based application that can improve inventory management and customer order processing for small businesses? This report will present the methodology, design, implementation, testing, and evaluation of our project, as well as the limitations and future work."
+\section{Intended Audience}
+Identifying and writing the intended audience for a Final Year Project (FYP) report is an important step in the writing process. The intended audience is the group of people for whom the report is written and who will primarily read and use the report. It is crucial to identify the intended audience early in the writing process as this will guide the report's style, tone, and level of detail.\\
+To identify the intended audience, consider the report's purpose, who will be using the report and for what purpose. For example, the intended audience for a FYP report in Computer Science may be a panel of professors who will be evaluating the project. In contrast, the intended audience for a FYP report in Business may be potential investors or clients.
+\section{Definitions, Acronyms, and Abbreviations}
+List all important definitions, acronyms, and abbreviations used in this document. For example: 
+\textbf{SDG}: Sustainable Development Goal\\
+\textbf{FYP:} Final Year Project\\
+\textbf{MVP}: Minimum Viable Product\\
+\textbf{UI}: User Interface\\
+\textbf{UX}: User Experience\\
+\textbf{Agile}: Agile Development\\
+\textbf{SCRUM}: Scrum Development\\
+\textbf{REST}: Representational State Transfer\\
+\textbf{ORM}: Object-Relational Mapping\\
+\textbf{CRUD}: Create, Read, Update, Delete\\
+\textbf{API}: Application Programming Interface
+\section{Conclusion}
+The last paragraph of the introduction chapter should contain an outline of the entire report. Summarize each chapter in one line to make the last paragraph.
+\chapter{Project Vision}
+For each related work provide a paragraph of introduction and at the end, a paragraph of conclusions. Give a page break after the chapter ends.  This chapter is mandatory.  
+Clearly specify the goals and objectives of the project along with the scope of the project. (You can make sub-heading of goals and objectives and the scope of the project).
+\section{Problem Domain Overview}
+Describe in full detail what your system does. This section can be further divided into sub-sections, but basically, a paragraph description of the system is required.
+\section{Problem Statement}
+Provide the \textbf{problem} which you are trying to solve. 
+\section{Problem Elaboration}
+Describe the problem in detail and the various sub-problems you would work on.
+\section{Goals and Objectives}
+Write goals and objectives here.
+\section{Project Scope}
+Specify the scope of your project here.\\
+For example, The scope of this project is to design and develop a web-based application for small businesses to manage their inventory and customer orders. The application will allow small businesses to:
+\begin{itemize}
+    \item Create, read, update, and delete inventory items
+   \item Create, read, update, and delete customer orders
+   \item Generate reports on inventory levels and customer orders
+   \item Send notifications to customers about their orders
+   \item Provide an easy-to-use user interface and a seamless user experience
+\end{itemize}
+The project will be developed using a combination of HTML, CSS, JavaScript, and a web-development framework such as React.js or Angular.js. The application will use a RESTful API to communicate with a back-end database, which will be implemented using a ORM library. The project will be developed using Agile development principles, and project management will be done using SCRUM.\\
+The project deliverables will include:
+\begin{itemize}
+ \item A functional web-based application for small businesses to manage their inventory and customer orders
+ \item A user manual for the application
+ \item A documentation of the design, implementation, and testing process
+ \end{itemize}
+The project scope does not include the following:
+\begin{itemize}
+ \item  Providing hosting or server infrastructure for the application
+ \item Developing mobile applications (iOS or Android)
+ \item  Integrating the application with third-party services or APIs
+ \end{itemize}
+This project scope will be used as a guide throughout the development
+\section{Sustainable Development Goal (SDG)}
+Identify at least one SDG area that you are targeting in this project. This has to be documented as a paragraph. The complete SDG list is shown in Figure \ref{fig:my_label}.
+\begin{figure} [!h]
+    \centering
+\includegraphics[width=0.8\textwidth]{Figures/Picture1}
+    \caption{This figure represents all the SDGs that can be targets of an FYP; Adding this sub-caption is mandatory; make sure you describe the picture in a way that if a visually impaired person is reading using a text reader, they can understand whats in this picture.}
+    \label{fig:1}
+\end{figure}
+\section{Constraints}
+\section{Business Opportunity}
+\section{Stakeholders Description/ User Characteristics}
+Identify and briefly describe who the users of this system will be, and their roles.
+\subsection{Stakeholders Summary}
+\subsection{Key High-Level Goals and Problems of Stakeholders}
+Notice how a section’s heading is changed to “heading 1”.  It will show up in the table of contents as a section under a chapter.  Notice its numbering also. Similarly, subsections can have heading 2 and heading 3 styles.\\
+\textcolor{red}{NOTE: Subsections from 2.7 to 2.9 are optional for Research projects but compulsory for Development projects.}
+
+\chapter{Literature Review / Related Work}
+For each related work, provide a paragraph of introduction and, at the end, a paragraph of conclusions. Give a page break after the chapter ends. \textcolor{red}{This chapter is mandatory.}
+\section{Definitions, Acronyms, and Abbreviations}
+\section{Detailed Literature Review} 
+This section will include a detailed literature review of your problem area. Make different categories for different types of work done in the past.  In addition to textual descriptions, make a summary table that describes each paper that you have read, along with references.
+\subsection{Related Research Work 1 / Related Development Project (Please make sure to add an appropriate heading here and not keep this same heading, this is your info only.)}
+\begin{itemize}
+    \item Summary of the research item / Development Project (1 or 2 paragraphs)
+  \item  Critical analysis of the research item / Development Project (Strengths and Weaknesses) 1 paragraph
+  \item  Relationship to the proposed work - 1 paragraph
+\end{itemize}
+
+ \subsection{Example LR 1: for Development Project}
+The project ABC \cite{ref:guyon:2007a} focused on building a real-time customer service dashboard designed to streamline query management and improve response efficiency within a mid-sized software firm. The system was developed using a modular architecture, integrating ticket tracking, live chat support, and performance analytics into a single interface. Built with React for the frontend and Node.js for the backend, the dashboard also featured role-based access control and SLA monitoring tools. During testing, the dashboard demonstrated a 35\% reduction in query resolution time and improved internal coordination between support agents and technical teams. The project was deployed in phases, starting with internal use and later expanding to client-facing support channels.
+
+One of the key strengths of this development effort was its adaptability to existing workflows. The dashboard was designed to integrate seamlessly with the company’s CRM and internal communication tools, minimizing disruption during rollout. Its real-time analytics allowed supervisors to monitor agent performance and customer satisfaction trends. However, the project faced limitations in scalability during peak traffic hours, and the initial version lacked multilingual support, which restricted its usability for international clients. These issues were partially addressed in later iterations but remain areas for future enhancement.
+
+This development project directly supports the proposed research by providing a practical foundation for evaluating customer service efficiency. While the research explores theoretical models and AI integration, the dashboard serves as a tangible implementation that can be enhanced with AI-driven features such as automated query routing and sentiment analysis. The performance metrics gathered during this project will inform the research’s evaluation framework and help validate proposed improvements in service delivery and operational management.
+
+ \subsection{Example LR 2: for Research and Development Project}
+Smith et al. \cite{ref:Bishop:2006} investigated the integration of AI-powered chatbots within corporate customer service frameworks, focusing on automating Tier-1 support queries. Their study involved deploying a Natural Language Processing (NLP) based chatbot across three multinational firms and evaluating its performance over a six-month period. The results demonstrated a 40\% reduction in average response time and a 25\% increase in customer satisfaction ratings. The chatbot was trained using historical customer interaction logs and was integrated with existing CRM systems to ensure contextual accuracy and personalized responses. Additionally, the study emphasized the scalability of chatbot systems, noting their ability to handle thousands of simultaneous queries without compromising quality, especially during peak service hours when traditional support teams struggled to maintain SLA compliance.
+
+One of the strengths of this research lies in its empirical approach, offering quantifiable improvements in service metrics. The integration with CRM systems added depth to the chatbot’s responses, enhancing the overall customer experience. However, the study’s limitations include its narrow focus on Tier-1 queries, with minimal exploration of escalation protocols or emotional intelligence in handling sensitive customer issues. It also lacks discussion on the long-term adaptability of the chatbot to evolving customer expectations and organizational changes.
+
+This research is directly relevant to the proposed work, which aims to develop a hybrid customer service model that combines AI efficiency with human oversight. While they focused primarily on automation, the proposed work seeks to extend their framework by incorporating feedback loops, escalation mechanisms, and sentiment analysis to handle more complex queries. The foundational insights from this study will inform the design and evaluation metrics of the proposed system, particularly in terms of response time, customer satisfaction, and operational scalability.
+
+\section{Literature Review Summary Table}
+Please provide a compact summary of your literature review as provided in the table \ref{tab:1}, for the development project.
+\begin{table}[!h]
+\centering
+\caption{This summary Table is for a development project, and you must identify each column clearly. Must need at least 15 relevant studies}
+\begin{tabular}{|p{2.5cm}|p{2.5cm}|p{4cm}|p{5cm}|}
+\hline
+    \textbf{Application} & \textbf{Features} & \textbf{Relevance} & \textbf{Limitations} \\
+\hline
+Rapid Miner \cite{ref:Duda:2000} & User interface design & Provides information on user requirements and design considerations & Limited sample size and geographic diversity of participants \\
+\hline
+TensorFlow \cite{ref:SVMGuide} & Competitive analysis & Identifies potential competitors and opportunities for differentiation & Limited to apps in the same category and not considering other possible alternatives \\
+\hline
+Abc Keras \cite{ref:guyon:2007} & Technical infrastructure & Helps to identify and plan for necessary technical resources and infrastructure & Assumes all requirements are known and does not evaluate the possibility of new requirements emerging in the future \\
+\hline
+Abc Xyz \cite{ref:guyon:2007a} & User experience testing & Provides feedback on user experience and identifies areas for improvement & Limited sample size and testing environment not fully representative of real-world conditions \\
+\hline
+\end{tabular}
+\label{tab:1}
+\end{table}
+The Table above explains a way to present your literature review for development projects. If you have a research project, the summary should be written in the below table \ref{tab:2} format.
+\begin{table}[!h]
+\caption{This summary Table is for a research project, and you must identify each column clearly. Must need at least 15 relevant studies}
+\centering
+\begin{tabular}{|p{3cm}|p{4cm}|p{4cm}|p{3cm}|}
+\hline
+\textbf{Author} & \textbf{Method} & \textbf{Results} & \textbf{Limitations} \\
+\hline
+Smith et al. \cite{ref:Bishop:2006}& Case study with a sample size of 50 & Positive effects of XYZ on ABC, 93.74\% accuracy & Small sample size \\
+\hline
+Johnson et al. \cite{ref:Duda:2000} & Literature review utilizing keyword-based search & A comprehensive overview of XYZ in the field of DEF, 12.8\% precision & Limited to specific subfield \\
+\hline
+Williams et al. \cite{ref:IJCNNChallenge:2007} & Survey of 1000 participants using a structured questionnaire & Strong correlation between XYZ and GHI, R-squared = 0.72 & Self-reported data \\
+\hline
+Jones et al. \cite{ref:SVMGuide} & Experimental design with 100 participants, Utilized SVM with the combination of PCA & XYZ significantly improves JKL in certain populations, AUC = 0.86 & Limited generalizability \\
+\hline
+\end{tabular}
+\label{tab:2}
+\end{table}
+
+\section{Conclusion}
+Write the conclusion of the literature review. 
+The columns in the table depending upon your problem and should be specific to your project as described in \ref{tab:1}, \ref{tab:2}, respectively. Proper citations and references are necessary. The template has already an integrated IEEE references format. Go to Google scholar, copy the bib text of your reference, and paste the reference into the fypbib.bib file. Then all you have to do is use \cite{ref:Bishop:2006}.\\ \textcolor{red}{\textbf{NOTE: For development projects, describe related or similar work done by other teams and details of their methods/algorithms. For a research project, a detailed literature survey is expected.}}
+ 
+\chapter{Software Requirement Specifications}
+Describe all modules of requirements and design in clear English text along with the necessary diagram and figures.  Anyone reading your report should be able to reproduce your system/results after reading it. It describes functional requirements, design constraints, and other factors necessary to provide a complete and comprehensive description of the requirements for the software.\\
+For each chapter, provide a paragraph of introduction and at the end, a paragraph of conclusions. Make sure no heading/subheading is blank.  Write text to introduce each section as well. 
+\textcolor{red}{NOTE: This Chapter is optional for Research projects but compulsory for Development projects.}
+\section{List of Features}
+List all important features of your system here.
+\section{Functional Requirements}
+The functional requirements fully describe the external behavior of the system. Identify and list each functionality and give a brief description, along with the user of each functionality.
+\section{Quality Attributes}
+
+\section{Non-Functional Requirements}
+This section should describe all the non-functional requirements, including reusability, performance (how many maximum users can access it at a time), extensibility, etc.
+\section{Assumptions}
+List down all the assumptions made for the specification.
+\section{Use Cases}
+This section lists use cases or scenarios from the use-case model if they represent some significant, central functionality of the final system, or if they have a large architectural coverage—they exercise many architectural elements, or if they stress or illustrate a specific, delicate point of the architecture.\\
+The table \ref{tab:2.1} provides a simple use case.
+
+
+\begin{table}[!ht]
+\centering
+\caption{ A sample use case is given in the above table. You have to follow this tabular format for use cases. Following is the description of the content required in this section. \textcolor{red}{No separate heading is required or use case tables. Keep them all under a generic use case heading. Also, In the previous version, usecase tables dont have cpation, in this version, we do have. } }
+\label{tab:2.1}
+\begin{tabular}{|lllll|}
+\hline
+\multicolumn{2}{|l|}{\textbf{Name}} &
+  \multicolumn{3}{l|}{Sample Use Case Name Here} \\ \hline
+\multicolumn{2}{|l|}{\textbf{Actors}} &
+  \multicolumn{3}{l|}{Admin, Business Owner, Store Manager} \\ \hline
+\multicolumn{2}{|l|}{\textbf{Summary}} &
+  \multicolumn{3}{l|}{\begin{tabular}[c]{@{}l@{}}The user shall provide their email and password on the login form, \\ and after successful verification, redirect the user to the home page.\end{tabular}} \\ \hline
+\multicolumn{2}{|l|}{\textbf{Pre-Conditions}} &
+  \multicolumn{3}{l|}{\begin{tabular}[c]{@{}l@{}}The user must be in the database records, either added by any of the\\  authorized users or added manually by a developer.\\ The user must not already be logged in.\end{tabular}} \\ \hline
+\multicolumn{2}{|l|}{\textbf{Post-Conditions}} &
+  \multicolumn{3}{l|}{\begin{tabular}[c]{@{}l@{}}The user’s session is successfully established and shall be redirected\\  to the home page.\end{tabular}} \\ \hline
+\multicolumn{2}{|l|}{\textbf{\begin{tabular}[c]{@{}l@{}}Special\\ Requirements\end{tabular}}} &
+  \multicolumn{3}{l|}{None} \\ \hline
+\multicolumn{5}{|c|}{\textbf{Basic Flow}} \\ \hline
+\multicolumn{3}{|c|}{\textbf{Actor Action}} &
+  \multicolumn{2}{c|}{\textbf{System Response}} \\ \hline
+\multicolumn{1}{|l|}{1} &
+  \multicolumn{2}{l|}{\begin{tabular}[c]{@{}l@{}}The user opens \\ the login page.\end{tabular}} &
+  \multicolumn{1}{l|}{2} &
+  \begin{tabular}[c]{@{}l@{}}The login page is displayed asking for email and\\  password.\end{tabular} \\ \hline
+\multicolumn{1}{|l|}{2} &
+  \multicolumn{2}{l|}{\begin{tabular}[c]{@{}l@{}}The user enters valid\\  email and password.\end{tabular}} &
+  \multicolumn{1}{l|}{4} &
+  \begin{tabular}[c]{@{}l@{}}The system verifies the email and  password, \\ establishes a session for the user and redirects\\  the user to the home page.\end{tabular} \\ \hline
+\multicolumn{5}{|c|}{\textbf{Alternative Flow}} \\ \hline
+\multicolumn{1}{|l|}{3} &
+  \multicolumn{2}{l|}{\begin{tabular}[c]{@{}l@{}}The user enters invalid\\  email or password.\end{tabular}} &
+  \multicolumn{1}{l|}{4-A} &
+  \begin{tabular}[c]{@{}l@{}}The system responds with an error \\ message: Incorrect email or password entered.\end{tabular} \\ \hline
+\end{tabular}
+\end{table}
+
+This section lists use cases or scenarios from the use-case model if they represent some significant, central functionality of the final system, or if they have a large architectural coverage—they exercise many architectural elements or if they stress or illustrate a specific, delicate point of the architecture.\\
+\textbf{Summary:} The description briefly conveys the role and purpose of the use case. A single paragraph will suffice for this description.\\
+\textbf{Basic Flow:} This use case starts when the actor does something. An actor always initiates use cases. The use case describes what the actor does and what the system does in response. It is phrased in the form of a dialog between the actor and the system.\\
+The use case describes what happens inside the system, but not how or why. If information is exchanged, be specific about what is passed back and forth. For example, it is not very illuminating to say that the actor enters customer information. It is better to say the actor enters the customer’s name and address. A Glossary of Terms is often useful to keep the complexity of the use case manageable you may want to define things like customer information there to keep the use case from drowning in details.\\
+Simple alternatives may be presented within the text of the use case. If it only takes a few sentences to describe what happens when there is an alternative, do it directly within the \textbf{Flow of Events} section. If the alternative flow is more complex, use a separate section to describe it. For example, an Alternative Flow subsection explains how to describe more complex alternatives.\\
+A picture is sometimes worth a thousand words, though there is no substitute for clean, clear prose. If it improves clarity, feel free to paste graphical depictions of user interfaces, process flows or other figures into the use case. If a flow chart is useful to present a complex decision process, by all means use it!  Similarly for state-dependent behavior, a state-transition diagram often clarifies the behavior of a system better than pages upon pages of text. Use the right presentation medium for your problem, but be wary of using terminology, notations or figures that your audience may not understand. Remember that your purpose is to clarify, not obscure.\\
+\textbf{First Alternative Flow:} More complex alternatives are described in a separate section, referred to in the Basic Flow subsection of Flow of Events section. Think of the Alternative Flow subsections like alternative behavior each alternative flow represents alternative behavior usually due to exceptions that occur in the main flow. They may be as long as necessary to describe the events associated with the alternative behavior. When an alternative flow ends, the events of the main flow of events are resumed unless otherwise stated.\\
+\textbf{Second Alternative Flow:} There may be, and most likely will be, a number of alternative flows in a use case. Keep each alternative flow separate to improve clarity. Using alternative flows improves the readability of the use case, as well as preventing use cases from being decomposed into hierarchies of use cases. Keep in mind that use cases are just textual descriptions, and their main purpose is to document the behavior of a system in a clear, concise, and understandable way.\\
+\textbf{Special Requirements:} A special requirement is typically a nonfunctional requirement that is specific to a use case, but is not easily or naturally specified in the text of the use case’s event flow. Examples of special requirements include legal and regulatory requirements, application standards, and quality attributes of the system to be built including usability, reliability, performance or supportability requirements. Additionally, other requirements such as operating systems and environments, compatibility requirements, and design constraints should be captured in this section.\\
+\textbf{Pre-Conditions:} A pre-condition of a use case is the state of the system that must be present prior to a use case being performed.\\
+\textbf{Post-Conditions:} A post-condition of a use case is a list of possible states the system can be in immediately after a use case has finished.
+\section{Hardware and Software Requirements}
+List the hardware and software requirements that will be required to develop and deploy the project.
+\subsection{Hardware Requirements}
+\subsection{Software Requirements}
+\section{Graphical User Interface}
+This section should give the GUI dumps of each screen, with reference to the users. The navigation flow of each user is also required, and each GUI should mark the functionality/use case that it covers.
+\section{Database Design (if required; this means if you are using noSQL, you will not provide ER but the other design element and data dictonary should still be there. Explain and elaborate your DB design)}
+\subsection{ER Diagram}
+\subsection{Data Dictionary}
+\section{ Risk Analysis}
+List and explain the risks that may be encountered during the project. For e.g.: technical risks, business risks, etc.
+\chapter{Proposed Approach and Methodology}
+The proposed approach could be a Framework, Heuristic, Algorithm, Protocol, or Mathematical-model.
+For each chapter, provide a paragraph of introduction and in the end a paragraph of conclusions. Not the programming code but the algorithmic and procedural details especially related to the hidden/ backend algorithms that are not covered in the design.\\
+\textcolor{red}{NOTE: This chapter is optional for Development projects but compulsory for Research projects.} 
+\chapter{High-Level and Low-Level Design}
+Provide the high- and low-level design of your system in this chapter. Select the design that is appropriate for your project.\\
+\textcolor{red}{NOTE: This Chapter is compulsory for both R\&D projects and Development projects.}
+\section{System Overview}
+Provide a general description of the software system, including its functionality and matters related to the overall system and its design (perhaps including a discussion of the basic design approach or organization). Feel free to split this discussion up into subsections (and sub-subsections, etc. ...).
+\section{Design Considerations}
+This section describes many issues that need to be addressed or resolved before attempting to devise a complete design solution.
+\subsection{Assumptions and Dependencies}
+Describe any assumptions or dependencies regarding the software and its use. These may concern such issues as:
+\begin{itemize}
+\item Related software or hardware 
+  \item Operating systems 
+  \item End-user characteristics 
+  \item Possible and/or probable changes in functionality
+\end{itemize}
+Do not just add random generic statements, be clear and concise about what you are writing.
+\subsection{General Constraints}
+Describe any global limitations or constraints that have a significant impact on the design of the system's software (and describe the associated impact). Such constraints may be imposed by any of the following (the list is not exhaustive):
+\begin{itemize}
+\item Hardware or software environment 
+\item End-user environment 
+\item Availability or volatility of resources 
+\item Standards compliance 
+\item Interoperability requirements 
+\item Interface/protocol requirements 
+\item Data repository and distribution requirements 
+\item Security requirements (or other such regulations) 
+\item Memory and other capacity limitations 
+\item Performance requirements 
+\item Network communications 
+\item Verification and validation requirements (testing) 
+\item Other means of addressing quality goals 
+\item Other requirements described in the requirements specification 
+\end{itemize}
+
+\subsection{Goals and Guidelines}
+Describe any goals, guidelines, principles, or priorities which dominate or embody the design of the system's software. Such goals might be:
+\begin{itemize}
+\item The KISS principle ("Keep it simple stupid!") 
+\item Emphasis on speed versus memory use 
+\item Working, looking, or "feeling" like an existing product
+\end{itemize}
+For each such goal or guideline, unless it is implicitly obvious, describe the reason for its desirability. Feel free to state and describe each goal in its own sub subsection if you wish.
+\subsection{ Development Methods}
+Briefly describe the method or approach used for this software design. If one or more formal/published methods were adopted or adapted, then include a reference to a more detailed description of these methods. If several methods were seriously considered, then each such method should be mentioned, along with a brief explanation of why all or part of it was used or not used.
+\section{System Architecture}
+This section should describe both the internal architecture of the modules, as well as the external architecture of the system with other systems, if any. Diagrammatic architecture is compulsory.\\
+This section should provide a high-level overview of how the functionality and responsibilities of the system were partitioned and then assigned to subsystems or components. Do not go into too much detail about the individual components themselves (there is a subsequent section for detailed component descriptions). The main purpose here is to gain a general understanding of how and why the system was decomposed, and how the individual parts work together to provide the desired functionality.\\
+At the top-most level, describe the major responsibilities that the software must undertake and the various roles that the system (or portions of the system) must play. Describe how the system was broken down into its components/subsystems (identifying each top-level component/subsystem and the roles/responsibilities assigned to it). Describe how the higher-level components collaborate with each other in order to achieve the required results. Don't forget to provide some sort of rationale for choosing this particular decomposition of the system (perhaps discussing other proposed decompositions and why they were rejected). Feel free to make use of design patterns, either in describing parts of the architecture (in pattern format), or for referring to elements of the architecture that employ them.\\
+If there are any diagrams, models, flowcharts, documented scenarios or use-cases of the system behavior and/or structure, they may be included here (unless you feel they are complex enough to merit being placed in the Detailed System Design section). Diagrams that describe a particular component or sub-system should be included within the particular subsection that describes that component or subsystem.\\
+\textcolor{red}{Note: This section (and its subsections) really applies only to newly developed (or yet-to-be developed) portions of the system.} If there are parts of the system that already existed before this development effort began, then you only need to describe the pre-existing parts that the new parts of the system depend upon, and only in enough detail sufficient to describe the relationships and interactions between the old parts and the new parts. Pre-existing parts that are modified or enhanced need to be described only to the extent that is necessary for the reader to gain a sufficient understanding of the nature of the changes that were made.
+\subsection{Subsystem Architecture}
+If a particular component is one which merits a more detailed discussion than what was presented in the System Architecture section, provide that more detailed discussion in a subsection of the System Architecture section (or it may even be more appropriate to describe the component in its own design document). If necessary, describe how the component was further divided into subcomponents, and the relationships and interactions between the subcomponents (similar to what was done for top-level components in the System Architecture section).\\
+If any subcomponents are also deemed to further merit discussion, then describe them in a separate subsection of this section (and in a similar fashion). Proceed to go into as many levels/subsections of discussion as needed in order for the reader to gain a high-level understanding of the entire system or subsystem (but remember to leave the gory details for the Detailed System Design section).\\
+If this component is very large and/or complex, you may want to consider documenting its design in a separate document and simply including a reference to it in this section. If this is the option you choose, the design document for this component should have an organizational format that is very similar (if not identical to) this document.
+\section{Architectural Strategies}
+Explain all strategies that you use for designing of the Architecture. Describe any design decisions and/or strategies that affect the overall organization of the system and its higher-level structures. These strategies should provide insight into the key abstractions and mechanisms used in the system architecture. Describe the reasoning employed for each decision and/or strategy (possibly referring to previously stated design goals and principles) and how any design goals or priorities were balanced or traded-off. Such decisions might concern (but are not limited to) things like the following:
+\begin{itemize}
+    \item Use of a particular type of product (programming language, database, library, etc. ...) 
+  \item Reuse of existing software components to implement various parts/features of the system 
+  \item Future plans for extending or enhancing the software 
+  \item User interface paradigms (or system input and output models) 
+  \item Hardware and/or software interface paradigms 
+  \item Error detection and recovery 
+  \item Memory management policies 
+  \item External databases and/or data storage management and persistence 
+  \item Distributed data or control over a network 
+  \item Generalized approaches to control 
+  \item Concurrency and synchronization 
+  \item Communication mechanisms 
+  \item Management of other resources
+\end{itemize}
+\subsection{Architectural Strategies Strategy-1 name or description} 
+\subsection{Architectural Strategies Strategy-2 name or description} 
+Each significant strategy employed should probably be discussed in its subsection or (if it is complex enough) in a separate design document (with an appropriate reference here, of course). Make sure that when describing a design decision you also discuss any other significant alternatives that were considered and your reasons for rejecting them (as well as your reasons for accepting the alternative you finally chose). Sometimes it will be most effective to employ the "pattern format" for describing a strategy.
+\section{Domain Model/Class Diagram}
+In this subsection, add the Class Diagram of your system. Class diagrams represent the structure design of your system.
+
+\section{Policies and Tactics}
+Describe any design policies and/or tactics that do not have sweeping architectural implications (meaning they would not significantly affect the overall organization of the system and its high-level structures) but which nonetheless affect the details of the interface and/or implementation of various aspects of the system. Such decisions might concern (but are not limited to) things like the following:
+\begin{itemize}
+    \item Choice of which specific product to use (compiler, interpreter, database, library, etc. ...) 
+ \item Engineering trade-offs 
+ \item	Coding guidelines and conventions 
+ \item	The protocol of one or more subsystems, modules, or subroutines 
+ \item The choice of a particular algorithm or programming idiom (design pattern) to implement portions of the system's functionality 
+ \item	Plans for ensuring requirements traceability 
+ \item	Plans for testing the software 
+ \item	Plans for maintaining the software 
+ \item	Interfaces for end-users, software, hardware, and communications 
+ \item	Hierarchical organization of the source code into its physical components (files and directories). 
+ \item	How to build and/or generate the system's deliverables (how to compile, link, load, etc. ...) 
+\end{itemize}
+\subsection{Policy/tactic-1 name or description}
+\subsection{Policy/tactic-2 name or description}
+Each particular policy or set of tactics employed should probably be discussed in its own subsection, or (if it is large or complex enough) in a separate design document (with an appropriate reference here of course). Make sure that when describing a design decision that you also discuss any other significant alternatives that were considered, and your reasons for rejecting them (as well as your reasons for accepting the alternative you finally chose). For this reason, it may frequently be convenient to use one of the more popular "pattern formats" to describe a given tactic.\\
+For this particular section, it may become difficult to decide whether a particular policy or set of tactics should be discussed in this section, or in the System Architecture section, or in the Detailed System Design section for the appropriate component. You will have to use your own "best" judgment to decide this. There will usually be some global policies and tactics that should be discussed here. Still, decisions about interfaces, algorithms, and/or data structures might be more appropriately discussed in the same (sub) section as its corresponding software component in one of these other sections.
+\chapter{Implementation and Test Cases}
+For each chapter, provide a paragraph of introduction and at the end, a paragraph of conclusions. (Not the programming code but the algorithmic and procedural details especially related to the hidden/ backend algorithms that are not covered in the design)
+\section{Implementation}
+Whatever implementation that you have done so far, please elaborate here.
+Give clear details of the algorithms that were implemented along with the platform and the APIs which were used. 
+\textcolor{red}{NOTE: For FYP-1, this chapter can be changed to description of prototype developed.}
+\subsection{Implementation of First Component/Algorithm}
+Write the implementation of the first component of your system here.
+\section{Test case Design and description}
+\textcolor{red}{This section will be added in FYP-II.} Summarize the common attributes of test cases. This may include input constraints that must be true for every input in the set of associated test cases, any shared environmental needs, any shared special procedural requirements, and any shared case dependencies. The following scheme is recommended for describing test cases in detail. The Sample test case is provided in table \ref{tab:3}.
+\begin{table}[!ht]
+\caption{Sample Test case No.1}
+
+\centering
+\begin{tabular}{|llll|}
+\hline
+\multicolumn{4}{|c|}{\textbf{\textless{}Software Component Name\textgreater{}}} \\ \hline
+\multicolumn{4}{|c|}{\textbf{\textless{}Reference\textgreater{}}} \\ \hline
+\multicolumn{1}{|l|}{\textbf{Test Case ID:}} &
+  \multicolumn{1}{l|}{\textit{Reference Number}} &
+  \multicolumn{1}{l|}{\textbf{QA Test Engineer:}} &
+  \textit{Name of personnel} \\ \hline
+\multicolumn{1}{|l|}{\textbf{Test case Version:}} &
+  \multicolumn{1}{l|}{\textit{Version number}} &
+  \multicolumn{1}{l|}{\textbf{Reviewed By:}} &
+  \textit{Testing Team lead} \\ \hline
+\multicolumn{1}{|l|}{\textbf{Test Date:}} &
+  \multicolumn{1}{l|}{\textit{Date}} &
+  \multicolumn{1}{l|}{\textbf{\begin{tabular}[c]{@{}l@{}}Use Case \\ Reference(s):\end{tabular}}} &
+  \textit{Relation to use cases} \\ \hline
+\multicolumn{1}{|l|}{\textbf{Revision History:}} &
+  \multicolumn{3}{l|}{\textit{Refer to previous test   case identity (if any)}} \\ \hline
+\multicolumn{1}{|l|}{\textbf{Objective:}} &
+  \multicolumn{3}{l|}{\textit{Need and   scope of the testing}} \\ \hline
+\multicolumn{1}{|l|}{\textbf{\begin{tabular}[c]{@{}l@{}}Product/Ver/\\ Module:\end{tabular}}} &
+  \multicolumn{3}{l|}{\textit{Refer to overall system being built and the place of this test case in it.}} \\ \hline
+\multicolumn{1}{|l|}{\textbf{Environment:}} &
+  \multicolumn{3}{l|}{\textit{Necessary and desired properties of the test environment.}} \\ \hline
+\multicolumn{1}{|l|}{\textbf{Assumptions:}} &
+  \multicolumn{3}{l|}{\textit{Assumptions that might affect the testing process.}} \\ \hline
+\multicolumn{1}{|l|}{\textbf{Pre-Requisite:}} &
+  \multicolumn{3}{l|}{\textit{Necessary condition that  needs to be fulfilled before the test case.}} \\ \hline
+\multicolumn{1}{|l|}{\textbf{Step No.}} &
+  \multicolumn{1}{l|}{\textbf{Execution   description}} &
+  \multicolumn{2}{l|}{\textbf{Procedure result}} \\ \hline
+\multicolumn{1}{|l|}{} &
+  \multicolumn{1}{l|}{\textit{Events being tested.}} &
+  \multicolumn{2}{l|}{\textit{Mention software response.}} \\ \hline
+\multicolumn{4}{|l|}{\textbf{Comments:}} \\ \hline
+\multicolumn{4}{|c|}{\textbf{Passed      Failed     Not Executed}} \\ \hline
+\end{tabular}
+\label{tab:3}
+\end{table}
+\section{Test Metrics}
+Summarize here the common ground of attributes of test case metrics as explained in Table \ref{tab:4}.
+\begin{table}[!ht]
+\centering
+\caption{Sample Test case Matric.No.1}
+
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Metric}                      & \textbf{Purpose}                                                                                                        \\ \hline
+\textbf{Number of Test Cases}        & \begin{tabular}[c]{@{}l@{}}Total number of test cases that you have\\ developed for  your system.\end{tabular}          \\ \hline
+\textbf{Number of Test Cases Passed} & The number of test cases that successfully passed                                                                       \\ \hline
+\textbf{Number of Test Cases Failed} & The number of test cases that failed                                                                                    \\ \hline
+\textbf{Test Case Defect Density}    & \begin{tabular}[c]{@{}l@{}}(No of test cases failed * 100) \\ No of test cases executed\end{tabular}                    \\ \hline
+\textbf{Test Case Effectiveness}     & \begin{tabular}[c]{@{}l@{}}No of defects detected using test cases *100\\ Total number of defects detected\end{tabular} \\ \hline
+\textbf{Traceability Matrix} &
+  \begin{tabular}[c]{@{}l@{}}Traceability is the ability to determine that each\\  the feature has a source in requirements and each \\ requirement has a corresponding implemented feature.\end{tabular} \\ \hline
+\end{tabular}
+\label{tab:4}
+\end{table}
+\subsection{Sample Test case Metric.No.2}
+Similar to the above table, add here for test metrics 2,3,4.\\
+\chapter{User Manual}
+\textcolor{red}{This chapter will be added in FYP-II.} Design a complete user manual of your application and add that in this chapter.
+\textcolor{red}{NOTE: This Chapter is optional for Research projects but compulsory for Development projects.}\\
+\chapter{Experimental Results and Discussion}
+This chapter will be added in FYP-II. Give proper analysis and discussion of experimental results (in plain English text) along with tables of results.  For each chapter provide a paragraph of introduction and in the end a paragraph of conclusions.\\
+\textcolor{red}{NOTE: This Chapter is optional for Development projects but compulsory for Research projects.}
+
+\chapter{Conclusions}
+\section{aa}
+\subsection{dfs}
+\subsubsection{dsd}
+{\bf This chapter is mandatory}.  
+Give conclusions and summary of the work done.  What were your findings and what were the results?  Discuss in detail whether the scope of your project was entirely covered or not and whether the objectives of the project were met or not.  What challenges did you face and what has been left out and why.\\
+Sum up all the conclusions of all the chapters here to make a final conclusion chapter.  Do not repeat any text, just summarize it in different words. Give recommendations for future work also.\\
+\textbf{For FYP-1 it is mandatory to list down a plan of the work to be done for FYP-2.}
+
+{
+\bibliographystyle{ieeetr}
+\bibliography{fypbib} %specify your .bib file here
+}
+%ADD APPENDICES IF REQUIRED OTHERWISE COMMENT IT OUT
+\appendix
+\chapter{First Appendix if Required}
+If you want to add appendices then make sure you provide a proper title.  Add different appendices by using the chapter command as shown for this one.  They will automatically be added to the table of contents.
+
+\section{References}
+See how .bib file is prepared.  The bibliography would be automatically added by Latex.  So here is how you cite papers (you'll need to view the .bib file to understand).  \cite{ref:Duda:2000} is the correct way to make one citation and \cite{ref:Bishop:2006,ref:SVMGuide} to make multiple citations. You can see various reference styles for manuals \cite{ref:SVMGuide}, conferences \cite{ref:guyon:2007}, websites \cite{ref:IJCNNChallenge:2007} and journal articles \cite{ref:guyon:2007a}.  Also, note that all citations appear in the order in which they appear within text.  They are not sorted according to author names.
+
+\section{Equations}
+Make sure you use the math environment for writing equations.  Again, make sure you do not hard code equation numbers.  Use label and ref commands of Latex to number them and reference them.  Here is an example of (\ref{eq:energy})
+\begin{equation}\label{eq:energy}
+E = mc^2
+\end{equation}
+Note, how the equation is referenced by its equation number within brackets.  
+
+\section{Figures}
+To insert a figure, you can use the following code as template.  Here the figure is referenced using ref command of Latex.  So Figure \ref{fig:fast} is the FAST logo.  DO NOT HARD CODE FIGURE NUMBERS.  Let Latex manage them for you.
+
+\begin{figure}[!hbt]
+\centering
+\includegraphics[width=1in]{Figures/fastlogo.png}
+{\caption {\label{fig:fast}{\textbf{Fast Logo is the Caption.}}}}  
+\end{figure}
+
+\section{Tables}
+Note how tables can be added in Latex.  Also, make sure you use label and ref commands to define and use table numbers.  You can use Table \ref{tbl:SomeTable} as a template to make tables, add captions to them and reference them.  DO NOT HARD CODE TABLE NUMBERS.  Let Latex manage their numbering for you.
+
+If you are having problems in managing Latex tables, you may use Lyx \url{https://www.lyx.org/}. 
+
+
+\begin{table}[hbt]
+
+\begin{center}
+\caption{\label{tbl:SomeTable} \textbf{Give a Caption to the Table.}}
+\begin{tabular}{|l|c|c|} 
+\hline
+\textbf{No.}&\textbf{Column 1}&\textbf{Column 2}\\
+\hline
+1.&Some data&More data\\
+\hline
+2.&Some values&More values\\
+\hline
+\end {tabular}
+
+\end{center}
+
+\end{table}
+
+\section{Pseudo Code}
+When you need to explain an existing algorithm of an algorithm you devised, then you should use pseudo code notation. Given below, algorithm  \ref{algo:one}, is an example. Note how the numbering is managed by the Latex itself.
+
+\begin{algorithm}[H]
+ \KwData{this text}
+ \KwResult{how to write algorithm with \LaTeX2e }
+ initialization\;
+ \While{not at end of this document}{
+  read current\;
+  \eIf{understand}{
+   go to next section\;
+   current section becomes this one\;
+   }{
+   go back to the beginning of current section\;
+  }
+ }
+ \caption{How to write algorithms}
+ \label{algo:one}
+\end{algorithm}
+
+\section{Code of Programming Languages}
+If you need to add C++, Java or any other programming language's code, then you can use ``listings'' package. Following is an example. Normally, the code is only added in the appendices to avoid clutter in the document.
+
+\begin{lstlisting}
+
+#include <stdio.h>
+#define N 10
+/* Block
+ * comment */
+
+int main()
+{
+    int i;
+
+    // Line comment.
+    puts("Hello world!");
+    
+    for (i = 0; i < N; i++)
+    {
+        puts("LaTeX is also great for programmers!");
+    }
+
+    return 0;
+}
+\end{lstlisting}
+
+\section{Recommendations for \LaTeX}
+Here we are providing you with only two Latex source files.  main.tex and fypbib.bib file. You can also start a project at \url{overleaf.com} and upload the zip file of this template there and share the Latex source between your group and supervisor.  This way all of you can work on the Latex files together online.
+
+
+\end{document}
+
+
