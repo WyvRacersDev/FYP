@@ -233,19 +233,78 @@ Write the conclusion of the literature review.
 The columns in the table depending upon your problem and should be specific to your project as described in \ref{tab:1}, \ref{tab:2}, respectively. Proper citations and references are necessary. The template has already an integrated IEEE references format. Go to Google scholar, copy the bib text of your reference, and paste the reference into the fypbib.bib file. Then all you have to do is use \cite{ref:Bishop:2006}.\\ \textcolor{red}{\textbf{NOTE: For development projects, describe related or similar work done by other teams and details of their methods/algorithms. For a research project, a detailed literature survey is expected.}}
  
 \chapter{Software Requirement Specifications}
-Describe all modules of requirements and design in clear English text along with the necessary diagram and figures.  Anyone reading your report should be able to reproduce your system/results after reading it. It describes functional requirements, design constraints, and other factors necessary to provide a complete and comprehensive description of the requirements for the software.\\
-For each chapter, provide a paragraph of introduction and at the end, a paragraph of conclusions. Make sure no heading/subheading is blank.  Write text to introduce each section as well. 
-\textcolor{red}{NOTE: This Chapter is optional for Research projects but compulsory for Development projects.}
+This chapter provides an overview of the project's features along with the functional and non functional requirements. It also details information about the software as well as the hardware requirements. Showcases a few images of the prototype GUI and details regarding the database.
+
+% \textcolor{red}{NOTE: This Chapter is optional for Research projects but compulsory for Development projects.}
+
 \section{List of Features}
-List all important features of your system here.
+The important features of the system are as follows:
+\begin{itemize}
+  \item Real-Time Lip Reading
+  \item Sign Language Conversion
+  \item Text-to-Speech (TTS)
+  \item Confidence Score
+  \item Context-Based Correction
+  \item Facial Expression Detection
+  \item Sound Optimizer
+  \item Guardian Notifier
+  \item Conversation History
+  \item Performance Dashboard 
+\end{itemize}
+
 \section{Functional Requirements}
-The functional requirements fully describe the external behavior of the system. Identify and list each functionality and give a brief description, along with the user of each functionality.
+The requirements related to the technical functionality of the system include the following:
+\begin{itemize}
+  \item The system should accept live or prerecorded videos as input for the purpose of lip-reading
+  \item The system should display the recognized text on the screen as it is recognized.
+  \item The system shall let the user start, pause and stop a lip-reading session 
+  \item The system shall convert recognized or typed text into spoken audio.
+  \item The system shall calculate and display a confidence percentage for each predicted word
+  \item The system shall pass predicted sentences through a language model that corrects spelling and context errors
+  \item The system shall support user registration, login and logout.
+  \item The system shall detect the emotions happy, sad, angry and neutral from the input video feed.
+  \item The system shall run emotion detection concurrently with lip reading.
+  \item The system shall provide a module that identifies and filters background noise from audio.
+  \item The user shall be able to register one or more guardians or family contacts.
+  \item Triggering an emergency phrase or emergency button shall automatically send a notification to registered guardians.
+  \item The system shall recognize sign language gestures from the webcam and translate them into text.
+  \item The system shall convert the translated sign language text into speech using the TTS module.
+  \item The system shall display recognition accuracy.
+\end{itemize}
+
 \section{Quality Attributes}
+Quality attributes provide a checklist that aids in assessing the quality of the software. The quality attributes of our system are:
+\begin{itemize}
+  \item The system be easy to use and be intuitive.
+  \item The system shall be accessible and secure
+  \item The system will be modular and easy to upgrade.
+  \item The system will have minimal errors.
+\end{itemize}
 
 \section{Non-Functional Requirements}
 This section should describe all the non-functional requirements, including reusability, performance (how many maximum users can access it at a time), extensibility, etc.
+\begin{itemize}
+  \item End-to-end latency from lip movement to displayed text should be low enough for natural conversation.
+  \item TTS output shall begin within 1 second of the user confirming text.
+  \item The system shall process live video at a minimum of about 15 frames per second on typical consumer hardware.
+  \item Emergency notifications shall be dispatched within 5 seconds of triggering.
+  \item The emergency feature shall have high availability and work even if the language model or other non-critical modules fail.
+  \item The interface shall be simple and learnable by a first-time user without training.
+  \item The UI shall be responsive across desktop, laptop and mobile screen sizes.
+  \item The system should rely on open-source or low-cost tools and run on mid-range consumer devices or standard cloud hosting.
+  \item Emergency phrases shall be reachable in at most one click from any main screen.
+\end{itemize}
+
 \section{Assumptions}
-List down all the assumptions made for the specification.
+The system will have the following assumptions:
+\begin{itemize}
+  \item The user has a working device with a standard built-in or external webcam.
+  \item The user's face and hands are clearly visible to the camera along with reasonable lighting and a front-facing position.
+  \item Users have basic ability to operate a web interface, such as clicking buttons and reading on-screen text.
+  \item The user has a stable internet connection, at least for features such as guardian notifications, the language model and cloud hosting.
+\end{itemize}
+
+
 \section{Use Cases}
 This section lists use cases or scenarios from the use-case model if they represent some significant, central functionality of the final system, or if they have a large architectural coverage—they exercise many architectural elements, or if they stress or illustrate a specific, delicate point of the architecture.\\
 The table \ref{tab:2.1} provides a simple use case.
