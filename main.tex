@@ -1,4 +1,6 @@
 \documentclass{FastFyp}
+\usepackage{float}
+\usepackage{tabularx}
 \begin{document}
 \newcommand{\supervisor}{SupervisorName}
 \newcommand{\university}{National University of Computer and Emerging Sciences, Lahore}
@@ -255,12 +257,12 @@ The important features of the system are as follows:
 \section{Functional Requirements}
 The requirements related to the technical functionality of the system include the following:
 \begin{itemize}
-  \item The system should accept live or prerecorded videos as input for the purpose of lip-reading
+  \item The system should accept live or prerecorded videos as input for the purpose of lip-reading.
   \item The system should display the recognized text on the screen as it is recognized.
-  \item The system shall let the user start, pause and stop a lip-reading session 
+  \item The system shall let the user start, pause and stop a lip-reading session. 
   \item The system shall convert recognized or typed text into spoken audio.
-  \item The system shall calculate and display a confidence percentage for each predicted word
-  \item The system shall pass predicted sentences through a language model that corrects spelling and context errors
+  \item The system shall calculate and display a confidence percentage for each predicted word.
+  \item The system shall pass predicted sentences through a language model that corrects spelling and context errors.
   \item The system shall support user registration, login and logout.
   \item The system shall detect the emotions happy, sad, angry and neutral from the input video feed.
   \item The system shall run emotion detection concurrently with lip reading.
@@ -276,7 +278,7 @@ The requirements related to the technical functionality of the system include th
 Quality attributes provide a checklist that aids in assessing the quality of the software. The quality attributes of our system are:
 \begin{itemize}
   \item The system be easy to use and be intuitive.
-  \item The system shall be accessible and secure
+  \item The system shall be accessible and secure.
   \item The system will be modular and easy to upgrade.
   \item The system will have minimal errors.
 \end{itemize}
@@ -306,69 +308,204 @@ The system will have the following assumptions:
 
 
 \section{Use Cases}
-This section lists use cases or scenarios from the use-case model if they represent some significant, central functionality of the final system, or if they have a large architectural coverage—they exercise many architectural elements, or if they stress or illustrate a specific, delicate point of the architecture.\\
-The table \ref{tab:2.1} provides a simple use case.
+This section provides a few important use cases that showcase the working of the system.
+% The table \ref{tab:2.1} provides a simple use case.
+% \subsection{Hold a Live Conversation Using Lip Reading}
 
-
-\begin{table}[!ht]
+\begin{table}[H]
 \centering
-\caption{ A sample use case is given in the above table. You have to follow this tabular format for use cases. Following is the description of the content required in this section. \textcolor{red}{No separate heading is required or use case tables. Keep them all under a generic use case heading. Also, In the previous version, usecase tables dont have cpation, in this version, we do have. } }
-\label{tab:2.1}
-\begin{tabular}{|lllll|}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{|l|X|}
 \hline
-\multicolumn{2}{|l|}{\textbf{Name}} &
-  \multicolumn{3}{l|}{Sample Use Case Name Here} \\ \hline
-\multicolumn{2}{|l|}{\textbf{Actors}} &
-  \multicolumn{3}{l|}{Admin, Business Owner, Store Manager} \\ \hline
-\multicolumn{2}{|l|}{\textbf{Summary}} &
-  \multicolumn{3}{l|}{\begin{tabular}[c]{@{}l@{}}The user shall provide their email and password on the login form, \\ and after successful verification, redirect the user to the home page.\end{tabular}} \\ \hline
-\multicolumn{2}{|l|}{\textbf{Pre-Conditions}} &
-  \multicolumn{3}{l|}{\begin{tabular}[c]{@{}l@{}}The user must be in the database records, either added by any of the\\  authorized users or added manually by a developer.\\ The user must not already be logged in.\end{tabular}} \\ \hline
-\multicolumn{2}{|l|}{\textbf{Post-Conditions}} &
-  \multicolumn{3}{l|}{\begin{tabular}[c]{@{}l@{}}The user’s session is successfully established and shall be redirected\\  to the home page.\end{tabular}} \\ \hline
-\multicolumn{2}{|l|}{\textbf{\begin{tabular}[c]{@{}l@{}}Special\\ Requirements\end{tabular}}} &
-  \multicolumn{3}{l|}{None} \\ \hline
-\multicolumn{5}{|c|}{\textbf{Basic Flow}} \\ \hline
-\multicolumn{3}{|c|}{\textbf{Actor Action}} &
-  \multicolumn{2}{c|}{\textbf{System Response}} \\ \hline
-\multicolumn{1}{|l|}{1} &
-  \multicolumn{2}{l|}{\begin{tabular}[c]{@{}l@{}}The user opens \\ the login page.\end{tabular}} &
-  \multicolumn{1}{l|}{2} &
-  \begin{tabular}[c]{@{}l@{}}The login page is displayed asking for email and\\  password.\end{tabular} \\ \hline
-\multicolumn{1}{|l|}{2} &
-  \multicolumn{2}{l|}{\begin{tabular}[c]{@{}l@{}}The user enters valid\\  email and password.\end{tabular}} &
-  \multicolumn{1}{l|}{4} &
-  \begin{tabular}[c]{@{}l@{}}The system verifies the email and  password, \\ establishes a session for the user and redirects\\  the user to the home page.\end{tabular} \\ \hline
-\multicolumn{5}{|c|}{\textbf{Alternative Flow}} \\ \hline
-\multicolumn{1}{|l|}{3} &
-  \multicolumn{2}{l|}{\begin{tabular}[c]{@{}l@{}}The user enters invalid\\  email or password.\end{tabular}} &
-  \multicolumn{1}{l|}{4-A} &
-  \begin{tabular}[c]{@{}l@{}}The system responds with an error \\ message: Incorrect email or password entered.\end{tabular} \\ \hline
-\end{tabular}
+\textbf{Name} & Hold a Live Conversation Using Lip Reading \\ \hline
+\textbf{Actors} & Speech-impaired user, hearing person \\ \hline
+\textbf{Summary} & The user silently mouths a sentence in front of the webcam. The system recognizes the words, shows a confidence score for each, corrects the sentence using the language model, detects the user's emotion, and speaks the confirmed text aloud to the hearing person. The conversation is saved to history. \\ \hline
+\textbf{Pre-Conditions} & The user is logged in and the webcam is connected. \\ \hline
+\textbf{Post-Conditions} & The conversation is saved to history with date, time and emotion. \\ \hline
+\textbf{Special Requirements} & None \\ \hline
+\end{tabularx}
+
+\vspace{-\arrayrulewidth}
+\begin{tabularx}{\textwidth}{|c|X|c|X|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Basic Flow}} \\ \hline
+\multicolumn{2}{|c|}{\textbf{Actor Action}} & \multicolumn{2}{c|}{\textbf{System Response}} \\ \hline
+1 & User selects ``Start Live Session''. & 2 & System opens the webcam and shows the live video feed. \\ \hline
+3 & User silently mouths a sentence. & 4 & System recognizes the words from lip movements. \\ \hline
+5 & & 6 & System displays each word with its confidence percentage and highlights low-confidence words. \\ \hline
+7 & & 8 & System runs the language model and corrects the sentence. \\ \hline
+9 & & 10 & System displays the corrected sentence for the user to accept, reject or edit. \\ \hline
+11 & User accepts the correction. & 12 & System sends the text to text-to-speech and speaks it aloud. \\ \hline
+13 & Hearing person replies verbally. & 14 & Session continues; user starts the next sentence. \\ \hline
+15 & User ends the session. & 16 & System saves the conversation with date, time and emotion to history. \\ \hline
+\multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
+17 & User rejects or edits the correction. & 17a & System speaks the edited text. \\ \hline
+\end{tabularx}
 \end{table}
 
-This section lists use cases or scenarios from the use-case model if they represent some significant, central functionality of the final system, or if they have a large architectural coverage—they exercise many architectural elements or if they stress or illustrate a specific, delicate point of the architecture.\\
-\textbf{Summary:} The description briefly conveys the role and purpose of the use case. A single paragraph will suffice for this description.\\
-\textbf{Basic Flow:} This use case starts when the actor does something. An actor always initiates use cases. The use case describes what the actor does and what the system does in response. It is phrased in the form of a dialog between the actor and the system.\\
-The use case describes what happens inside the system, but not how or why. If information is exchanged, be specific about what is passed back and forth. For example, it is not very illuminating to say that the actor enters customer information. It is better to say the actor enters the customer’s name and address. A Glossary of Terms is often useful to keep the complexity of the use case manageable you may want to define things like customer information there to keep the use case from drowning in details.\\
-Simple alternatives may be presented within the text of the use case. If it only takes a few sentences to describe what happens when there is an alternative, do it directly within the \textbf{Flow of Events} section. If the alternative flow is more complex, use a separate section to describe it. For example, an Alternative Flow subsection explains how to describe more complex alternatives.\\
-A picture is sometimes worth a thousand words, though there is no substitute for clean, clear prose. If it improves clarity, feel free to paste graphical depictions of user interfaces, process flows or other figures into the use case. If a flow chart is useful to present a complex decision process, by all means use it!  Similarly for state-dependent behavior, a state-transition diagram often clarifies the behavior of a system better than pages upon pages of text. Use the right presentation medium for your problem, but be wary of using terminology, notations or figures that your audience may not understand. Remember that your purpose is to clarify, not obscure.\\
-\textbf{First Alternative Flow:} More complex alternatives are described in a separate section, referred to in the Basic Flow subsection of Flow of Events section. Think of the Alternative Flow subsections like alternative behavior each alternative flow represents alternative behavior usually due to exceptions that occur in the main flow. They may be as long as necessary to describe the events associated with the alternative behavior. When an alternative flow ends, the events of the main flow of events are resumed unless otherwise stated.\\
-\textbf{Second Alternative Flow:} There may be, and most likely will be, a number of alternative flows in a use case. Keep each alternative flow separate to improve clarity. Using alternative flows improves the readability of the use case, as well as preventing use cases from being decomposed into hierarchies of use cases. Keep in mind that use cases are just textual descriptions, and their main purpose is to document the behavior of a system in a clear, concise, and understandable way.\\
-\textbf{Special Requirements:} A special requirement is typically a nonfunctional requirement that is specific to a use case, but is not easily or naturally specified in the text of the use case’s event flow. Examples of special requirements include legal and regulatory requirements, application standards, and quality attributes of the system to be built including usability, reliability, performance or supportability requirements. Additionally, other requirements such as operating systems and environments, compatibility requirements, and design constraints should be captured in this section.\\
-\textbf{Pre-Conditions:} A pre-condition of a use case is the state of the system that must be present prior to a use case being performed.\\
-\textbf{Post-Conditions:} A post-condition of a use case is a list of possible states the system can be in immediately after a use case has finished.
+% SECOND CASE
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{|l|X|}
+\hline
+\textbf{Name} & Translate Sign Language to Speech \\ \hline
+\textbf{Actors} & Sign language user, hearing person \\ \hline
+\textbf{Summary} & The user signs in front of the camera, the system converts gestures to text and speaks it. \\ \hline
+\textbf{Pre-Conditions} & The user is logged in and the webcam is connected. \\ \hline
+\textbf{Post-Conditions} & The conversation is saved to history with date, time and emotion. \\ \hline
+\textbf{Special Requirements} & None \\ \hline
+\end{tabularx}
+
+\vspace{-\arrayrulewidth}
+\begin{tabularx}{\textwidth}{|c|X|c|X|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Basic Flow}} \\ \hline
+\multicolumn{2}{|c|}{\textbf{Actor Action}} & \multicolumn{2}{c|}{\textbf{System Response}} \\ \hline
+1 & User switches from lip-reading mode to sign-language mode. & 2 & System activates the sign-language recognition module. \\ \hline
+3 & User performs sign gestures in front of the camera. & 4 & System detects hands and recognizes the gestures. \\ \hline
+5 & & 6 & System converts the gestures to text and displays confidence scores. \\ \hline
+7 & User confirms the text. & 8 & System converts the text to speech and plays it for the hearing person. \\ \hline
+9 & User ends the session. & 10 & System saves the conversation and updates the statistics. \\ \hline
+\multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
+11 & User shows unrecognized gesture. & 11a & System informs the user that the gesture was not recognized and asks them to sign again. \\ \hline
+\end{tabularx}
+\end{table}
+
+% 3
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{|l|X|}
+\hline
+\textbf{Name} & Trigger an Emergency Phrase and Notify a Guardian \\ \hline
+\textbf{Actors} & User, guardian \\ \hline
+\textbf{Summary} & The user presses a quick phrase, the system speaks it and automatically alerts the guardian. \\ \hline
+\textbf{Pre-Conditions} & The user is logged in and at least one guardian is registered. \\ \hline
+\textbf{Post-Conditions} & The emergency event and its notification status are recorded in the user's activity. \\ \hline
+\textbf{Special Requirements} & The notification must be dispatched within 5 seconds of triggering. \\ \hline
+\end{tabularx}
+
+\vspace{-\arrayrulewidth}
+\begin{tabularx}{\textwidth}{|c|X|c|X|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Basic Flow}} \\ \hline
+\multicolumn{2}{|c|}{\textbf{Actor Action}} & \multicolumn{2}{c|}{\textbf{System Response}} \\ \hline
+1 & User communicates the emergency. & 2 & System detects the emergency situation. \\ \hline
+3 & & 4 & System sends /an SMS, email or push notification to the guardian with the user's name, message and time. \\ \hline
+5 & Guardian receives the alert. & 6 & System records the delivery status. \\ \hline
+7 & & 8 & System logs the emergency event in the user's activity. \\ \hline
+\multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
+9 & & 10a & If delivery fails, the system retries and sends the alert through another channel. \\ \hline
+\end{tabularx}
+\end{table}
+
+%4
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{|l|X|}
+\hline
+\textbf{Name} & Register, Log In and Manage Profile \\ \hline
+\textbf{Actors} & New or returning user \\ \hline
+\textbf{Summary} & The user creates an account, logs in, manages guardians and quick phrases, and views their activity. \\ \hline
+\textbf{Pre-Conditions} & None \\ \hline
+\textbf{Post-Conditions} & The user profile is created or updated. \\ \hline
+\textbf{Special Requirements} & Passwords must be stored hashed and data transmitted over encrypted connections. \\ \hline
+\end{tabularx}
+
+\vspace{-\arrayrulewidth}
+\begin{tabularx}{\textwidth}{|c|X|c|X|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Basic Flow}} \\ \hline
+\multicolumn{2}{|c|}{\textbf{Actor Action}} & \multicolumn{2}{c|}{\textbf{System Response}} \\ \hline
+1 & User enters name, contact details and password and submits the registration. & 2 & System validates the data, hashes the password and creates the account. \\ \hline
+3 & User logs in with credentials. & 4 & System authenticates the user and opens the home screen. \\ \hline
+5 & User adds guardian contacts and custom quick phrases. & 6 & System saves them to the profile. \\ \hline
+7 & User opens ``My Activity''. & 8 & System shows sessions, conversations and emergency events. \\ \hline
+\multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
+9 & User enters wrong credentials. & 9a & System shows an error message and offers a password reset. \\ \hline
+\end{tabularx}
+\end{table}
+
+%5
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{|l|X|}
+\hline
+\textbf{Name} & View the Performance Dashboard \\ \hline
+\textbf{Actors} & User \\ \hline
+\textbf{Summary} & The user views accuracy, processing time, number of words recognized and recognition history. \\ \hline
+\textbf{Pre-Conditions} & The user is logged in and has completed at least one session. \\ \hline
+\textbf{Post-Conditions} & None (read-only). \\ \hline
+\textbf{Special Requirements} & None \\ \hline
+\end{tabularx}
+
+\vspace{-\arrayrulewidth}
+\begin{tabularx}{\textwidth}{|c|X|c|X|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Basic Flow}} \\ \hline
+\multicolumn{2}{|c|}{\textbf{Actor Action}} & \multicolumn{2}{c|}{\textbf{System Response}} \\ \hline
+1 & User opens the Dashboard. & 2 & System displays accuracy, processing time and total words recognized. \\ \hline
+3 & User selects a date range. & 4 & System shows the recognition history as charts for that period. \\ \hline
+\multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
+5 & User opens the Dashboard with no completed sessions. & 5a & System displays a ``no data available'' message. \\ \hline
+\end{tabularx}
+\end{table}
+
+% This section lists use cases or scenarios from the use-case model if they represent some significant, central functionality of the final system, or if they have a large architectural coverage—they exercise many architectural elements or if they stress or illustrate a specific, delicate point of the architecture.\\
+% \textbf{Summary:} The description briefly conveys the role and purpose of the use case. A single paragraph will suffice for this description.\\
+% \textbf{Basic Flow:} This use case starts when the actor does something. An actor always initiates use cases. The use case describes what the actor does and what the system does in response. It is phrased in the form of a dialog between the actor and the system.\\
+% The use case describes what happens inside the system, but not how or why. If information is exchanged, be specific about what is passed back and forth. For example, it is not very illuminating to say that the actor enters customer information. It is better to say the actor enters the customer’s name and address. A Glossary of Terms is often useful to keep the complexity of the use case manageable you may want to define things like customer information there to keep the use case from drowning in details.\\
+% Simple alternatives may be presented within the text of the use case. If it only takes a few sentences to describe what happens when there is an alternative, do it directly within the \textbf{Flow of Events} section. If the alternative flow is more complex, use a separate section to describe it. For example, an Alternative Flow subsection explains how to describe more complex alternatives.\\
+% A picture is sometimes worth a thousand words, though there is no substitute for clean, clear prose. If it improves clarity, feel free to paste graphical depictions of user interfaces, process flows or other figures into the use case. If a flow chart is useful to present a complex decision process, by all means use it!  Similarly for state-dependent behavior, a state-transition diagram often clarifies the behavior of a system better than pages upon pages of text. Use the right presentation medium for your problem, but be wary of using terminology, notations or figures that your audience may not understand. Remember that your purpose is to clarify, not obscure.\\
+% \textbf{First Alternative Flow:} More complex alternatives are described in a separate section, referred to in the Basic Flow subsection of Flow of Events section. Think of the Alternative Flow subsections like alternative behavior each alternative flow represents alternative behavior usually due to exceptions that occur in the main flow. They may be as long as necessary to describe the events associated with the alternative behavior. When an alternative flow ends, the events of the main flow of events are resumed unless otherwise stated.\\
+% \textbf{Second Alternative Flow:} There may be, and most likely will be, a number of alternative flows in a use case. Keep each alternative flow separate to improve clarity. Using alternative flows improves the readability of the use case, as well as preventing use cases from being decomposed into hierarchies of use cases. Keep in mind that use cases are just textual descriptions, and their main purpose is to document the behavior of a system in a clear, concise, and understandable way.\\
+% \textbf{Special Requirements:} A special requirement is typically a nonfunctional requirement that is specific to a use case, but is not easily or naturally specified in the text of the use case’s event flow. Examples of special requirements include legal and regulatory requirements, application standards, and quality attributes of the system to be built including usability, reliability, performance or supportability requirements. Additionally, other requirements such as operating systems and environments, compatibility requirements, and design constraints should be captured in this section.\\
+% \textbf{Pre-Conditions:} A pre-condition of a use case is the state of the system that must be present prior to a use case being performed.\\
+% \textbf{Post-Conditions:} A post-condition of a use case is a list of possible states the system can be in immediately after a use case has finished.
+
+
 \section{Hardware and Software Requirements}
-List the hardware and software requirements that will be required to develop and deploy the project.
+This section specifies the Software and Hardware requirements to develop as well as run the system properly
 \subsection{Hardware Requirements}
+The hardware required includes the following: 
+\begin{itemize}
+  \item A laptop, desktop or smartphone for the user.
+  \item A standard webcam to capture lip movements, facial expressions and sign language gestures.
+  \item A central server with a 4-core processor and 8 GB of RAM to host the backend and the models.
+  \item Sufficient storage to store user profiles, conversation history, emergency logs and trained models.
+  \item A stable internet connection for guardian notifications and the language model.
+  \item A GPU to aid faster processing of the deep learning models, or a free cloud GPU such as Google Colab or Kaggle for training.
+\end{itemize}
+
+
 \subsection{Software Requirements}
+\begin{itemize}
+  \item Python 3.9 or higher
+  \item Jupyter Notebook / Google Colab / VS Code / PyCharm
+  \item Python libraries like OpenCV, TensorFlow or PyTorch
+  \item React.js, HTML5, CSS3 and JavaScript for the frontend
+  \item WebRTC and the Web Speech API for camera access and text-to-speech
+  \item A language model for context-based correction
+\end{itemize}
+
 \section{Graphical User Interface}
 This section should give the GUI dumps of each screen, with reference to the users. The navigation flow of each user is also required, and each GUI should mark the functionality/use case that it covers.
+
 \section{Database Design (if required; this means if you are using noSQL, you will not provide ER but the other design element and data dictonary should still be there. Explain and elaborate your DB design)}
 \subsection{ER Diagram}
 \subsection{Data Dictionary}
+
 \section{ Risk Analysis}
-List and explain the risks that may be encountered during the project. For e.g.: technical risks, business risks, etc.
+Three major risks are associated with this project, which are Time, Performance and Data constraints.\\
+The project involves various phases like dataset collection (public datasets for lip reading, sign language and facial expressions), data pre-processing, model training, testing, model integration and front-end implementation. The system also includes many modules, such as the language model correction, emotion detection, the Sound Optimizer, the emergency notifier and the performance dashboard. Given the amount of work, time is a major constraint that needs to be managed carefully during the project.
+Next is performance. Because this project aims to let users hold a normal conversation without an interpreter, a wrong or slow prediction can lead to misunderstanding, especially in an emergency. Lip reading is a difficult problem, and the system has to run in real time on a standard webcam and consumer hardware while remaining accurate enough to be useful. Thus, performance constraints also pose a major risk.
+Finally, there is data. Lip-reading and sign language models depend heavily on the quality and size of the training datasets, and most public datasets cover limited vocabularies, specific speakers and controlled lighting. Models trained on them may not perform as well on real users in everyday conditions, so limited or unsuitable data poses a further risk to accuracy.
+
 \chapter{Proposed Approach and Methodology}
 The proposed approach could be a Framework, Heuristic, Algorithm, Protocol, or Mathematical-model.
 For each chapter, provide a paragraph of introduction and in the end a paragraph of conclusions. Not the programming code but the algorithmic and procedural details especially related to the hidden/ backend algorithms that are not covered in the design.\\
