@@ -81,7 +81,13 @@ conversations.
 \pagebreak 
 
 \section*{Executive Summary}
-The executive summary should be one to two pages’ of an overview of the information contained in the FYP report.  It should give the reader an easy reference, in a very brief form, to the important information contained in the report and explained in more detail in the body of the report. People reading the report will use this section as a reference during presentations. 
+More than 1.5 billion people worldwide live with some degree of hearing loss, and the World Health Organization projects that this figure will rise to nearly 2.5 billion by 2050 \cite{who2021}. In Pakistan the situation is more difficult because trained sign language interpreters are scarce, and aids such as cochlear implants and speech generating devices are too expensive for most families. A student in a lecture or a patient describing symptoms to a doctor therefore usually depends on whichever relative happens to be present. Existing technology covers only part of the problem. Automatic speech recognition works well on clear audio, but it is of no use to a person who cannot produce clear speech, and it becomes unreliable in the noisy places where help is needed most. Sign language is widely used in the deaf community, but most people outside it do not understand it, so the burden of translation falls back on the user. Schools, hospitals and banks currently have no affordable way to serve these customers directly, which limits access to education, healthcare and financial services.
+
+Silent Signals is a mobile app that allows a person with a hearing or speech impairment to hold a normal two-way conversation without an interpreter and without special hardware. It runs on any device with a camera, such as a laptop or a phone, which keeps the cost of adoption low for both individuals and institutions. The user mouths words in front of the camera, and the system converts their lip movements into text on the screen. A user who communicates through sign language can use the same interface, and the system renders their signs as text as well. The recognized text can then be read aloud so that a hearing person can follow the conversation and reply naturally. A noise suppression component keeps the spoken reply clear in a busy room. Because the main input is visual, the platform continues to work in environments such as hospitals, banks and crowded classrooms, where audio based tools often fail. The system supports English and is designed for everyday situations.
+
+The app includes several features that make it reliable and practical for daily use. Each recognized word is shown with a confidence score, and uncertain words are highlighted so that the user can correct them before they are spoken. A language model fixes spelling and grammar errors in the predicted sentences, for example turning ``I ant watr'' into ``I want water''. Facial expression detection adds emotional context, which helps the listener understand how something is meant. An emergency mode offers one click phrases such as ``I need help'' and sends an automatic alert to a registered guardian or family member, which gives families peace of mind. Users can review earlier conversations in a history with date and time, and a personal profile keeps their activity in one place. Accessibility options such as large text, dark mode and high contrast modes make the interface usable for people with different needs. A performance dashboard shows accuracy, processing time and the number of words recognized, which helps administrators monitor quality.
+
+The project covers the complete development cycle, including data collection, model training, a backend service that hosts the models, a user facing application, integration, testing and deployment. The lip reading model is trained on the GRID audio-visual corpus \cite{cooke2006grid}, building on earlier work that showed end to end sentence level lip reading to be feasible \cite{assael2016lipnet}. [Add one or two sentences with your key results, e.g. the word error rate and the average processing time per sentence.] For institutions, the main benefit is a low cost way to serve customers with hearing or speech impairments without hiring interpreters or buying specialised devices. For users, the benefits are independence, safer communication in emergencies and better access to public services. For hearing people, the benefit is that they can communicate naturally without knowing sign language. In conclusion, Silent Signals shows that visual speech recognition, combined with sign language recognition, speech synthesis and noise suppression, can be offered as one affordable product that makes everyday services more inclusive. 
 \pagebreak
 
 
@@ -99,83 +105,160 @@ The executive summary should be one to two pages’ of an overview of the inform
 
 
 \chapter{Introduction}
-This chapter is mandatory. The introduction should contain a brief overview of the problem being addressed and the background information needed for the reader to understand the work being done and the reasoning behind it.  
-The last paragraph of the introduction chapter should contain an outline of the entire report.  Summarize each chapter in one line to make the last paragraph.
+Speech is the primary way in which people exchange information, and almost every public service is designed on the assumption that the person using it can both hear and speak. For a large part of the world's population this assumption does not hold. The World Health Organization reports that more than 1.5 billion people live with some degree of hearing loss and projects that the number will rise to nearly 2.5 billion by 2050 \cite{who2021}. People with hearing or speech impairments face a daily communication barrier in classrooms, hospitals, banks and workplaces, where a trained interpreter is rarely available. In Pakistan the barrier is made worse by a shortage of trained sign language interpreters and by the high cost of aids and treatments such as cochlear implants and speech generating devices, which places them beyond the reach of most families. As a result, a student in a lecture, or a patient describing symptoms to a doctor, is usually left dependent on whichever relative happens to be present. This dependence limits privacy, independence and access to basic services.
+
+Technology has addressed only part of this problem. Automatic speech recognition systems of the kind built into modern phones are highly accurate, but they work on an audio signal. They are therefore of no use to a person who cannot produce clear speech, and they become unreliable in noisy environments such as hospitals, banks and crowded classrooms, which are exactly the places where assistance is needed most. Visual speech recognition, also known as lip reading, offers an alternative because it recognizes speech from the movement of the lips and does not need audio at all. LipNet showed that end-to-end sentence level lip reading is possible on the GRID corpus \cite{assael2016lipnet,cooke2006grid}, and later audio-visual models reported word error rates competitive with audio-only systems on large scale data \cite{afouras2018deep}. Sign language is another important channel and is widely used within the deaf community, but it is not understood by many people outside it, so the burden of translation is pushed back onto the user \cite{koller2016deepsign}.
+
+Silent Signals is a machine learning based communication aid that brings these channels together in one product. Its main module is a lip-reading system that takes a recorded video or a live webcam feed, locates the mouth region using face landmark detection \cite{lugaresi2019mediapipe}, and passes the resulting frame sequence to a spatio-temporal deep learning network that outputs English text. A sign language module uses hand and body landmark tracking to render signs as the same on-screen text, so that both groups of users are served through one interface. A text-to-speech module reads the recognized text aloud so that the conversation can flow in both directions, and a sound optimization module applies deep learning based noise suppression so that the spoken reply stays intelligible in a noisy room \cite{valin2018hybrid}. Supporting features include a confidence score for each word, language model based sentence correction, facial expression detection, conversation history and an emergency mode that alerts a registered guardian. The goal is a single, affordable tool that needs no interpreter and no special hardware.
+
 \section{Purpose of this Document}
-\textbf{Specify the purpose of this Project.}
-The purpose of the document in an FYP report is to clearly and concisely state the main objective and goals of the project, as well as the research question(s) or hypothesis(es) being investigated. It should provide a brief overview of the background and context of the project, and explain why the research is important and relevant. The purpose of the document should be written in a way that is easy for the reader to understand, and should be included at the beginning of the report.\\ In addition to providing an overview of the project, the purpose of the document should also outline the specific objectives and goals of the research, such as what the project aims to achieve and what the research questions or hypotheses are. This will help the reader understand the scope of the project and what to expect from the report. It is also important to include a brief description of the methods and techniques used in the research, as well as any limitations or assumptions of the project. This will provide the reader with a clear understanding of how the research was conducted and what the results and conclusions are based on. Finally, it should be clear what the report is going to cover, what kind of information will be presented, and in what order.\\
-For Example, "The purpose of this document is to present the design, implementation, and evaluation of our Final Year Project (FYP) which aims to develop a web-based application for small businesses to manage their inventory and customer orders. The project will focus on creating a user-friendly interface and providing a seamless user experience. The goal of this research is to provide a Minimum Viable Product (MVP) that can be used by small businesses to improve their inventory management and customer order processing. The research question we aim to answer is: Can we develop a web-based application that can improve inventory management and customer order processing for small businesses? This report will present the methodology, design, implementation, testing, and evaluation of our project, as well as the limitations and future work."
+\textbf{}
+This document describes the complete development of Silent Signals, from the background research to the design, implementation, testing and evaluation of the system. It explains the problem that the project addresses, reviews related work in lip reading, sign language recognition, speech synthesis and speech enhancement, and then presents our own approach and how it differs from existing work. The system is delivered as an application backed by a service that hosts the machine learning models. The lip-reading model is trained on the GRID corpus \cite{cooke2006grid}, the sign language model is trained on a vocabulary of common everyday words and phrases, and the system works in English. The application accepts a recorded video or a live webcam feed, shows the recognized text with a confidence score for each word, corrects the sentence using a language model, and can speak the result aloud. It also keeps a conversation history and provides an emergency mode for quick communication with a registered guardian. The document also records the limitations of the work and the directions for future development.
+
+The main research questions that this project aims to answer are as follows. Can a lip-reading model trained on a controlled dataset be used in a real-time application that runs on an ordinary webcam? Can lip reading and sign language recognition be combined in one interface so that people who rely on different channels can use the same tool? Can confidence scores and language model correction make the recognized text reliable enough to be used in everyday conversations? These questions guide the design decisions and the evaluation described in the later chapters. Answering them matters because a system that is accurate only on recorded clips, or only in a laboratory setting, would not help the people who need it. For this reason the evaluation looks at both recorded video and live webcam input, and at how well the system performs when the background is noisy.
+
 \section{Intended Audience}
-Identifying and writing the intended audience for a Final Year Project (FYP) report is an important step in the writing process. The intended audience is the group of people for whom the report is written and who will primarily read and use the report. It is crucial to identify the intended audience early in the writing process as this will guide the report's style, tone, and level of detail.\\
-To identify the intended audience, consider the report's purpose, who will be using the report and for what purpose. For example, the intended audience for a FYP report in Computer Science may be a panel of professors who will be evaluating the project. In contrast, the intended audience for a FYP report in Business may be potential investors or clients.
+This document is intended for our supervisor and the FYP evaluation panel, who will use it to judge the problem definition, the technical approach and the quality of the work carried out. It is written for technical readers such as students, researchers and developers who wish to build a similar system, because it summarizes related work on lip reading, sign language recognition, speech enhancement and speech synthesis and explains our design choices. A third group of readers is made up of the people for whom the system is built, namely people with hearing and speech impairments, their families, and the institutions that serve them, such as schools, hospitals and banks. For these readers the executive summary and the project vision chapter give the most useful overview, while the later chapters can be read for the technical detail. Readers are assumed to have a basic understanding of machine learning.
 \section{Definitions, Acronyms, and Abbreviations}
-List all important definitions, acronyms, and abbreviations used in this document. For example: 
+In the interest of clarity, this report uses several acronyms. The following list gives each acronym with its full form.
+
 \textbf{SDG}: Sustainable Development Goal\\
 \textbf{FYP:} Final Year Project\\
-\textbf{MVP}: Minimum Viable Product\\
+\textbf{ML}: Machine Learning\\
 \textbf{UI}: User Interface\\
-\textbf{UX}: User Experience\\
-\textbf{Agile}: Agile Development\\
-\textbf{SCRUM}: Scrum Development\\
-\textbf{REST}: Representational State Transfer\\
-\textbf{ORM}: Object-Relational Mapping\\
-\textbf{CRUD}: Create, Read, Update, Delete\\
-\textbf{API}: Application Programming Interface
+\textbf{GPU}: Graphics Processing Units\\
+\textbf{TTS}: Text-to-Speech\\
+\textbf{GRID}: Audio-Visual Corpus for Speech Perception and Recognition\\
 \section{Conclusion}
-The last paragraph of the introduction chapter should contain an outline of the entire report. Summarize each chapter in one line to make the last paragraph.
+The rest of this report is organized as follows. Chapter~\ref{ch:vision} presents the project vision, including the problem statement, the goals and objectives, the scope and the sustainable development goal that the project supports. Chapter~\ref{ch:lit} reviews related research and development projects in lip reading, sign language recognition, speech enhancement, speech synthesis and facial expression detection, and summarizes them in a table. Chapter~\ref{ch:srs} lists the features, the functional and non-functional requirements, the use cases and the hardware and software requirements of the system. Chapter~\ref{ch:approach} describes the proposed approach and the methodology followed to prepare the data and train the models. Chapter~\ref{ch:design} presents the high-level and low-level design of the system, including its architecture and its modules. Chapter~\ref{ch:impl} describes the prototype that has been implemented so far and the plan for test cases. Chapter~\ref{ch:concl} concludes the report with a summary of the work done, the limitations and the plan for FYP-II.
+For each related work provide a paragraph of introduction and at the end, a paragraph of conclusions. 
 \chapter{Project Vision}
-For each related work provide a paragraph of introduction and at the end, a paragraph of conclusions. Give a page break after the chapter ends.  This chapter is mandatory.  
-Clearly specify the goals and objectives of the project along with the scope of the project. (You can make sub-heading of goals and objectives and the scope of the project).
+\label{ch:vision}
+This chapter presents the vision of Silent Signals. It explains what the system does, the problem that it is built to solve, and the goals and scope that the project follows. It also identifies the sustainable development goals that the work supports, the constraints under which it is developed, the business opportunity that it offers and the stakeholders who are affected by it. The chapter forms the base for the requirements in Chapter~\ref{ch:srs} and the design in Chapter~\ref{ch:design}, because every requirement and every design decision in those chapters can be traced back to a goal or a problem described here. The sections are arranged so that the reader first sees the domain and the problem, then the planned solution and its boundaries, and finally the wider context of sustainability, business and users. Where facts about the problem come from outside sources they are cited, and the remaining statements describe our own plan. The chapter closes with a conclusion that links the vision to the literature review that follows.
+
 \section{Problem Domain Overview}
-Describe in full detail what your system does. This section can be further divided into sub-sections, but basically, a paragraph description of the system is required.
+Silent Signals belongs to the domain of assistive communication technology, which uses machine learning, computer vision and speech processing to help people with hearing or speech impairments communicate with others. The system is a web based application backed by a service that hosts the machine learning models. A user signs in, chooses a mode and points a webcam at their face or hands. In lip-reading mode the system crops the mouth region from each video frame and passes the sequence to a deep learning network that predicts the spoken words without any audio \cite{assael2016lipnet}. In sign language mode it tracks hand and body landmarks \cite{lugaresi2019mediapipe} and recognizes signs from a vocabulary of common everyday words and phrases. Both modes produce the same on-screen text, shown with a confidence score for each word and corrected by a language model before the user confirms it. A text-to-speech module then reads the sentence aloud, with noise suppression keeping the reply clear in a noisy room \cite{valin2018hybrid}. Facial expression detection adds emotional context, while conversation history, user profiles, a performance dashboard and accessibility settings support everyday use. In an emergency, one click sends a predefined phrase and an automatic notification to a registered guardian. The system supports English only and runs on a laptop, desktop or phone with a standard camera.
 \section{Problem Statement}
-Provide the \textbf{problem} which you are trying to solve. 
+People with hearing or speech impairments cannot take part fully in everyday conversations in classrooms, hospitals, banks and workplaces without the help of an interpreter or a relative. Trained interpreters are scarce in Pakistan, and aids such as cochlear implants and speech generating devices are too costly for most families. Speech recognition on modern phones does not solve the problem, because it needs an audio signal that the user may not be able to produce clearly, and its reliability drops in noisy places. Sign language is widely used in the deaf community, but most hearing people do not understand it. Lip reading research has shown that speech can be recognized from video alone \cite{assael2016lipnet,afouras2018deep}, but to the best of our knowledge it is rarely offered as a complete tool for real conversation. There is therefore no single, affordable system that lets a person with a hearing or speech impairment hold a two-way conversation with a hearing person in real time. This project addresses that gap by building a vision based communication platform that recognizes speech from lip movements and signs, speaks the result aloud, and supports the user with correction, context and emergency features.
+  
 \section{Problem Elaboration}
-Describe the problem in detail and the various sub-problems you would work on.
+The overall problem divides into several sub-problems, and each of them must be solved for the system to be useful. The first is visual speech recognition itself. Lip movements are ambiguous because different sounds can look alike on the lips, so a model must use the surrounding frames and words to choose the right output \cite{assael2016lipnet}. The second is real-time operation. Models that work well on recorded clips must be fast enough to run on a live webcam feed with a small delay, on ordinary hardware. The third is the quality of the output. Predicted sentences can contain spelling and word errors, so the system needs a way to measure confidence and to correct the text using context. The fourth is support for sign language users, which needs reliable hand and body tracking and a vocabulary of signs \cite{koller2016deepsign}. The fifth is the return path, in which the recognized text is turned into clear speech that a hearing person can understand even in a noisy room \cite{valin2018hybrid}. The sixth is safety and usability, because a user in an emergency must be able to reach help quickly, and a user with limited ability must find the interface easy to read and operate.
+
+These sub-problems are linked to each other. A weak lip-reading model cannot be fully repaired by a language model, because a correction can only be as good as the words it starts from. A fast model that is inaccurate will mislead the user, and an accurate model that is slow will break the natural flow of a conversation. Data is a further difficulty, since public lip reading datasets such as GRID are recorded in controlled conditions with a limited vocabulary \cite{cooke2006grid}, so a model trained on them may not transfer directly to everyday speech. The project therefore treats each sub-problem as a separate module with its own evaluation, and also measures the combined system on end to end tasks. This makes it possible to find which module is responsible when the overall result is poor, and to replace or improve one module without rebuilding the others. In this way the sub-problems are handled as a connected pipeline and not as separate experiments.
+
 \section{Goals and Objectives}
-Write goals and objectives here.
-\section{Project Scope}
-Specify the scope of your project here.\\
-For example, The scope of this project is to design and develop a web-based application for small businesses to manage their inventory and customer orders. The application will allow small businesses to:
+The goal of this project is to build a single, affordable platform that lets a person with a hearing or speech impairment hold a normal two-way conversation without an interpreter and without special hardware. The goal is broken into objectives, each of which can be checked in the evaluation. The objectives are grouped into core objectives, which deliver the communication channel itself, and supporting objectives, which make the channel reliable, safe and easy to use. The core objectives are met first because the supporting ones depend on them. Each objective maps to a feature and to requirements in Chapter~\ref{ch:srs}. The objectives are written from the point of view of what the user can do, so that progress can be judged by demonstration and not only by model accuracy. Priority is given to the lip-reading objective, since it is the main contribution of the project and carries the highest technical risk. The objectives are as follows:
 \begin{itemize}
-    \item Create, read, update, and delete inventory items
-   \item Create, read, update, and delete customer orders
-   \item Generate reports on inventory levels and customer orders
-   \item Send notifications to customers about their orders
-   \item Provide an easy-to-use user interface and a seamless user experience
+  \item Recognize English speech from lip movements in recorded video.
+  \item Support live lip reading from a webcam feed.
+  \item Show a confidence score for each predicted word.
+  \item Correct predicted sentences using a language model.
+  \item Recognize everyday signs and show them as text.
+  \item Convert recognized text into spoken audio.
+  \item Keep spoken replies clear using noise suppression.
+  \item Detect happy, sad, angry and neutral expressions.
+  \item Provide emergency phrases and guardian notification.
+  \item Store conversation history with date and time.
+  \item Offer user profiles and accessibility settings.
+  \item Show accuracy and processing time on a dashboard.
 \end{itemize}
-The project will be developed using a combination of HTML, CSS, JavaScript, and a web-development framework such as React.js or Angular.js. The application will use a RESTful API to communicate with a back-end database, which will be implemented using a ORM library. The project will be developed using Agile development principles, and project management will be done using SCRUM.\\
-The project deliverables will include:
+\section{Project Scope}
+The scope of this project is to design and develop a web based communication aid for people with hearing or speech impairments. The project covers the complete development of Silent Signals, from data collection and model training through to integration, testing and deployment. The work includes the machine learning models, the backend service that hosts them, and the user facing application. On the machine learning side there are four main models, namely a lip-reading model, a sign language recognition model, a text-to-speech model and a noise suppression model, supported by a facial expression model and a language model for sentence correction. The lip-reading model is trained on the GRID corpus \cite{cooke2006grid}, and the sign language model is trained on a vocabulary of common everyday words and phrases that will be extended as the project progresses. The system works in English. Development is incremental, with the lip-reading pipeline built first and the dependent modules added afterwards, and open source tools and ordinary hardware are preferred to keep the system affordable. The application will allow users to:
 \begin{itemize}
- \item A functional web-based application for small businesses to manage their inventory and customer orders
- \item A user manual for the application
- \item A documentation of the design, implementation, and testing process
- \end{itemize}
+  \item Use recorded video or a live webcam for lip reading.
+  \item Sign in front of the camera and see the text.
+  \item Review confidence scores and corrected sentences.
+  \item Hear the recognized text as spoken audio.
+  \item Select emergency phrases and alert a guardian.
+  \item Review past conversations and recognition statistics.
+\end{itemize}
+The project deliverables include:
+\begin{itemize}
+  \item A working web application with the trained models.
+  \item A backend service that hosts the models.
+  \item A user manual for the application.
+  \item Native mobile applications for iOS or Android.
+  \item Documentation of the design, implementation and testing.
+\end{itemize}
 The project scope does not include the following:
 \begin{itemize}
- \item  Providing hosting or server infrastructure for the application
- \item Developing mobile applications (iOS or Android)
- \item  Integrating the application with third-party services or APIs
- \end{itemize}
-This project scope will be used as a guide throughout the development
+  \item Languages other than English.
+  \item Special cameras, sensors or wearable devices.
+  \item Recognition of the full vocabulary of any sign language.
+  \item Certification as a medical or legal interpreting device.
+\end{itemize}
 \section{Sustainable Development Goal (SDG)}
-Identify at least one SDG area that you are targeting in this project. This has to be documented as a paragraph. The complete SDG list is shown in Figure \ref{fig:my_label}.
+Silent Signals supports the United Nations Sustainable Development Goals \cite{un2015agenda}, and the complete list of goals is shown in Figure~\ref{fig:sdg}. The primary goal that the project targets is SDG 10, Reduced Inequalities, which calls for the inclusion of all people regardless of disability. People with hearing and speech impairments are often excluded from services because those services assume that every user can hear and speak, and the system reduces this exclusion by giving them a way to be understood without an interpreter. The project also supports SDG 4, Quality Education. A student with a hearing or speech impairment can follow a lecture and take part in it more easily when speech and signs are converted to text and audio, which makes classrooms more inclusive. In addition, the project supports SDG 3, Good Health and Well-being, because patients who cannot speak clearly can describe their symptoms to a doctor directly, and the emergency mode helps them to call for help quickly. These links are based on the scale of hearing loss reported by the World Health Organization \cite{who2021}.
+ The complete SDG list is shown in Figure \ref{fig:my_label}.
 \begin{figure} [!h]
     \centering
 \includegraphics[width=0.8\textwidth]{Figures/Picture1}
-    \caption{This figure represents all the SDGs that can be targets of an FYP; Adding this sub-caption is mandatory; make sure you describe the picture in a way that if a visually impaired person is reading using a text reader, they can understand whats in this picture.}
+    \caption{The seventeen United Nations Sustainable Development Goals, shown as a grid of colored tiles with the number, title and icon of each goal.}
     \label{fig:1}
 \end{figure}
 \section{Constraints}
+The seventeen United Nations Sustainable Development Goals, shown as a grid of colored tiles with the number, title and icon of each goal.
 \section{Business Opportunity}
+Hearing loss affects a very large and growing population, which creates a steady need for tools that make communication easier \cite{who2021}. Institutions that serve the public, such as schools, hospitals, banks and offices, deal with customers who have hearing or speech impairments but rarely have trained interpreters available. Hiring an interpreter for every interaction is costly and often not possible, and specialised hardware such as speech generating devices is out of reach for many families. Silent Signals offers a lower cost option because it runs on a standard camera, on a laptop or phone, and uses open source tools. The main customers would be educational institutions, hospitals and clinics, banks and large employers, together with non-profit organisations and families who support people with impairments. Compared with audio based speech recognition, the system has a clear advantage because it works when the user cannot speak clearly and when the background is noisy.
+
+Several routes to revenue are possible. A free basic version could serve individuals, while an institutional licence could be sold to a school or hospital for a yearly fee per site or per number of users. Premium features such as larger sign language vocabularies, additional languages and integration with hospital or school systems could be offered as paid add-ons. Partnerships with organisations that support people with disabilities could help to collect more training data and to reach users. The modular design also means that individual components, such as the lip-reading model or the noise suppression service, could later be offered to other developers through an interface. In the near term the project remains an academic prototype, and the opportunity described here is a possible direction for future work. Any such step would need validation with real users and a study of the market, which is outside the scope of this report.
+
 \section{Stakeholders Description/ User Characteristics}
-Identify and briefly describe who the users of this system will be, and their roles.
+Silent Signals is used by several groups of people, and their needs shape many of the requirements in later chapters. The primary users are people with hearing or speech impairments who want to take part in conversations without the help of a relative or an interpreter. Some of them communicate by moving their lips without producing clear sound, and others communicate through sign language. The secondary users are the hearing people with whom they talk, such as teachers, doctors and bank staff, who read the recognized text or hear the spoken reply. Guardians and family members are also involved, since they are notified when the user needs help. The users are expected to have basic ability to operate a web interface, such as pressing buttons and reading text on a screen, and to have a device with a camera. They are not expected to have any knowledge of machine learning. Because the primary users may also have difficulty with small text or low contrast, the interface offers adjustable accessibility settings. The following subsections summarize the stakeholders and describe their goals and problems.
+
 \subsection{Stakeholders Summary}
+Table~\ref{tab:stake} summarizes the stakeholders of Silent Signals together with a short description and their role in the system. The stakeholders fall into four groups. Direct users give input to the system, namely the speech impaired user and the sign language user, who communicate through lip movements or signs. Receiving users are the hearing conversation partners and the guardians, who read the text, hear the speech or receive an alert. Adopting stakeholders are the institutions that choose to offer the system to their students, patients or customers, and they care mainly about cost and reliability. Finally, the development team and the supervisor build and evaluate the system. A single person can belong to more than one group, for example a student who signs in a classroom and later uses lip reading in a hospital. The roles in the table are the basis for the use cases that are described in Chapter~\ref{ch:srs}.
+\begin{table}[!h]
+\centering
+\caption{Stakeholders of Silent Signals}
+\begin{tabular}{|p{3.2cm}|p{5.8cm}|p{5cm}|}
+\hline
+\textbf{Stakeholder} & \textbf{Description} & \textbf{Role in the system} \\
+\hline
+Speech impaired user & A person who cannot produce clear speech but can move the lips & Uses lip-reading mode to communicate \\
+\hline
+Sign language user & A deaf or hard of hearing person who communicates through signs & Uses sign language mode to communicate \\
+\hline
+Hearing conversation partner & A teacher, doctor, bank officer or colleague who does not know sign language & Reads the text and hears the spoken reply \\
+\hline
+Guardian & A registered family member or caregiver of the user & Receives emergency notifications \\
+\hline
+Institution & A school, hospital, bank or workplace that serves such users & Adopts the system for its students, patients or customers \\
+\hline
+Development team and supervisor & The students who build the system and the project advisor & Design, build, test and evaluate the system \\
+\hline
+\end{tabular}
+\label{tab:stake}
+\end{table}
+
 \subsection{Key High-Level Goals and Problems of Stakeholders}
-Notice how a section’s heading is changed to “heading 1”.  It will show up in the table of contents as a section under a chapter.  Notice its numbering also. Similarly, subsections can have heading 2 and heading 3 styles.\\
+Table~\ref{tab:goals} lists the key goals and problems of each stakeholder. The goals column states what the stakeholder wants to achieve, and the problems column states what currently prevents it. Many requirements of the system come directly from this table. For example, the problem of a guardian who cannot be present or reached in time leads to the emergency notification feature, and the problem of noise for the hearing conversation partner leads to the sound optimization module. Problems that are shared by several stakeholders, such as the scarcity of interpreters and the failure of audio based tools in noisy places, are the main motivation for the whole project. The table also shows that the needs of the groups are connected, because a system that serves the user well but is hard for the hearing partner to follow would not enable real conversation. The design therefore considers both sides of every conversation, and the requirements and use cases in later chapters are written with these goals and problems in mind.
+\begin{table}[H]
+\centering
+\caption{Key goals and problems of the stakeholders}
+\begin{tabular}{|p{3.2cm}|p{5.4cm}|p{5.4cm}|}
+\hline
+\textbf{Stakeholder} & \textbf{Key goals} & \textbf{Key problems} \\
+\hline
+Speech impaired user & Talk to hearing people and get help in an emergency & Interpreters are scarce and audio tools fail \\
+\hline
+Sign language user & Be understood by people who do not sign & Others do not understand signs \\
+\hline
+Hearing conversation partner & Understand the user quickly and reply naturally & Noise, unclear speech and no sign knowledge \\
+\hline
+Guardian & Know when the user needs help & Cannot be present or reached in time \\
+\hline
+Institution & Serve these users at low cost & Interpreters are costly and often unavailable \\
+\hline
+Development team and supervisor & Deliver an accurate working system on time & Limited data, hardware and time \\
+\hline
+\end{tabular}
+\label{tab:goals}
+\end{table}
 \textcolor{red}{NOTE: Subsections from 2.7 to 2.9 are optional for Research projects but compulsory for Development projects.}
 
 \chapter{Literature Review / Related Work}
+\label{ch:lit}
 For each related work, provide a paragraph of introduction and, at the end, a paragraph of conclusions. Give a page break after the chapter ends. \textcolor{red}{This chapter is mandatory.}
 \section{Definitions, Acronyms, and Abbreviations}
 \section{Detailed Literature Review} 
@@ -246,6 +329,7 @@ Write the conclusion of the literature review.
 The columns in the table depending upon your problem and should be specific to your project as described in \ref{tab:1}, \ref{tab:2}, respectively. Proper citations and references are necessary. The template has already an integrated IEEE references format. Go to Google scholar, copy the bib text of your reference, and paste the reference into the fypbib.bib file. Then all you have to do is use \cite{ref:Bishop:2006}.\\ \textcolor{red}{\textbf{NOTE: For development projects, describe related or similar work done by other teams and details of their methods/algorithms. For a research project, a detailed literature survey is expected.}}
  
 \chapter{Software Requirement Specifications}
+\label{ch:srs}
 This chapter provides an overview of the project's features along with the functional and non functional requirements. It also details information about the software as well as the hardware requirements. Showcases a few images of the prototype GUI and details regarding the database.
 
 % \textcolor{red}{NOTE: This Chapter is optional for Research projects but compulsory for Development projects.}
@@ -518,10 +602,12 @@ Next is performance. Because this project aims to let users hold a normal conver
 Finally, there is data. Lip-reading and sign language models depend heavily on the quality and size of the training datasets, and most public datasets cover limited vocabularies, specific speakers and controlled lighting. Models trained on them may not perform as well on real users in everyday conditions, so limited or unsuitable data poses a further risk to accuracy.
 
 \chapter{Proposed Approach and Methodology}
+\label{ch:approach}
 The proposed approach could be a Framework, Heuristic, Algorithm, Protocol, or Mathematical-model.
 For each chapter, provide a paragraph of introduction and in the end a paragraph of conclusions. Not the programming code but the algorithmic and procedural details especially related to the hidden/ backend algorithms that are not covered in the design.\\
 \textcolor{red}{NOTE: This chapter is optional for Development projects but compulsory for Research projects.} 
 \chapter{High-Level and Low-Level Design}
+\label{ch:design}
 Provide the high- and low-level design of your system in this chapter. Select the design that is appropriate for your project.\\
 \textcolor{red}{NOTE: This Chapter is compulsory for both R\&D projects and Development projects.}
 \section{System Overview}
@@ -619,6 +705,7 @@ Describe any design policies and/or tactics that do not have sweeping architectu
 Each particular policy or set of tactics employed should probably be discussed in its own subsection, or (if it is large or complex enough) in a separate design document (with an appropriate reference here of course). Make sure that when describing a design decision that you also discuss any other significant alternatives that were considered, and your reasons for rejecting them (as well as your reasons for accepting the alternative you finally chose). For this reason, it may frequently be convenient to use one of the more popular "pattern formats" to describe a given tactic.\\
 For this particular section, it may become difficult to decide whether a particular policy or set of tactics should be discussed in this section, or in the System Architecture section, or in the Detailed System Design section for the appropriate component. You will have to use your own "best" judgment to decide this. There will usually be some global policies and tactics that should be discussed here. Still, decisions about interfaces, algorithms, and/or data structures might be more appropriately discussed in the same (sub) section as its corresponding software component in one of these other sections.
 \chapter{Implementation and Test Cases}
+\label{ch:impl}
 For each chapter, provide a paragraph of introduction and at the end, a paragraph of conclusions. (Not the programming code but the algorithmic and procedural details especially related to the hidden/ backend algorithms that are not covered in the design)
 \section{Implementation}
 Whatever implementation that you have done so far, please elaborate here.
@@ -700,6 +787,7 @@ This chapter will be added in FYP-II. Give proper analysis and discussion of exp
 \textcolor{red}{NOTE: This Chapter is optional for Development projects but compulsory for Research projects.}
 
 \chapter{Conclusions}
+\label{ch:concl}
 \section{aa}
 \subsection{dfs}
 \subsubsection{dsd}
