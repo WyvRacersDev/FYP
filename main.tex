@@ -1,6 +1,12 @@
 \documentclass{FastFyp}
 \usepackage{float}
 \usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{xltabular}
+\usepackage{array}
+\usepackage{makecell}
+\newcolumntype{Y}[1]{>{\hsize=#1\hsize\raggedright\arraybackslash}X}
 \begin{document}
 \newcommand{\supervisor}{Mr Zeeshan Nazar}
 \newcommand{\university}{National University of Computer and Emerging Sciences, Lahore}
@@ -591,9 +597,75 @@ The hardware required includes the following:
 \section{Graphical User Interface}
 This section should give the GUI dumps of each screen, with reference to the users. The navigation flow of each user is also required, and each GUI should mark the functionality/use case that it covers.
 
-\section{Database Design (if required; this means if you are using noSQL, you will not provide ER but the other design element and data dictonary should still be there. Explain and elaborate your DB design)}
+\section{Database Design }
 \subsection{ER Diagram}
+The Entity-Relationship (ER) diagram provides a detailed representation of the database design for our system. It encompasses various entities, each of which plays a crucial role in the system’s functionality. These entities include:
+\begin{itemize}
+  \item Users: This entity stores the basic information of registered users, including their name, email, password, and unique UserID.
+  \item EmergencyWords: This entity stores emergency-related words or phrases configured for each user. These words are used to identify potential emergency situations.
+  \item Settings: This entity stores user-specific configuration preferences, such as font size, dark mode, and font contrast, allowing the system to provide a personalized and accessible experience.
+  \item ConversationHistory: This entity maintains records of the user's conversations, including the conversation ID, source, raw text, corrected text, and detected emotion. It allows previous interactions to be stored and referenced.
+  \item Guardians: This entity stores information about the emergency contacts associated with a user, including the guardian's name, contact information, communication medium, and unique GuardianID.
+  \item EmergencyHistory: This entity maintains a record of detected emergency events. It stores information such as the event ID, associated user and guardian, detected emergency phrase, and the time at which the event occurred.
+\end{itemize}
+Each of these entities interacts with others to support the core functionality of the system. Users can configure their Settings, define EmergencyWords, and have associated Guardians. The system stores their ConversationHistory, while detected emergency situations are recorded in EmergencyHistory and can trigger notifications to the user's designated guardians. The ER diagram therefore serves as a roadmap for understanding the database structure, relationships, and overall data flow of the system.
 \subsection{Data Dictionary}
+Data dictionary given below defines all the entities, their attributes and data-types.
+\renewcommand{\arraystretch}{1.3}
+\begin{xltabular}{\textwidth}{|>{\centering\arraybackslash}p{2.4cm}|p{2.3cm}|p{2.7cm}|p{1.9cm}|p{1.5cm}|X|}
+\caption{Database schema}
+\label{tab:schema} \\
+\hline
+\textbf{Entity} & \textbf{Attribute} & \textbf{Datatype} & \textbf{Relation To} & \textbf{Nullable} & \textbf{Description} \\ \hline
+\endfirsthead
+
+\hline
+\textbf{Entity} & \textbf{Attribute} & \textbf{Datatype} & \textbf{Relation To} & \textbf{Nullable} & \textbf{Description} \\ \hline
+\endhead
+
+\hline
+\endfoot
+
+% ---------- Users ----------
+\textbf{Users} & \textbf{UserID} & UniqueIdentifier & & No & Primary Key of Users table \\ \cline{2-6}
+ & Name & String & & No & Name of the user \\ \cline{2-6}
+ & Email & String & & No & Email address of the user \\ \cline{2-6}
+ & Password & String & & No & Password of the user \\ \hline
+
+% ---------- EmergencyWords ----------
+\textbf{Emergency\newline Words} & \textbf{WordID} & UniqueIdentifier & & No & Primary Key of EmergencyWords table \\ \cline{2-6}
+ & UserID & UniqueIdentifier & Users & No & Foreign Key referencing the user associated with the emergency word \\ \cline{2-6}
+ & Words & String & & No & Emergency word or phrase configured by the user \\ \hline
+
+% ---------- ConversationHistory ----------
+\textbf{Conversation\newline History} & \textbf{ConvID} & UniqueIdentifier & & No & Primary Key of ConversationHistory table \\ \cline{2-6}
+ & UserID & UniqueIdentifier & Users & No & Foreign Key referencing the user who participated in the conversation \\ \cline{2-6}
+ & Source & String & & No & Source or input modality of the conversation \\ \cline{2-6}
+ & RawText & String & & No & Original text generated or received from the conversation \\ \cline{2-6}
+ & CorrectedText & String & & No & Corrected or processed version of the conversation text \\ \cline{2-6}
+ & Emotion & String & & No & Emotion detected from the conversation \\ \hline
+
+% ---------- Settings ----------
+\textbf{Settings} & FontSize & Integer & & No & Font size selected by the user \\ \cline{2-6}
+ & IsOnDarkMode & Boolean & & No & Indicates whether dark mode is enabled \\ \cline{2-6}
+ & FontContrast & Integer & & No & Font contrast setting selected by the user \\ \hline
+
+% ---------- Guardians ----------
+\textbf{Guardians} & \textbf{GuardianID} & UniqueIdentifier & & No & Primary Key of Guardians table \\ \cline{2-6}
+ & UserID & UniqueIdentifier & Users & No & Foreign Key referencing the user associated with the guardian \\ \cline{2-6}
+ & Name & String & & No & Name of the guardian \\ \cline{2-6}
+ & Medium & String & & No & Communication medium used to notify the guardian \\ \cline{2-6}
+ & Contact & String & & No & Contact information of the guardian \\ \hline
+
+% ---------- EmergencyHistory ----------
+\textbf{Emergency\newline History} & \textbf{EventID} & UniqueIdentifier & & No & Primary Key of EmergencyHistory table \\ \cline{2-6}
+ & UserID & UniqueIdentifier & Users & No & Foreign Key referencing the user associated with the emergency event \\ \cline{2-6}
+ & GuardianID & UniqueIdentifier & Guardians & No & Foreign Key referencing the guardian associated with the emergency notification \\ \cline{2-6}
+ & Phrase & String & & No & Emergency phrase that triggered the event \\ \cline{2-6}
+ & TimeOccured & DateTime & & No & Date and time when the emergency event occurred \\ \hline
+\end{xltabular}
+
+
 
 \section{ Risk Analysis}
 Three major risks are associated with this project, which are Time, Performance and Data constraints.\\
