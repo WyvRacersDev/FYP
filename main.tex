@@ -270,6 +270,7 @@ This chapter presents the detailed literature review of studies relevant to the 
 
 \begin{itemize}
   \item \textbf{American Sign Language (ASL): }A complete, natural visual-gestural language used by the Deaf Community in the United States and Canada.
+  \item \textbf{ANN: }Stands for Artificial Neural Network.
   \item \textbf{Computer Vision: }A subset of artificial intelligence that enables computers to derive meaningful information from images and videos.
   \item \textbf{CNN: }Stands for Convolutional Neural Network. It is a deep learning model which uses a regularized feed forward neural network capable of self learning using filters. Its primary use case is image classification.
   \item \textbf{Attention Mechanisms: }Techniques that let a computer dynamically focuses on just the right frame or hand movement at the exact moment it tries to write down a specific target word instead of looking at the whle video at once.
@@ -277,6 +278,7 @@ This chapter presents the detailed literature review of studies relevant to the 
   \item \textbf{Luong-style alighment: }An attention mechanism.
   \item \textbf{CTC: }Stands for Connectionist Temporal Classification, a loss function.
   \item \textbf{Sequence cross-entropy: }A metric to judge how a model's predictions match the actual output.
+  \item \textbf{Transformer: }A family of ANN architectures based on the multi-head attention mechanism.
 \end{itemize}
 
 
@@ -295,6 +297,28 @@ One strength of this work is that it showed SLT could be learned end to end with
 \subsubsection{Relationship to the proposed research work}
 This research is directly relevant to our project, which focuses on translating ASL to English. Camg\"oz et al. \cite{ref:Camgoz:2018} showed that sign language can be treated as a translation problem over full sentences rather than a word-by-word recognition task, and this idea inspires our work. Because their work focuses on German Sign Language, it leaves room for further work on ASL to English translation, which is the problem we aim to address.
 
+
+\subsection{Sign Language Transformers: Joint End-to-End Sign Language Recognition and Translation}
+
+\subsubsection{Summary of the research item}
+Camg\"oz et al. \cite{ref:Camgoz:2020} later replaced the RNN+CNN setup from their earlier work from 2018 with transformers and trained recognition and translation together in a single model. The two tasks are tied through a CTC loss, so the system does not need timing information for the glosses.
+
+\subsubsection{Critical analysis of the research item}
+On the PHOENIX14T data, they report 21.80 BLEU-4, which is more than double the 9.58 from the earlier CNN+RNN end-to-end model. One weakness is that training still depends on gloss annotations, which are expensive to produce and missing for most sign language data. The dataset used is still German weather forecasts, so it is unclear how well the gains hold up on open-domain or ASL dataset.
+
+\subsubsection{Relationship to the proposed research work}
+This paper is relevant to our project because it highlights how much recognition and translation can help each other when they are learned together by the model.
+
+\subsection{Better Sign Language Translation with STMC-Transformer}
+
+
+\subsubsection{Summary of the research item}
+
+
+\subsubsection{Critical analysis of the research item}
+
+
+\subsubsection{Relationship to the proposed research work}
 
 
 
