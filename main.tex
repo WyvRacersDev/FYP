@@ -283,14 +283,13 @@ This section will include a detailed literature review of your problem area. Mak
   \item \textbf{CTC: }Stands for Connectionist Temporal Classification, a loss function.
   \item \textbf{Sequence cross-entropy: }A metric to judge how a model's predictions match the actual output.
   \item \textbf{Transformer: }A family of ANN architectures based on the multi-head attention mechanism.
+  \item \textbf{Gloss: }A word-for-word textual representations of sign gestures.
 \end{itemize}
 
 
 \section{Detailed Literature Review} 
 This section will include a detailed literature review of studies and work done (including methodlogies and results).
-
 \subsection{Neural Sign Language Translation}
-
 \subsubsection{Summary of the research item}
 
 Bridging the communication gap between the Deaf community and those who do not use sign language has been a primary objective in assistive technologies. Traditionally, Sign Language Recognition systems focused on mapping one sign to one word for translation rather than a full-sentence translation. To improve this a solution was proposed by Camgöz et al. \cite{ref:Camgoz:2018} formalized SLT as a Seq2Seq problem, which shifted the objective from isolated sign prediction to generating natural spoken language sentences directly from video. It introduced an end-to-end deep learning framework that pairs a 2D CNN, to extract the spatial features from each frame, with a GRU-based encoder-decoder. An attention mechanism (both Bahdanau and Luong variants were tested) lets the decoder focus on different parts of the video while producing each target word. They tried two setups: an end-to-end model that translates directly from frames, and a hybrid model that first recognizes intermediate gloss annotations and then translates the glosses into text. The authors also introduced the RWTH-PHOENIX-Weather 2014T (PHOENIX14T) dataset, which contains 8,257 continuous weather-forecast videos in German Sign Language, each paired with gloss annotations and a German translation. It was the first publicly available dataset of this kind and gave the field a common benchmark.
@@ -303,7 +302,6 @@ This research is directly relevant to our project, which focuses on translating 
 
 
 \subsection{Sign Language Transformers: Joint End-to-End Sign Language Recognition and Translation}
-
 \subsubsection{Summary of the research item}
 Camg\"oz et al. \cite{ref:Camgoz:2020} later replaced the RNN+CNN setup from their earlier work from 2018 with transformers and trained recognition and translation together in a single model. The two tasks are tied through a CTC loss, so the system does not need timing information for the glosses.
 
@@ -314,15 +312,25 @@ On the PHOENIX14T data, they report 21.80 BLEU-4, which is more than double the 
 This paper is relevant to our project because it highlights how much recognition and translation can help each other when they are learned together by the model.
 
 \subsection{Better Sign Language Translation with STMC-Transformer}
-
-
 \subsubsection{Summary of the research item}
-
+Yin and Read \cite{ref:Yin:2020} focused on the translation half of the pipeline, which most earlier work had paid little attention to, and tested a range of transformer setups nd pair them with a Spatial-Temporal Multi-Cue (STMC) network that predicts gloss sequences from video by fusing features across different spatial regions and temporal scales. Experiments are run on two benchmarks: PHOENIX14T, the German Sign Language weather-forecast dataset that has become the standard benchmark in this area, and ASLG-PC12, an ASL gloss-to-text dataset. On PHOENIX14T their best setup improves over the prior state of the art by more than 5 BLEU-4 points when translation is done from ground-truth glosses, and by more than 7 BLEU-4 when done from predicted glosses. On ASLG-PC12 the gain is over 16 BLEU-4.
 
 \subsubsection{Critical analysis of the research item}
-
+The most notable finding we have observed is that translating from predicted glosses actually outperforms translating from ground-truth glosses on PHOENIX14T. This suggests the STMC-predicted glosses may carry contextual information that the manually written ground-truth labels do not fully capture, or that there is some sort of mismatch in how the two types of glosses are formatted. On the negative side, ASLG-PC12 is a gloss-to-text dataset only, meaning there is no video involved at all for that benchmark, so the large ASLG-PC12 gain does not tell us anything about how well the visual recognition step performs on ASL. The study is also limited in scope: PHOENIX14T covers only weather forecasts, and neither dataset reflects the full complexity of everyday ASL conversation.
 
 \subsubsection{Relationship to the proposed research work}
+This is relevent to our project because this paper is one of the few in the sign language translation literature that directly touches ASL, even if only at the gloss-to-text stage via ASLG-PC12. For our project, this shows that strong transformer-based translation can signficantly close the gap between predicted and actual gloss inputs. The BLEU-4 figures also give us a solid reference point because by knowing how ASL gloss-to-text results compare to German Sign Language results helps us set realistic expectations for the translation component of our ASL-to-English system
+
+\subsection{Improving Sign Language-Gloss Translations With Pretrained Models}
+\subsubsection{Summary of the research item}
+In traditional SLT systems, sign language videos are first converted into glosses using continuous sign language recognition. A Neural Machine Translation (NMT) model then translates the gloss sequence into natural spoken text. In addition to this, there is a lack of sufficent data for annotated sign language for developing effective translation models. There was also an assumption that converting glosses to natural language is like translating between two different languages (e.g., translating English to German). Chen et al. \cite{ref:Chen:2026} found this assumption to be untrue and discovered that gloss-to-text isn't really cross-lingual translation. Instead, they framed gloss-to-text as a monolingual constraint generation (or denoising) task. It was also observed that models pretrained to clean up messy or broken text (using denoising auto-encoding, like mBART) performed much better than models trained for traditional language translation.
+
+\subsubsection{Critical analysis of the research item}
+This work presents a clear approach to the low-resource nature of sign-language gloss-to-text translation and proves an old assumption wrong. Another major positive point is that it evaluates the proposed approach across multiple benchmark datasets, including PHOENIX-2014T, ASLG-PC12, and CSL-Daily, and reports notable improvements in translation performance. However, this approach has limitations, the primary one being that the work focuses on gloss-to-text translation rather than direct video-to-text translation, meaning it does not address the challenging sign recognition stage. The approach can also be sensitive to noisy or incorrectly recognized glosses, which may reduce its effectiveness in real-world application. Furthermore, the evaluation relies mainly on automatic metrics such as BLEU, ROUGE, and METEOR, which may not fully reflect the quality of translations.
+
+\subsubsection{Relationship to the proposed research work}
+This study is relevant to our Silent Signals because it shows the effectiveness of pretrained sequence-to-sequence models for gloss-to-text translation. Since our system is supposed to convert ASL to English, this approach provides a useful reference for the translation component of our project.
+
 
 
 
