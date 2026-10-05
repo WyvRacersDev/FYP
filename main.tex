@@ -331,9 +331,15 @@ This work presents a clear approach to the low-resource nature of sign-language 
 \subsubsection{Relationship to the proposed research work}
 This study is relevant to our Silent Signals because it shows the effectiveness of pretrained sequence-to-sequence models for gloss-to-text translation. Since our system is supposed to convert ASL to English, this approach provides a useful reference for the translation component of our project.
 
+\subsection{Gloss-Free Sign Language Translation via Visual-Language Pretraining}
+\subsubsection{Summary of the research item}
+Zhou et al. \cite{ref:ZhouB:2023} take the position that glosses are both an information bottleneck and an expensive annotation requirement, and that sign language translation should not depend on them. Their method, GFSLT-VLP (Gloss-Free Sign Language Translation via Visual-Language Pretraining), initializes the visual and text components from pretrained vision-language models so that the system inherits semantic knowledge before seeing any sign language data. The model is then fine-tuned end-to-end on sign-to-text pairs without any gloss supervision. On PHOENIX14T, it improves over previous gloss-free methods by more than 5 BLEU-4, and on CSL-Daily by more than 3 BLEU-4, while being competitive with several gloss-based approaches.
 
+\subsubsection{Critical analysis of the research item}
+The primary takeaway in this case is not simply the fact that the BLEU score increased, but the observation that an approach not using glosses was able to bridge the majority of the gap in performance between itself and approaches that use gloss supervision. In other words, glosses are shown to be not needed, and it becomes possible to train models on data which has never been annotated for glosses. The visual-language pretraining paradigm seems like a logical solution to the problem of small sign language dataset sizes through using general purpose corpora. At the same time, the lack of evaluation of any of the models used in a more general setting, in particular the fact that PHOENIX14T and CSL-Daily datasets are restricted domain, is problematic. The former includes a very narrow domain related to weather with a very limited vocabulary, thus making good results infeasible in an open vocabulary conversational context. Moreover, visual aspects of signing, in particular hand movements, spatial grammar, and non-manuals, might not transfer to the task at hand in the same way as they did to general visual language tasks through the process of pre-training.
 
-
+\subsubsection{Relationship to the proposed research work}
+This is probably the most directly applicable methodological paper for our project As with any sign language system, our ASL training data will be limited and generating gloss annotations would be a major bottleneck. The gloss-free approach allows us to train on datasets such as How2Sign or YouTube-ASL that have video and English text but do not have gloss labels. The pretraining strategy also opens up a practical way forward: starting from a strong vision-language model and fine-tuning on ASL-to-English pairs, which does not require large annotation budgets.
 
 \section{Literature Review Summary Table}
 Please provide a compact summary of your literature review as provided in the table \ref{tab:1}, for the development project.
