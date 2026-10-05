@@ -282,12 +282,23 @@ This chapter presents the detailed literature review of studies relevant to the 
 
 \section{Detailed Literature Review} 
 This section will include a detailed literature review of studies and work done (including methodlogies and results).
-\subsection{Sign Language Translation}
+
+\subsection{Neural Sign Language Translation}
+
+\subsubsection{Summary of the research item}
+
 Bridging the communication gap between the Deaf community and those who do not use sign language has been a primary objective in assistive technologies. Traditionally, Sign Language Recognition systems focused on mapping one sign to one word for translation rather than a full-sentence translation. To improve this a solution was proposed by Camgöz et al. \cite{ref:Camgoz:2018} formalized SLT as a Seq2Seq problem, which shifted the objective from isolated sign prediction to generating natural spoken language sentences directly from video. It introduced an end-to-end deep learning framework that pairs a 2D CNN, to extract the spatial features from each frame, with a GRU-based encoder-decoder. An attention mechanism (both Bahdanau and Luong variants were tested) lets the decoder focus on different parts of the video while producing each target word. They tried two setups: an end-to-end model that translates directly from frames, and a hybrid model that first recognizes intermediate gloss annotations and then translates the glosses into text. The authors also introduced the RWTH-PHOENIX-Weather 2014T (PHOENIX14T) dataset, which contains 8,257 continuous weather-forecast videos in German Sign Language, each paired with gloss annotations and a German translation. It was the first publicly available dataset of this kind and gave the field a common benchmark.
 
+\subsubsection{Critical analysis of the research item}
 One strength of this work is that it showed SLT could be learned end to end without relying on glosses at inference time, which makes the approach easier to extend to new data. Their experiments also showed that attention clearly improves translation quality over a plain encoder-decoder, and the gloss-to-text results (19.26 BLEU-4) gave a useful benchmark to compare end-to-end models against. Releasing PHOENIX14T was arguably just as important, since later SLT work has relied on it heavily for the purpose of benchmarking. However, the study has several limitations. The end-to-end model reached only about 9.6 BLEU-4 on the test set, which is around half the gloss-based upper bound, so direct video-to-text translation was still far from practically useable. The dataset covers only one small domain (weather forecasts) with a small vocabulary and a limited number of signers, so the results may not carry over to everyday conversation. The visual features come from a frame-level 2D CNN pretrained on ImageNet rather than sign data, so it cannot model motion correctly. The decoder also struggles with long sequences.
 
+\subsubsection{Relationship to the proposed research work}
 This research is directly relevant to our project, which focuses on translating ASL to English. Camg\"oz et al. \cite{ref:Camgoz:2018} showed that sign language can be treated as a translation problem over full sentences rather than a word-by-word recognition task, and this idea inspires our work. Because their work focuses on German Sign Language, it leaves room for further work on ASL to English translation, which is the problem we aim to address.
+
+
+
+
+
 \section{Literature Review Summary Table}
 Please provide a compact summary of your literature review as provided in the table \ref{tab:1}, for the development project.
 \begin{table}[!h]
