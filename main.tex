@@ -6,6 +6,8 @@
 \usepackage{xltabular}
 \usepackage{array}
 \usepackage{makecell}
+\usepackage{graphicx}
+\usepackage{subcaption}
 \newcolumntype{Y}[1]{>{\hsize=#1\hsize\raggedright\arraybackslash}X}
 \begin{document}
 \newcommand{\supervisor}{Mr Zeeshan Nazar}
@@ -265,9 +267,11 @@ Development team and supervisor & Deliver an accurate working system on time & L
 
 \chapter{Literature Review / Related Work}
 \label{ch:lit}
-This chapter presents the detailed literature review of studies relevant to the domain of conversion of American Sign Language to English, text-to-speech conversion, speech-to-text conversion, lip reading and predicting text using a machine learning model
+For each related work, provide a paragraph of introduction and, at the end, a paragraph of conclusions. Give a page break after the chapter ends. \textcolor{red}{This chapter is mandatory.}
 \section{Definitions, Acronyms, and Abbreviations}
-
+\section{Detailed Literature Review} 
+This section will include a detailed literature review of your problem area. Make different categories for different types of work done in the past.  In addition to textual descriptions, make a summary table that describes each paper that you have read, along with references.
+\subsection{Related Research Work 1 / Related Development Project (Please make sure to add an appropriate heading here and not keep this same heading, this is your info only.)}
 \begin{itemize}
   \item \textbf{American Sign Language (ASL): }A complete, natural visual-gestural language used by the Deaf Community in the United States and Canada.
   \item \textbf{ANN: }Stands for Artificial Neural Network.
@@ -623,7 +627,146 @@ The hardware required includes the following:
 \end{itemize}
 
 \section{Graphical User Interface}
-This section should give the GUI dumps of each screen, with reference to the users. The navigation flow of each user is also required, and each GUI should mark the functionality/use case that it covers.
+This section highlights and showcases all the screens associated with the app, including the startup animation, the main menu, accessibilty settings, the chat history and all the conversation converting functions. 
+
+\begin{figure}[H]
+    \centering
+
+    \begin{subfigure}{0.30\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/start2.jpeg}
+        \caption{First person speaking}
+        \label{fig:image1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.30\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/start1.jpeg}
+        \caption{Second person speaking}
+        \label{fig:image2}
+    \end{subfigure}
+
+    \caption{Opening Animations}
+    \label{fig:both-images}
+\end{figure}
+
+\begin{center}
+    \textit{showcases the opening animation of the app}
+\end{center}
+
+\begin{figure}[H]    
+    \centering
+    \includegraphics[width=0.30\textwidth]{images/main1.jpeg}
+    \caption{Main Screen}
+    \label{fig:Profile screen}
+\end{figure}
+\begin{center}
+    \textit{showcases main screen of the app, the user can choose what to do}
+\end{center}
+
+
+
+\begin{figure}[H]
+    \centering
+
+    \begin{subfigure}{0.30\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/lipreading.jpeg}
+        \caption{Lip-Reading Screen}
+        \label{fig:image1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.30\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/signlanguage.jpeg}
+        \caption{Sign Language Detection Screen}
+        \label{fig:image2}
+    \end{subfigure}
+
+    \caption{Lip-reading and Sign Language Screens}
+    \label{fig:both-images}
+\end{figure}
+
+\begin{center}
+    \textit{showcases the Lip-reading and Sign Language screens of the app}
+\end{center}
+
+
+\begin{figure}[H]
+    \centering
+
+    \begin{subfigure}{0.30\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/accessibility.jpeg}
+        \caption{[placeholder for TTS and STT]}
+        \label{fig:image1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.30\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/history.jpeg}
+        \caption{[placeholder for TTS and STT]}
+        \label{fig:image2}
+    \end{subfigure}
+
+    \caption{[placeholder for TTS and STT] Screens}
+    \label{fig:both-images}
+\end{figure}
+
+\begin{center}
+    \textit{showcases the [placeholder for TTS and STT] screens of the app}
+\end{center}
+
+\begin{figure}[H]
+    \centering
+
+    \begin{subfigure}{0.30\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/accessibility.jpeg}
+        \caption{Accessibility Settings Screen}
+        \label{fig:image1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.30\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/history.jpeg}
+        \caption{User Conversation History Screen}
+        \label{fig:image2}
+    \end{subfigure}
+
+    \caption{Accessibility Settings and User Conversation History Screens}
+    \label{fig:both-images}
+\end{figure}
+
+\begin{center}
+    \textit{showcases the Accessibility Settings and User Conversation History screens of the app}
+\end{center}
+
+
+\begin{figure}[H]    
+    \centering
+    \begin{subfigure}{0.30\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/emergency.jpeg}
+        \caption{Emergency Phrases Screen}
+        \label{fig:image1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.30\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/profile.jpeg}
+        \caption{User Profile Screen}
+        \label{fig:Profile screen}
+    \end{subfigure}
+
+    
+\end{figure}
+
+\begin{center}
+    \textit{showcases the Emergency Phrases and local User Profile Screen on the app}
+\end{center}
+
+
 
 \section{Database Design }
 \subsection{ER Diagram}
