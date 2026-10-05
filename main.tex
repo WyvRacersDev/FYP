@@ -6,6 +6,8 @@
 \usepackage{xltabular}
 \usepackage{array}
 \usepackage{makecell}
+\usepackage{graphicx}
+\usepackage{subcaption}
 \newcolumntype{Y}[1]{>{\hsize=#1\hsize\raggedright\arraybackslash}X}
 \begin{document}
 \newcommand{\supervisor}{Mr Zeeshan Nazar}
@@ -265,29 +267,31 @@ Development team and supervisor & Deliver an accurate working system on time & L
 
 \chapter{Literature Review / Related Work}
 \label{ch:lit}
-This chapter presents the detailed literature review of studies relevant to the domain of conversion of American Sign Language to English, text-to-speech conversion, speech-to-text conversion, lip reading and predicting text using a machine learning model
+For each related work, provide a paragraph of introduction and, at the end, a paragraph of conclusions. Give a page break after the chapter ends. \textcolor{red}{This chapter is mandatory.}
 \section{Definitions, Acronyms, and Abbreviations}
-
+\section{Detailed Literature Review} 
+This section will include a detailed literature review of your problem area. Make different categories for different types of work done in the past.  In addition to textual descriptions, make a summary table that describes each paper that you have read, along with references.
+\subsection{Related Research Work 1 / Related Development Project (Please make sure to add an appropriate heading here and not keep this same heading, this is your info only.)}
 \begin{itemize}
-  \item \textbf{American Sign Language (ASL): }A complete, natural visual-gestural language used by the Deaf Community in the United States and Canada.
-  \item \textbf{Computer Vision: }A subset of artificial intelligence that enables computers to derive meaningful information from images and videos.
-  \item \textbf{CNN: }Stands for Convolutional Neural Network. It is a deep learning model which uses a regularized feed forward neural network capable of self learning using filters. Its primary use case is image classification.
-  \item \textbf{Attention Mechanisms: }Techniques that let a computer dynamically focuses on just the right frame or hand movement at the exact moment it tries to write down a specific target word instead of looking at the whle video at once.
-  \item \textbf{Bahdanau-style alignment: }An attention mechanism.
-  \item \textbf{Luong-style alighment: }An attention mechanism.
-  \item \textbf{CTC: }Stands for Connectionist Temporal Classification, a loss function.
-  \item \textbf{Sequence cross-entropy: }A metric to judge how a model's predictions match the actual output.
+    \item Summary of the research item / Development Project (1 or 2 paragraphs)
+  \item  Critical analysis of the research item / Development Project (Strengths and Weaknesses) 1 paragraph
+  \item  Relationship to the proposed work - 1 paragraph
 \end{itemize}
 
+ \subsection{Example LR 1: for Development Project}
+The project ABC \cite{ref:guyon:2007a} focused on building a real-time customer service dashboard designed to streamline query management and improve response efficiency within a mid-sized software firm. The system was developed using a modular architecture, integrating ticket tracking, live chat support, and performance analytics into a single interface. Built with React for the frontend and Node.js for the backend, the dashboard also featured role-based access control and SLA monitoring tools. During testing, the dashboard demonstrated a 35\% reduction in query resolution time and improved internal coordination between support agents and technical teams. The project was deployed in phases, starting with internal use and later expanding to client-facing support channels.
 
-\section{Detailed Literature Review} 
-This section will include a detailed literature review of studies and work done (including methodlogies and results).
-\subsection{Sign Language Translation}
-Bridging the communication gap between the Deaf community and those who do not use sign language has been a primary objective in assistive technologies. Traditionally, Sign Language Recognition systems focused on mapping one sign to one word for translation rather than a full-sentence translation. To improve this a solution was proposed by Camgöz et al. \cite{ref:Camgoz:2018} formalized SLT as a Seq2Seq problem, which shifted the objective from isolated sign prediction to generating natural spoken language sentences directly from video. It introduced an end-to-end deep learning framework that pairs a 2D CNN, to extract the spatial features from each frame, with a GRU-based encoder-decoder. An attention mechanism (both Bahdanau and Luong variants were tested) lets the decoder focus on different parts of the video while producing each target word. They tried two setups: an end-to-end model that translates directly from frames, and a hybrid model that first recognizes intermediate gloss annotations and then translates the glosses into text. The authors also introduced the RWTH-PHOENIX-Weather 2014T (PHOENIX14T) dataset, which contains 8,257 continuous weather-forecast videos in German Sign Language, each paired with gloss annotations and a German translation. It was the first publicly available dataset of this kind and gave the field a common benchmark.
+One of the key strengths of this development effort was its adaptability to existing workflows. The dashboard was designed to integrate seamlessly with the company’s CRM and internal communication tools, minimizing disruption during rollout. Its real-time analytics allowed supervisors to monitor agent performance and customer satisfaction trends. However, the project faced limitations in scalability during peak traffic hours, and the initial version lacked multilingual support, which restricted its usability for international clients. These issues were partially addressed in later iterations but remain areas for future enhancement.
 
-One strength of this work is that it showed SLT could be learned end to end without relying on glosses at inference time, which makes the approach easier to extend to new data. Their experiments also showed that attention clearly improves translation quality over a plain encoder-decoder, and the gloss-to-text results (19.26 BLEU-4) gave a useful benchmark to compare end-to-end models against. Releasing PHOENIX14T was arguably just as important, since later SLT work has relied on it heavily for the purpose of benchmarking. However, the study has several limitations. The end-to-end model reached only about 9.6 BLEU-4 on the test set, which is around half the gloss-based upper bound, so direct video-to-text translation was still far from practically useable. The dataset covers only one small domain (weather forecasts) with a small vocabulary and a limited number of signers, so the results may not carry over to everyday conversation. The visual features come from a frame-level 2D CNN pretrained on ImageNet rather than sign data, so it cannot model motion correctly. The decoder also struggles with long sequences.
+This development project directly supports the proposed research by providing a practical foundation for evaluating customer service efficiency. While the research explores theoretical models and AI integration, the dashboard serves as a tangible implementation that can be enhanced with AI-driven features such as automated query routing and sentiment analysis. The performance metrics gathered during this project will inform the research’s evaluation framework and help validate proposed improvements in service delivery and operational management.
 
-This research is directly relevant to our project, which focuses on translating ASL to English. Camg\"oz et al. \cite{ref:Camgoz:2018} showed that sign language can be treated as a translation problem over full sentences rather than a word-by-word recognition task, and this idea inspires our work. Because their work focuses on German Sign Language, it leaves room for further work on ASL to English translation, which is the problem we aim to address.
+ \subsection{Example LR 2: for Research and Development Project}
+Smith et al. \cite{ref:Bishop:2006} investigated the integration of AI-powered chatbots within corporate customer service frameworks, focusing on automating Tier-1 support queries. Their study involved deploying a Natural Language Processing (NLP) based chatbot across three multinational firms and evaluating its performance over a six-month period. The results demonstrated a 40\% reduction in average response time and a 25\% increase in customer satisfaction ratings. The chatbot was trained using historical customer interaction logs and was integrated with existing CRM systems to ensure contextual accuracy and personalized responses. Additionally, the study emphasized the scalability of chatbot systems, noting their ability to handle thousands of simultaneous queries without compromising quality, especially during peak service hours when traditional support teams struggled to maintain SLA compliance.
+
+One of the strengths of this research lies in its empirical approach, offering quantifiable improvements in service metrics. The integration with CRM systems added depth to the chatbot’s responses, enhancing the overall customer experience. However, the study’s limitations include its narrow focus on Tier-1 queries, with minimal exploration of escalation protocols or emotional intelligence in handling sensitive customer issues. It also lacks discussion on the long-term adaptability of the chatbot to evolving customer expectations and organizational changes.
+
+This research is directly relevant to the proposed work, which aims to develop a hybrid customer service model that combines AI efficiency with human oversight. While they focused primarily on automation, the proposed work seeks to extend their framework by incorporating feedback loops, escalation mechanisms, and sentiment analysis to handle more complex queries. The foundational insights from this study will inform the design and evaluation metrics of the proposed system, particularly in terms of response time, customer satisfaction, and operational scalability.
+
 \section{Literature Review Summary Table}
 Please provide a compact summary of your literature review as provided in the table \ref{tab:1}, for the development project.
 \begin{table}[!h]
@@ -593,7 +597,146 @@ The hardware required includes the following:
 \end{itemize}
 
 \section{Graphical User Interface}
-This section should give the GUI dumps of each screen, with reference to the users. The navigation flow of each user is also required, and each GUI should mark the functionality/use case that it covers.
+This section highlights and showcases all the screens associated with the app, including the startup animation, the main menu, accessibilty settings, the chat history and all the conversation converting functions. 
+
+\begin{figure}[H]
+    \centering
+
+    \begin{subfigure}{0.30\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/start2.jpeg}
+        \caption{First person speaking}
+        \label{fig:image1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.30\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/start1.jpeg}
+        \caption{Second person speaking}
+        \label{fig:image2}
+    \end{subfigure}
+
+    \caption{Opening Animations}
+    \label{fig:both-images}
+\end{figure}
+
+\begin{center}
+    \textit{showcases the opening animation of the app}
+\end{center}
+
+\begin{figure}[H]    
+    \centering
+    \includegraphics[width=0.30\textwidth]{images/main1.jpeg}
+    \caption{Main Screen}
+    \label{fig:Profile screen}
+\end{figure}
+\begin{center}
+    \textit{showcases main screen of the app, the user can choose what to do}
+\end{center}
+
+
+
+\begin{figure}[H]
+    \centering
+
+    \begin{subfigure}{0.30\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/lipreading.jpeg}
+        \caption{Lip-Reading Screen}
+        \label{fig:image1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.30\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/signlanguage.jpeg}
+        \caption{Sign Language Detection Screen}
+        \label{fig:image2}
+    \end{subfigure}
+
+    \caption{Lip-reading and Sign Language Screens}
+    \label{fig:both-images}
+\end{figure}
+
+\begin{center}
+    \textit{showcases the Lip-reading and Sign Language screens of the app}
+\end{center}
+
+
+\begin{figure}[H]
+    \centering
+
+    \begin{subfigure}{0.30\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/accessibility.jpeg}
+        \caption{[placeholder for TTS and STT]}
+        \label{fig:image1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.30\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/history.jpeg}
+        \caption{[placeholder for TTS and STT]}
+        \label{fig:image2}
+    \end{subfigure}
+
+    \caption{[placeholder for TTS and STT] Screens}
+    \label{fig:both-images}
+\end{figure}
+
+\begin{center}
+    \textit{showcases the [placeholder for TTS and STT] screens of the app}
+\end{center}
+
+\begin{figure}[H]
+    \centering
+
+    \begin{subfigure}{0.30\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/accessibility.jpeg}
+        \caption{Accessibility Settings Screen}
+        \label{fig:image1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.30\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/history.jpeg}
+        \caption{User Conversation History Screen}
+        \label{fig:image2}
+    \end{subfigure}
+
+    \caption{Accessibility Settings and User Conversation History Screens}
+    \label{fig:both-images}
+\end{figure}
+
+\begin{center}
+    \textit{showcases the Accessibility Settings and User Conversation History screens of the app}
+\end{center}
+
+
+\begin{figure}[H]    
+    \centering
+    \begin{subfigure}{0.30\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/emergency.jpeg}
+        \caption{Emergency Phrases Screen}
+        \label{fig:image1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.30\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/profile.jpeg}
+        \caption{User Profile Screen}
+        \label{fig:Profile screen}
+    \end{subfigure}
+
+    
+\end{figure}
+
+\begin{center}
+    \textit{showcases the Emergency Phrases and local User Profile Screen on the app}
+\end{center}
+
+
 
 \section{Database Design }
 \subsection{ER Diagram}
