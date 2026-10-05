@@ -851,9 +851,45 @@ Finally, there is data. Lip-reading and sign language models depend heavily on t
 
 \chapter{Proposed Approach and Methodology}
 \label{ch:approach}
-The proposed approach could be a Framework, Heuristic, Algorithm, Protocol, or Mathematical-model.
-For each chapter, provide a paragraph of introduction and in the end a paragraph of conclusions. Not the programming code but the algorithmic and procedural details especially related to the hidden/ backend algorithms that are not covered in the design.\\
-\textcolor{red}{NOTE: This chapter is optional for Development projects but compulsory for Research projects.} 
+This chapter presents the proposed approach and methodology for the development of Silent Signals. It covers the lip-reading module, context-based correction and confidence scoring, sign language recognition, speech output and sound optimization, facial expression detection. For each module, the data collection, pre-processing, and model details are described.
+
+\section{Lip-Reading Module}
+This section describes the lip-reading module, which converts a silent video of a speaker's face, either recorded or from a live webcam, into text.
+
+\subsection{Data collection}
+The module will be trained and evaluated on the "Lip Reading in the Wild" (LRW) dataset ~\cite{yang2019lrw1000} , which is publicly available. LRW contains approximately 500 distinct English word classes, with hundreds of video samples for each word collected from television broadcasts. Each clip is a short, word-level video segment in which a speaker articulates the target word, making the dataset suitable for training a model to recognize spoken words using only visual information from the speaker's lips. The videos contain natural variations in speakers, appearance, pose, and speaking style, providing a more realistic setting for visual speech recognition than highly controlled datasets. To measure generalization fairly, the dataset will be divided into training, validation, and test sets while ensuring that speakers in the test set are not included in the training data, providing an unseen-speaker evaluation of the model's lip-reading capability.
+\subsection{Pre-processing}
+Each video frame will be processed using the MediaPipe Face Landmarker through the MediaPipe Tasks Vision API ~\cite{googlemediapipe2026} . The landmarker detects 478 facial landmarks, from which a subset corresponding to the outer and inner lips will be selected. The coordinates of these landmarks will be used to determine the center and spatial extent of the mouth region in each frame. To reduce fluctuations caused by small variations in landmark detection, the detected mouth center will be smoothed across consecutive frames. A bounding box will then be generated around the smoothed mouth center, with its width determined by the detected mouth width multiplied by an empirically selected margin factor. The height of the bounding box will be adjusted to maintain a 2:1 width-to-height aspect ratio. The resulting mouth regions will be cropped from each frame and resized to 128 × 64 pixels. Finally, the pixel values will be normalized to the range [0, 1] before being passed to the lip-reading model. This preprocessing ensures that the model focuses primarily on relevant lip movements while reducing the influence of other facial features and background information.
+\subsection{Model details}
+The lip-reading module will use a spatiotemporal neural network consisting of a 3D CNN followed by a BiLSTM. The model will take 29 preprocessed mouth frames of size 128 × 64 pixels as input. The 3D CNN will extract spatial features such as lip shape while also capturing short-term movements across consecutive frames. A BiLSTM will then model longer-term temporal dependencies in the sequence, which is important for distinguishing words with similar lip shapes but different movement patterns. The network will use convolutional layers with 32, 64, and 128 filters, followed by batch normalization, ReLU activation, and 3D max-pooling. The resulting features will be passed through a BiLSTM with 128 hidden units in each direction, followed by a 512-neuron fully connected layer with 0.5 dropout. Finally, a softmax output layer will classify the sequence into one of the 500 LRW word classes. This architecture provides a relatively lightweight approach while effectively combining spatial lip features with their temporal movement patterns.
+
+
+\section{Sign Language Module}
+
+\subsection{Data collection}
+\subsection{Pre-processing}
+\subsection{Model details}
+
+
+\section{Context Based Correction Module}
+\subsection{Data collection}
+\subsection{Pre-processing}
+\subsection{Model details}
+
+
+\section{Facial expression detection module}
+\subsection{Data collection}
+\subsection{Pre-processing}
+\subsection{Model details}
+
+
+\section{Sound optimization and output module}
+\subsection{Data collection}
+\subsection{Pre-processing}
+\subsection{Model details}
+
+
+% \textcolor{red}{NOTE: This chapter is optional for Development projects but compulsory for Research projects.} 
 \chapter{High-Level and Low-Level Design}
 \label{ch:design}
 Provide the high- and low-level design of your system in this chapter. Select the design that is appropriate for your project.\\
