@@ -312,13 +312,13 @@ This paper is relevant to our project because it highlights how much recognition
 
 \subsection{Better Sign Language Translation with STMC-Transformer}
 \subsubsection{Summary of the research item}
-Yin and Read \cite{ref:Yin:2020} focused on the translation half of the pipeline, which most earlier work had paid little attention to, and tested a range of transformer setups. They also added a spatial-temporal multi-cue (STMC) network to predict glosses from video. Experiments were run on PHOENIX14T and on ASLG-PC12, an ASL gloss dataset, with improvements of over 5 BLEU-4 points on PHOENIX14T with ground-truth glosses, over 7 with predicted glosses, and over 16 on ASLG-PC12. Translating from predicted glosses actually did better than from ground-truth glosses, which was a surprising finding. A limitation is that ASLG-PC12 is a gloss-to-text dataset, so it does not test recognition from video at all. Since this is one of the few works that touches ASL directly, it gives us a useful reference point for how ASL results compare to German Sign Language ones.
+Yin and Read \cite{ref:Yin:2020} focused on the translation half of the pipeline, which most earlier work had paid little attention to, and tested a range of transformer setups nd pair them with a Spatial-Temporal Multi-Cue (STMC) network that predicts gloss sequences from video by fusing features across different spatial regions and temporal scales. Experiments are run on two benchmarks: PHOENIX14T, the German Sign Language weather-forecast dataset that has become the standard benchmark in this area, and ASLG-PC12, an ASL gloss-to-text dataset. On PHOENIX14T their best setup improves over the prior state of the art by more than 5 BLEU-4 points when translation is done from ground-truth glosses, and by more than 7 BLEU-4 when done from predicted glosses. On ASLG-PC12 the gain is over 16 BLEU-4.
 
 \subsubsection{Critical analysis of the research item}
-
+The most notable finding we have observed is that translating from predicted glosses actually outperforms translating from ground-truth glosses on PHOENIX14T. This suggests the STMC-predicted glosses may carry contextual information that the manually written ground-truth labels do not fully capture, or that there is some sort of mismatch in how the two types of glosses are formatted. On the negative side, ASLG-PC12 is a gloss-to-text dataset only, meaning there is no video involved at all for that benchmark, so the large ASLG-PC12 gain does not tell us anything about how well the visual recognition step performs on ASL. The study is also limited in scope: PHOENIX14T covers only weather forecasts, and neither dataset reflects the full complexity of everyday ASL conversation.
 
 \subsubsection{Relationship to the proposed research work}
-
+This is relevent to our project because this paper is one of the few in the sign language translation literature that directly touches ASL, even if only at the gloss-to-text stage via ASLG-PC12. For our project, this shows that strong transformer-based translation can signficantly close the gap between predicted and actual gloss inputs. The BLEU-4 figures also give us a solid reference point because by knowing how ASL gloss-to-text results compare to German Sign Language results helps us set realistic expectations for the translation component of our ASL-to-English system
 
 
 
