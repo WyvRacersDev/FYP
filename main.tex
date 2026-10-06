@@ -341,6 +341,18 @@ The primary takeaway in this case is not simply the fact that the BLEU score inc
 \subsubsection{Relationship to the proposed research work}
 This is probably the most directly applicable methodological paper for our project As with any sign language system, our ASL training data will be limited and generating gloss annotations would be a major bottleneck. The gloss-free approach allows us to train on datasets such as How2Sign or YouTube-ASL that have video and English text but do not have gloss labels. The pretraining strategy also opens up a practical way forward: starting from a strong vision-language model and fine-tuning on ASL-to-English pairs, which does not require large annotation budgets.
 
+\subsection{Word-level Deep Sign Language Recognition from Video}
+\subsubsection{Summary of the research item}
+Li et al. \cite{ref:Li:2020} noticed that most sign language datasets contained only a small number of words, which meant that models trained on them could not be used in real situations. To address this, they introduced WLASL, a Word-Level American Sign Language video dataset with more than 2000 words performed by over 100 signers. They describe it as by far the largest public ASL dataset for word-level recognition. On top of the dataset, the paper implements and compares two baseline approaches. One uses the holistic visual appearance of the video, and the other uses 2D human pose, and a pose-based temporal graph convolution model is also proposed to improve the pose-based results.
+
+\subsubsection{Critical analysis of the research item}
+The main strength is that the dataset fills a clear gap, and the two baselines give other researchers something to compare against. The finding that pose-based and appearance-based models reach similar performance, up to about 66\% top-10 accuracy across 2000 words, is also informative because it shows that both approaches work but that the task is still difficult. The main limitation is that every sample is a single word. There is no sentence structure, no grammar and no information about how signs combine, so the dataset cannot train a full translation system by itself. The accuracy numbers are also for recognition and cannot be read as translation quality.
+
+\subsubsection{Relationship to the proposed research work}
+WLASL is relevant to our project because it is a source of ASL vocabulary and a clear example of how recognition gets harder as the number of words increases. Even if our system works at the sentence level, the individual signs still have to be recognized well, so what this paper shows about word-level difficulty applies to us. It also shows that pose information is a serious alternative to raw video, which we find interesting as an idea. We would use it as background on ASL data and on the limits of word-level approaches, not as a direct model for our task.
+
+
+
 \section{Literature Review Summary Table}
 Please provide a compact summary of your literature review as provided in the table \ref{tab:1}, for the development project.
 \begin{table}[!h]
