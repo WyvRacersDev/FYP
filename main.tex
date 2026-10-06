@@ -877,7 +877,7 @@ Finally, there is data. Lip-reading and sign language models depend heavily on t
 
 \chapter{Proposed Approach and Methodology}
 \label{ch:approach}
-This chapter presents the proposed approach and methodology for the development of Silent Signals. It covers the lip-reading module, context-based correction and confidence scoring, sign language recognition, speech output and sound optimization, facial expression detection. For each module, the data collection, pre-processing, and model details are described.
+This chapter presents the proposed approach and methodology for the development of Silent Signals. It covers the lip-reading module, context-based correction and confidence scoring, sign language recognition, speech output and sound optimization, facial expression detection. The data collection, pre-processing, and the model details are also described.
 
 \section{Lip-Reading Module}
 This section describes the lip-reading module, which converts a silent video of a speaker's face, either recorded or from a live webcam, into text.
@@ -891,28 +891,18 @@ The lip-reading module will use a spatiotemporal neural network consisting of a 
 
 
 \section{Sign Language Module}
-
-\subsection{Data collection}
-\subsection{Pre-processing}
+This section will specify the details with respect to the ASL(American Sign Language) detecting module. This module will extract the user's sign language and then extract meaning from it for others to understand.  
+% \subsection{Data collection}
+% \subsection{Pre-processing}
 \subsection{Model details}
+The ASL recognition module will utilize an existing pretrained I3D (Inflated 3D ConvNet) ~\cite{2024SPIE13077E..02C} model for video-based American Sign Language recognition. The model is designed to process sequences of video frames and recognize signs by learning spatial and temporal features from the input video.
 
 
 \section{Context Based Correction Module}
-\subsection{Data collection}
-\subsection{Pre-processing}
+This section details information regarding the context based communication correction module. This module will take the information detected by the other models and act as an intermediatory between the communication mediums to make sure the detected information makes sense.  
 \subsection{Model details}
+This module will involve the use of a locally hosted Large-Language-Model (LLM) for the task of performing the corrections. It will use the user's details as well as the context of the conversation history to perform corrections which can be disabled by the user's choice. The LLM currently planned for this is llama3.2~\cite{ollama_llama32_3b} with 3 billion parameters, as it is at the perfect spot of not being too large to run and not being too small to doubt the output of.
 
-
-\section{Facial expression detection module}
-\subsection{Data collection}
-\subsection{Pre-processing}
-\subsection{Model details}
-
-
-\section{Sound optimization and output module}
-\subsection{Data collection}
-\subsection{Pre-processing}
-\subsection{Model details}
 
 
 % \textcolor{red}{NOTE: This chapter is optional for Development projects but compulsory for Research projects.} 
