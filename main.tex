@@ -665,7 +665,7 @@ The hardware required includes the following:
 
 \subsection{Software Requirements}
 \begin{itemize}
-  \item Python 3.9 or higher
+  \item Python 3.13 or higher
   \item Jupyter Notebook / Google Colab / VS Code / PyCharm
   \item Python libraries like OpenCV, TensorFlow or PyTorch
   \item React.js, HTML5, CSS3 and JavaScript for the frontend
@@ -923,51 +923,58 @@ This module will involve the use of a locally hosted Large-Language-Model (LLM) 
 
 % \textcolor{red}{NOTE: This chapter is optional for Development projects but compulsory for Research projects.} 
 \chapter{High-Level and Low-Level Design}
-\label{ch:design}
-Provide the high- and low-level design of your system in this chapter. Select the design that is appropriate for your project.\\
-\textcolor{red}{NOTE: This Chapter is compulsory for both R\&D projects and Development projects.}
+% \label{ch:design}
+This chapter showcases a very detailed design overview of the entire system of the application including the high and low level design which also include the design considerations, general constraints, goals, guidelines, the development method, the architectures of the system as well as the subsystems, the different strategies involved with the creation of the system as well as the class diagram along with our policies and tactics.
+% \textcolor{red}{NOTE: This Chapter is compulsory for both R\&D projects and Development projects.}
 \section{System Overview}
-Provide a general description of the software system, including its functionality and matters related to the overall system and its design (perhaps including a discussion of the basic design approach or organization). Feel free to split this discussion up into subsections (and sub-subsections, etc. ...).
+Silent Signals is a communication aid for people with hearing or speech impairments.One of its core function is lip reading, it takes a silent video of a speaker's face, either an uploaded recording or a live webcam feed, and converts the lip movements into text. The text is refined by a language model, shown with a confidence score for every word, and can be spoken aloud so that a hearing person can take part in the conversation.In addition to this, another core feature involves converting sign language to text as well which also involves the use of live or prerecorded videos that are then used to convert into text. Around this core sit facial expression detection, an emergency mode that notifies a registered guardian, conversation history, per-user accessibility settings and a performance dashboard and noise suppression for spoken replies complete the proposed feature set.
+
 \section{Design Considerations}
-This section describes many issues that need to be addressed or resolved before attempting to devise a complete design solution.
+This section describes many of the issues that
+need to be addressed before attempting to devise a complete design solution
 \subsection{Assumptions and Dependencies}
-Describe any assumptions or dependencies regarding the software and its use. These may concern such issues as:
+The assumptions and dependencies of our application that should be
+addressed for successful result are as follows:
 \begin{itemize}
-\item Related software or hardware 
-  \item Operating systems 
-  \item End-user characteristics 
-  \item Possible and/or probable changes in functionality
+\item Installation of python 3.13 or higher.
+\item Python libraries including but not limited to MediaPipe Tasks AP, OpenCV, Uvicorn, pyttsx3, PyTorch and TensorFlow. 
+\item Installation of ollama and the llama3.2 3b model for the LLM functionality.
+\item Training of the lip-reading model with the LRW dataset
+\item Use of the pretrained model for the sign language component.
+\item A personal computing device with an appropriate operating system such as windows or linux (for the server)
+\item The server is expected to have the trained models as well as a GPU capable of processing the models as well as the corrective LLM.
+\item Central server which will handle all the model's processing.
+\item The user will utilise their mobile phone to access the compute server and its feature set. 
 \end{itemize}
-Do not just add random generic statements, be clear and concise about what you are writing.
+% Do not just add random generic statements, be clear and concise about what you are writing.
+
 \subsection{General Constraints}
-Describe any global limitations or constraints that have a significant impact on the design of the system's software (and describe the associated impact). Such constraints may be imposed by any of the following (the list is not exhaustive):
+% Describe any global limitations or constraints that have a significant impact on the design of the system's software (and describe the associated impact). Such constraints may be imposed by any of the following (the list is not exhaustive):
+The machine learning models and the components associated with the system have a few constraints that may hinder the performance of the application, these include the following:  
 \begin{itemize}
-\item Hardware or software environment 
-\item End-user environment 
-\item Availability or volatility of resources 
-\item Standards compliance 
-\item Interoperability requirements 
-\item Interface/protocol requirements 
-\item Data repository and distribution requirements 
-\item Security requirements (or other such regulations) 
-\item Memory and other capacity limitations 
-\item Performance requirements 
-\item Network communications 
-\item Verification and validation requirements (testing) 
-\item Other means of addressing quality goals 
-\item Other requirements described in the requirements specification 
+\item Accuracy of the lip reading component 
+\item The preprocessing of the data to extract the relevent data may affect the training 
+\item Privacy of the user 
+\item Network connection from the phone to the server 
+\item Accessibility of the user
+\item The hardware of the user (camera and microphones) 
 \end{itemize}
 
 \subsection{Goals and Guidelines}
-Describe any goals, guidelines, principles, or priorities which dominate or embody the design of the system's software. Such goals might be:
+The goals and guidelines for this project are as follows:
 \begin{itemize}
-\item The KISS principle ("Keep it simple stupid!") 
-\item Emphasis on speed versus memory use 
-\item Working, looking, or "feeling" like an existing product
+\item Replaceability for the models and components, no hardcoding
+\item Simplicity and following the KISS principle (keep it simple stupid!)
+\item Privacy centred design 
+\item Accuracy of the models
+\item High bandwith of the system 
 \end{itemize}
-For each such goal or guideline, unless it is implicitly obvious, describe the reason for its desirability. Feel free to state and describe each goal in its own sub subsection if you wish.
+% For each such goal or guideline, unless it is implicitly obvious, describe the reason for its desirability. Feel free to state and describe each goal in its own sub subsection if you wish.
+
 \subsection{ Development Methods}
-Briefly describe the method or approach used for this software design. If one or more formal/published methods were adopted or adapted, then include a reference to a more detailed description of these methods. If several methods were seriously considered, then each such method should be mentioned, along with a brief explanation of why all or part of it was used or not used.
+We will be developing this project using the scrum software development model. It will involve us working in sprints of 1-2 weeks in which we will be creating the interfaces required for the system as well as concrete implementations and interactions between the components of the system and the models. This approach is perfect as it allows us to work on the project in short-term collaborative periods of time instead of having to complete every required component together.   
+
+% Briefly describe the method or approach used for this software design. If one or more formal/published methods were adopted or adapted, then include a reference to a more detailed description of these methods. If several methods were seriously considered, then each such method should be mentioned, along with a brief explanation of why all or part of it was used or not used.
 \section{System Architecture}
 This section should describe both the internal architecture of the modules, as well as the external architecture of the system with other systems, if any. Diagrammatic architecture is compulsory.\\
 This section should provide a high-level overview of how the functionality and responsibilities of the system were partitioned and then assigned to subsystems or components. Do not go into too much detail about the individual components themselves (there is a subsequent section for detailed component descriptions). The main purpose here is to gain a general understanding of how and why the system was decomposed, and how the individual parts work together to provide the desired functionality.\\
