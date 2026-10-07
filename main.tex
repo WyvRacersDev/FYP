@@ -351,6 +351,15 @@ The main strength is that the dataset fills a clear gap, and the two baselines g
 \subsubsection{Relationship to the proposed research work}
 WLASL is relevant to our project because it provides a source of ASL vocabulary, and it is a good example of how it becomes difficult to recognize as the number of words increases. Although our system is based on the sentence level, the difficulty of the individual signs is still significant, so this paper's results on word level difficulty also apply to us. It also demonstrates that the information about pose is a serious alternative to raw video, which is an idea we find interesting. We would use it as a background to ASL data and as a model to the limits of word-level approaches, but not as a direct model for our task.
 
+\subsection{YouTube-ASL: A Large-Scale, Open-Domain American Sign Language-English Parallel Corpus}
+\subsubsection{Summary of the research item}
+Uthus et al. \cite{ref:Uthus:2023} describe YouTube-ASL, a large open-domain corpus of ASL videos with English captions taken from YouTube. They found candidate videos with automatic content-based annotations and then used skilled human annotators to filter out videos with poor quality or captions that did not line up. The end result has 984 hours of high-quality captioned video and more than 2500 unique signers, which they say is about three times the size of the largest earlier ASL dataset and has about ten times as many signers as any sign language dataset so far. To show what the data can do, they train baseline ASL-to-English translation models on it and evaluate them on How2Sign.
+
+\subsubsection{Critical analysis of the research item}
+The positives are its size and variety. The models achieved the new state of the art (12.39 BLEU) on How2Sign when they were fine-tuned, and the authors report their zero-shot results on that benchmark to be nearer the real use case than a studio dataset. However, there are disadvantages. The use of the data does not make the translation reliable; a BLEU score of about 12 is still not enough. The quality of the captions may vary from video to video, depending on the quality of the original video, which is uploaded to YouTube. Videos are subject to deletion over time, so the corpus is not used as a stable test set, hence the authors use How2Sign for evaluation.
+
+\subsubsection{Relationship to the proposed research work}
+This paper is important to us because it is directly to ASL to English and because it demonstrates the power of a comprehensive and diverse data set. But if the main limitation in this field is data, and not model design, as the paper argues, then the type of data we select will guide our outcomes more than make-up changes to a model. It's also a handy demonstration of how to create a massive resource from existing content found on the internet, and the many challenges that can arise, including missing videos and inconsistent captions. We consider it a source of inspiration on the topic of thinking about data quality, scale and assessment in our own work.
 
 
 \section{Literature Review Summary Table}
