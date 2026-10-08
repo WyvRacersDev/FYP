@@ -6,13 +6,11 @@
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Opening Animations}}{29}{figure.caption.11}%
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Main Screen}}{30}{figure.caption.12}%
 \contentsline {figure}{\numberline {4.3}{\ignorespaces Lip-reading and Sign Language Screens}}{31}{figure.caption.13}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces [placeholder for TTS and STT] Screens}}{32}{figure.caption.14}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Text-To-Speech and Speech-To-Text Screens}}{32}{figure.caption.14}%
 \contentsline {figure}{\numberline {4.5}{\ignorespaces Accessibility Settings and User Conversation History Screens}}{33}{figure.caption.15}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Entity Relationship Diagram}}{35}{figure.caption.17}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {A.1}{\ignorespaces {\textbf {Fast Logo is the Caption.}}}}{57}{figure.caption.20}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Architecture Diagram}}{45}{figure.caption.18}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Lip-Reading Architecture Diagram}}{46}{figure.caption.19}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Class diagram}}{47}{figure.caption.20}%

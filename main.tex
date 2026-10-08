@@ -737,24 +737,24 @@ This section highlights and showcases all the screens associated with the app, i
 
     \begin{subfigure}{0.30\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{images/accessibility.jpeg}
-        \caption{[placeholder for TTS and STT]}
+        \includegraphics[width=\textwidth]{images/text_to_speech.jpg}
+        \caption{Text-To-Speech Screen}
         \label{fig:image1}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.30\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{images/history.jpeg}
-        \caption{[placeholder for TTS and STT]}
+        \includegraphics[width=\textwidth]{images/speech_to_text.jpg}
+        \caption{Speech-To-Text Screen}
         \label{fig:image2}
     \end{subfigure}
 
-    \caption{[placeholder for TTS and STT] Screens}
+    \caption{Text-To-Speech and Speech-To-Text Screens}
     \label{fig:both-images}
 \end{figure}
 
 \begin{center}
-    \textit{showcases the [placeholder for TTS and STT] screens of the app}
+    \textit{showcases the Text-To-Speech and Speech-To-Text screens of the app}
 \end{center}
 
 \begin{figure}[H]
@@ -820,6 +820,15 @@ The Entity-Relationship (ER) diagram provides a detailed representation of the d
   \item EmergencyHistory: This entity maintains a record of detected emergency events. It stores information such as the event ID, associated user and guardian, detected emergency phrase, and the time at which the event occurred.
 \end{itemize}
 Each of these entities interacts with others to support the core functionality of the system. Users can configure their Settings, define EmergencyWords, and have associated Guardians. The system stores their ConversationHistory, while detected emergency situations are recorded in EmergencyHistory and can trigger notifications to the user's designated guardians. The ER diagram therefore serves as a roadmap for understanding the database structure, relationships, and overall data flow of the system.
+
+\begin{figure}[H]    
+    \centering
+    \includegraphics[width=\textwidth]{images/db diagram.png}
+    \caption{Entity Relationship Diagram}
+    \label{fig:Profile screen}
+\end{figure}
+
+
 \subsection{Data Dictionary}
 Data dictionary given below defines all the entities, their attributes and data-types.
 \renewcommand{\arraystretch}{1.3}
@@ -969,249 +978,269 @@ We will be developing this project using the scrum software development model. I
 
 % Briefly describe the method or approach used for this software design. If one or more formal/published methods were adopted or adapted, then include a reference to a more detailed description of these methods. If several methods were seriously considered, then each such method should be mentioned, along with a brief explanation of why all or part of it was used or not used.
 \section{System Architecture}
-This section should describe both the internal architecture of the modules, as well as the external architecture of the system with other systems, if any. Diagrammatic architecture is compulsory.\\
-This section should provide a high-level overview of how the functionality and responsibilities of the system were partitioned and then assigned to subsystems or components. Do not go into too much detail about the individual components themselves (there is a subsequent section for detailed component descriptions). The main purpose here is to gain a general understanding of how and why the system was decomposed, and how the individual parts work together to provide the desired functionality.\\
-At the top-most level, describe the major responsibilities that the software must undertake and the various roles that the system (or portions of the system) must play. Describe how the system was broken down into its components/subsystems (identifying each top-level component/subsystem and the roles/responsibilities assigned to it). Describe how the higher-level components collaborate with each other in order to achieve the required results. Don't forget to provide some sort of rationale for choosing this particular decomposition of the system (perhaps discussing other proposed decompositions and why they were rejected). Feel free to make use of design patterns, either in describing parts of the architecture (in pattern format), or for referring to elements of the architecture that employ them.\\
-If there are any diagrams, models, flowcharts, documented scenarios or use-cases of the system behavior and/or structure, they may be included here (unless you feel they are complex enough to merit being placed in the Detailed System Design section). Diagrams that describe a particular component or sub-system should be included within the particular subsection that describes that component or subsystem.\\
-\textcolor{red}{Note: This section (and its subsections) really applies only to newly developed (or yet-to-be developed) portions of the system.} If there are parts of the system that already existed before this development effort began, then you only need to describe the pre-existing parts that the new parts of the system depend upon, and only in enough detail sufficient to describe the relationships and interactions between the old parts and the new parts. Pre-existing parts that are modified or enhanced need to be described only to the extent that is necessary for the reader to gain a sufficient understanding of the nature of the changes that were made.
-\subsection{Subsystem Architecture}
-If a particular component is one which merits a more detailed discussion than what was presented in the System Architecture section, provide that more detailed discussion in a subsection of the System Architecture section (or it may even be more appropriate to describe the component in its own design document). If necessary, describe how the component was further divided into subcomponents, and the relationships and interactions between the subcomponents (similar to what was done for top-level components in the System Architecture section).\\
-If any subcomponents are also deemed to further merit discussion, then describe them in a separate subsection of this section (and in a similar fashion). Proceed to go into as many levels/subsections of discussion as needed in order for the reader to gain a high-level understanding of the entire system or subsystem (but remember to leave the gory details for the Detailed System Design section).\\
-If this component is very large and/or complex, you may want to consider documenting its design in a separate document and simply including a reference to it in this section. If this is the option you choose, the design document for this component should have an organizational format that is very similar (if not identical to) this document.
-\section{Architectural Strategies}
-Explain all strategies that you use for designing of the Architecture. Describe any design decisions and/or strategies that affect the overall organization of the system and its higher-level structures. These strategies should provide insight into the key abstractions and mechanisms used in the system architecture. Describe the reasoning employed for each decision and/or strategy (possibly referring to previously stated design goals and principles) and how any design goals or priorities were balanced or traded-off. Such decisions might concern (but are not limited to) things like the following:
-\begin{itemize}
-    \item Use of a particular type of product (programming language, database, library, etc. ...) 
-  \item Reuse of existing software components to implement various parts/features of the system 
-  \item Future plans for extending or enhancing the software 
-  \item User interface paradigms (or system input and output models) 
-  \item Hardware and/or software interface paradigms 
-  \item Error detection and recovery 
-  \item Memory management policies 
-  \item External databases and/or data storage management and persistence 
-  \item Distributed data or control over a network 
-  \item Generalized approaches to control 
-  \item Concurrency and synchronization 
-  \item Communication mechanisms 
-  \item Management of other resources
-\end{itemize}
-\subsection{Architectural Strategies Strategy-1 name or description} 
-\subsection{Architectural Strategies Strategy-2 name or description} 
-Each significant strategy employed should probably be discussed in its subsection or (if it is complex enough) in a separate design document (with an appropriate reference here, of course). Make sure that when describing a design decision you also discuss any other significant alternatives that were considered and your reasons for rejecting them (as well as your reasons for accepting the alternative you finally chose). Sometimes it will be most effective to employ the "pattern format" for describing a strategy.
-\section{Domain Model/Class Diagram}
-In this subsection, add the Class Diagram of your system. Class diagrams represent the structure design of your system.
+This section provides an overview of the early architecture design. The system has a layered architecture which includes the frontend layer ,the backend and machine learning layer, the database layer as well as the language model layer. All of these components are required to exist for the proper working of the system. The frontend will be in react. The backend layers involve models made using python as well as a backend that uses FASTapi for communication between the frontend and backend. The data base also communicates with the backend as well as the LLM layer through API functions, the models as well as the database functions are modular through polymorphism.       
 
-\section{Policies and Tactics}
-Describe any design policies and/or tactics that do not have sweeping architectural implications (meaning they would not significantly affect the overall organization of the system and its high-level structures) but which nonetheless affect the details of the interface and/or implementation of various aspects of the system. Such decisions might concern (but are not limited to) things like the following:
-\begin{itemize}
-    \item Choice of which specific product to use (compiler, interpreter, database, library, etc. ...) 
- \item Engineering trade-offs 
- \item	Coding guidelines and conventions 
- \item	The protocol of one or more subsystems, modules, or subroutines 
- \item The choice of a particular algorithm or programming idiom (design pattern) to implement portions of the system's functionality 
- \item	Plans for ensuring requirements traceability 
- \item	Plans for testing the software 
- \item	Plans for maintaining the software 
- \item	Interfaces for end-users, software, hardware, and communications 
- \item	Hierarchical organization of the source code into its physical components (files and directories). 
- \item	How to build and/or generate the system's deliverables (how to compile, link, load, etc. ...) 
-\end{itemize}
-\subsection{Policy/tactic-1 name or description}
-\subsection{Policy/tactic-2 name or description}
-Each particular policy or set of tactics employed should probably be discussed in its own subsection, or (if it is large or complex enough) in a separate design document (with an appropriate reference here of course). Make sure that when describing a design decision that you also discuss any other significant alternatives that were considered, and your reasons for rejecting them (as well as your reasons for accepting the alternative you finally chose). For this reason, it may frequently be convenient to use one of the more popular "pattern formats" to describe a given tactic.\\
-For this particular section, it may become difficult to decide whether a particular policy or set of tactics should be discussed in this section, or in the System Architecture section, or in the Detailed System Design section for the appropriate component. You will have to use your own "best" judgment to decide this. There will usually be some global policies and tactics that should be discussed here. Still, decisions about interfaces, algorithms, and/or data structures might be more appropriately discussed in the same (sub) section as its corresponding software component in one of these other sections.
-\chapter{Implementation and Test Cases}
-\label{ch:impl}
-For each chapter, provide a paragraph of introduction and at the end, a paragraph of conclusions. (Not the programming code but the algorithmic and procedural details especially related to the hidden/ backend algorithms that are not covered in the design)
-\section{Implementation}
-Whatever implementation that you have done so far, please elaborate here.
-Give clear details of the algorithms that were implemented along with the platform and the APIs which were used. 
-\textcolor{red}{NOTE: For FYP-1, this chapter can be changed to description of prototype developed.}
-\subsection{Implementation of First Component/Algorithm}
-Write the implementation of the first component of your system here.
-\section{Test case Design and description}
-\textcolor{red}{This section will be added in FYP-II.} Summarize the common attributes of test cases. This may include input constraints that must be true for every input in the set of associated test cases, any shared environmental needs, any shared special procedural requirements, and any shared case dependencies. The following scheme is recommended for describing test cases in detail. The Sample test case is provided in table \ref{tab:3}.
-\begin{table}[!ht]
-\caption{Sample Test case No.1}
-
-\centering
-\begin{tabular}{|llll|}
-\hline
-\multicolumn{4}{|c|}{\textbf{\textless{}Software Component Name\textgreater{}}} \\ \hline
-\multicolumn{4}{|c|}{\textbf{\textless{}Reference\textgreater{}}} \\ \hline
-\multicolumn{1}{|l|}{\textbf{Test Case ID:}} &
-  \multicolumn{1}{l|}{\textit{Reference Number}} &
-  \multicolumn{1}{l|}{\textbf{QA Test Engineer:}} &
-  \textit{Name of personnel} \\ \hline
-\multicolumn{1}{|l|}{\textbf{Test case Version:}} &
-  \multicolumn{1}{l|}{\textit{Version number}} &
-  \multicolumn{1}{l|}{\textbf{Reviewed By:}} &
-  \textit{Testing Team lead} \\ \hline
-\multicolumn{1}{|l|}{\textbf{Test Date:}} &
-  \multicolumn{1}{l|}{\textit{Date}} &
-  \multicolumn{1}{l|}{\textbf{\begin{tabular}[c]{@{}l@{}}Use Case \\ Reference(s):\end{tabular}}} &
-  \textit{Relation to use cases} \\ \hline
-\multicolumn{1}{|l|}{\textbf{Revision History:}} &
-  \multicolumn{3}{l|}{\textit{Refer to previous test   case identity (if any)}} \\ \hline
-\multicolumn{1}{|l|}{\textbf{Objective:}} &
-  \multicolumn{3}{l|}{\textit{Need and   scope of the testing}} \\ \hline
-\multicolumn{1}{|l|}{\textbf{\begin{tabular}[c]{@{}l@{}}Product/Ver/\\ Module:\end{tabular}}} &
-  \multicolumn{3}{l|}{\textit{Refer to overall system being built and the place of this test case in it.}} \\ \hline
-\multicolumn{1}{|l|}{\textbf{Environment:}} &
-  \multicolumn{3}{l|}{\textit{Necessary and desired properties of the test environment.}} \\ \hline
-\multicolumn{1}{|l|}{\textbf{Assumptions:}} &
-  \multicolumn{3}{l|}{\textit{Assumptions that might affect the testing process.}} \\ \hline
-\multicolumn{1}{|l|}{\textbf{Pre-Requisite:}} &
-  \multicolumn{3}{l|}{\textit{Necessary condition that  needs to be fulfilled before the test case.}} \\ \hline
-\multicolumn{1}{|l|}{\textbf{Step No.}} &
-  \multicolumn{1}{l|}{\textbf{Execution   description}} &
-  \multicolumn{2}{l|}{\textbf{Procedure result}} \\ \hline
-\multicolumn{1}{|l|}{} &
-  \multicolumn{1}{l|}{\textit{Events being tested.}} &
-  \multicolumn{2}{l|}{\textit{Mention software response.}} \\ \hline
-\multicolumn{4}{|l|}{\textbf{Comments:}} \\ \hline
-\multicolumn{4}{|c|}{\textbf{Passed      Failed     Not Executed}} \\ \hline
-\end{tabular}
-\label{tab:3}
-\end{table}
-\section{Test Metrics}
-Summarize here the common ground of attributes of test case metrics as explained in Table \ref{tab:4}.
-\begin{table}[!ht]
-\centering
-\caption{Sample Test case Matric.No.1}
-
-\begin{tabular}{|l|l|}
-\hline
-\textbf{Metric}                      & \textbf{Purpose}                                                                                                        \\ \hline
-\textbf{Number of Test Cases}        & \begin{tabular}[c]{@{}l@{}}Total number of test cases that you have\\ developed for  your system.\end{tabular}          \\ \hline
-\textbf{Number of Test Cases Passed} & The number of test cases that successfully passed                                                                       \\ \hline
-\textbf{Number of Test Cases Failed} & The number of test cases that failed                                                                                    \\ \hline
-\textbf{Test Case Defect Density}    & \begin{tabular}[c]{@{}l@{}}(No of test cases failed * 100) \\ No of test cases executed\end{tabular}                    \\ \hline
-\textbf{Test Case Effectiveness}     & \begin{tabular}[c]{@{}l@{}}No of defects detected using test cases *100\\ Total number of defects detected\end{tabular} \\ \hline
-\textbf{Traceability Matrix} &
-  \begin{tabular}[c]{@{}l@{}}Traceability is the ability to determine that each\\  the feature has a source in requirements and each \\ requirement has a corresponding implemented feature.\end{tabular} \\ \hline
-\end{tabular}
-\label{tab:4}
-\end{table}
-\subsection{Sample Test case Metric.No.2}
-Similar to the above table, add here for test metrics 2,3,4.\\
-\chapter{User Manual}
-\textcolor{red}{This chapter will be added in FYP-II.} Design a complete user manual of your application and add that in this chapter.
-\textcolor{red}{NOTE: This Chapter is optional for Research projects but compulsory for Development projects.}\\
-\chapter{Experimental Results and Discussion}
-This chapter will be added in FYP-II. Give proper analysis and discussion of experimental results (in plain English text) along with tables of results.  For each chapter provide a paragraph of introduction and in the end a paragraph of conclusions.\\
-\textcolor{red}{NOTE: This Chapter is optional for Development projects but compulsory for Research projects.}
-
-\chapter{Conclusions}
-\label{ch:concl}
-\section{aa}
-\subsection{dfs}
-\subsubsection{dsd}
-{\bf This chapter is mandatory}.  
-Give conclusions and summary of the work done.  What were your findings and what were the results?  Discuss in detail whether the scope of your project was entirely covered or not and whether the objectives of the project were met or not.  What challenges did you face and what has been left out and why.\\
-Sum up all the conclusions of all the chapters here to make a final conclusion chapter.  Do not repeat any text, just summarize it in different words. Give recommendations for future work also.\\
-\textbf{For FYP-1 it is mandatory to list down a plan of the work to be done for FYP-2.}
-
-{
-\bibliographystyle{ieeetr}
-\bibliography{fypbib} %specify your .bib file here
-}
-%ADD APPENDICES IF REQUIRED OTHERWISE COMMENT IT OUT
-\appendix
-\chapter{First Appendix if Required}
-If you want to add appendices then make sure you provide a proper title.  Add different appendices by using the chapter command as shown for this one.  They will automatically be added to the table of contents.
-
-\section{References}
-See how .bib file is prepared.  The bibliography would be automatically added by Latex.  So here is how you cite papers (you'll need to view the .bib file to understand).  \cite{ref:Duda:2000} is the correct way to make one citation and \cite{ref:Bishop:2006,ref:SVMGuide} to make multiple citations. You can see various reference styles for manuals \cite{ref:SVMGuide}, conferences \cite{ref:guyon:2007}, websites \cite{ref:IJCNNChallenge:2007} and journal articles \cite{ref:guyon:2007a}.  Also, note that all citations appear in the order in which they appear within text.  They are not sorted according to author names.
-
-\section{Equations}
-Make sure you use the math environment for writing equations.  Again, make sure you do not hard code equation numbers.  Use label and ref commands of Latex to number them and reference them.  Here is an example of (\ref{eq:energy})
-\begin{equation}\label{eq:energy}
-E = mc^2
-\end{equation}
-Note, how the equation is referenced by its equation number within brackets.  
-
-\section{Figures}
-To insert a figure, you can use the following code as template.  Here the figure is referenced using ref command of Latex.  So Figure \ref{fig:fast} is the FAST logo.  DO NOT HARD CODE FIGURE NUMBERS.  Let Latex manage them for you.
-
-\begin{figure}[!hbt]
-\centering
-\includegraphics[width=1in]{Figures/fastlogo.png}
-{\caption {\label{fig:fast}{\textbf{Fast Logo is the Caption.}}}}  
+\begin{figure}[H]    
+    \centering
+    \includegraphics[width=\textwidth]{images/architecture.png}
+    \caption{Architecture Diagram}
+    \label{fig:Profile screen}
 \end{figure}
 
-\section{Tables}
-Note how tables can be added in Latex.  Also, make sure you use label and ref commands to define and use table numbers.  You can use Table \ref{tbl:SomeTable} as a template to make tables, add captions to them and reference them.  DO NOT HARD CODE TABLE NUMBERS.  Let Latex manage their numbering for you.
+% This section should describe both the internal architecture of the modules, as well as the external architecture of the system with other systems, if any. Diagrammatic architecture is compulsory.\\
+% This section should provide a high-level overview of how the functionality and responsibilities of the system were partitioned and then assigned to subsystems or components. Do not go into too much detail about the individual components themselves (there is a subsequent section for detailed component descriptions). The main purpose here is to gain a general understanding of how and why the system was decomposed, and how the individual parts work together to provide the desired functionality.\\
+% At the top-most level, describe the major responsibilities that the software must undertake and the various roles that the system (or portions of the system) must play. Describe how the system was broken down into its components/subsystems (identifying each top-level component/subsystem and the roles/responsibilities assigned to it). Describe how the higher-level components collaborate with each other in order to achieve the required results. Don't forget to provide some sort of rationale for choosing this particular decomposition of the system (perhaps discussing other proposed decompositions and why they were rejected). Feel free to make use of design patterns, either in describing parts of the architecture (in pattern format), or for referring to elements of the architecture that employ them.\\
+% If there are any diagrams, models, flowcharts, documented scenarios or use-cases of the system behavior and/or structure, they may be included here (unless you feel they are complex enough to merit being placed in the Detailed System Design section). Diagrams that describe a particular component or sub-system should be included within the particular subsection that describes that component or subsystem.\\
+% \textcolor{red}{Note: This section (and its subsections) really applies only to newly developed (or yet-to-be developed) portions of the system.} If there are parts of the system that already existed before this development effort began, then you only need to describe the pre-existing parts that the new parts of the system depend upon, and only in enough detail sufficient to describe the relationships and interactions between the old parts and the new parts. Pre-existing parts that are modified or enhanced need to be described only to the extent that is necessary for the reader to gain a sufficient understanding of the nature of the changes that were made.
+\subsection{Subsystem Architecture}
+The Lip-Reading module is the most complicated part of the entire software. It involves the use of the MediaPipe API~\cite{googlemediapipe2026} for cropping the mouth region from the LRW~\cite{yang2019lrw1000} dataset and processing it through a machine learning model. This model will then be used in the final project to determine the spoken words from the videos uploaded by the user. 
+% If a particular component is one which merits a more detailed discussion than what was presented in the System Architecture section, provide that more detailed discussion in a subsection of the System Architecture section (or it may even be more appropriate to describe the component in its own design document). If necessary, describe how the component was further divided into subcomponents, and the relationships and interactions between the subcomponents (similar to what was done for top-level components in the System Architecture section).\\
+% If any subcomponents are also deemed to further merit discussion, then describe them in a separate subsection of this section (and in a similar fashion). Proceed to go into as many levels/subsections of discussion as needed in order for the reader to gain a high-level understanding of the entire system or subsystem (but remember to leave the gory details for the Detailed System Design section).\\
+% If this component is very large and/or complex, you may want to consider documenting its design in a separate document and simply including a reference to it in this section. If this is the option you choose, the design document for this component should have an organizational format that is very similar (if not identical to) this document.
+\subsection{Lip-Reading model}
+The Lip-Reading module uses preprocessing to remove unnecessary information from the videos, followed by normalization for more stable training. This is followed by going through a 3d CNN, this is because the model not only needs to learn the 2 dimensions of the shape of the lips but also the time of the shapes of the lips, this is because in order to predict the word, it needs to know the full context of the shape of the word including the previous and the next shape. This is followed by 3 layers of filters for the purpose of extracting features, the output of which is then passed through a batch normalization layer. This is then passed through a ReLU activation function for the purpose of non linearity. Following this, a 3 dimensional maxpooling layer is applied which then gives the output after going through a 0.5 dropout and softmax layer.     
 
-If you are having problems in managing Latex tables, you may use Lyx \url{https://www.lyx.org/}. 
+\begin{figure}[H]    
+    \centering
+    \includegraphics[width=\textwidth]{images/lip reading model architecture.png}
+    \caption{Lip-Reading Architecture Diagram}
+    \label{fig:Profile screen}
+\end{figure}
+
+\section{Architectural Strategies}
+The strategies we have chosen for the project are as follows: 
+% Explain all strategies that you use for designing of the Architecture. Describe any design decisions and/or strategies that affect the overall organization of the system and its higher-level structures. These strategies should provide insight into the key abstractions and mechanisms used in the system architecture. Describe the reasoning employed for each decision and/or strategy (possibly referring to previously stated design goals and principles) and how any design goals or priorities were balanced or traded-off. Such decisions might concern (but are not limited to) things like the following:
+\subsection{Programming language}
+For the frontend, we will be using React with npm and expo for easy testing and deployment on android devices. The backend will be made using Python 3.13 with the help of FASTapi and Uvicorn. This will enable us to create a simple and effective layered frontend and backend architecture. The backend and the frontend will communicate with one another using the FASTapi sockets and apis hosted thorugh Uvicorn. The networking will be handled through Uvicorn and the api requests will be handled through FAST api. The backend will be hosted on a desktop server which will host the lip-reading, sign language,text to speech, speech to text models as well as the corrective LLM through ollama.
+
+\subsection{Reuse of existing software components}
+The reused components of the system involve the use of a pretrained model for the sign language detecting module. In addition, there are also built in libraries which will be used to detect faces ~\cite{lugaresi2019mediapipe} , cropping speaker mouth~\cite{googlemediapipe2026} ,emotion detection~\cite{savchenko2022hsemotion} and training of the lip-reading model ~\cite{tensorflow2015}~\cite{paszke2019pytorch}.
+
+\subsection{Data privacy and storage}
+The videos uploaded by the users will not be used for any training or even saved in the server. The only time they exist on the server will be during the processing and then they will be deleted immediately and will not be cached either. This will also apply to any output generated after the processing of the data. 
+
+\section{Domain Model/Class Diagram}
+% In this subsection, add the Class Diagram of your system. Class diagrams represent the structure design of your system.
+The following class diagram showcases an early prototype design of the classes and their interactions with each other. The relationships of the classes are clearly showcased. The 2 abstract classes and their respective overloaded child classes are also showcased.
+
+\begin{figure}[H]    
+    \centering
+    \includegraphics[width=\textwidth]{images/Silent Signals Class Diagram.png}
+    \caption{Class diagram}
+    \label{fig:Profile screen}
+\end{figure}
+
+\section{Policies and Tactics}
+% Describe any design policies and/or tactics that do not have sweeping architectural implications (meaning they would not significantly affect the overall organization of the system and its high-level structures) but which nonetheless affect the details of the interface and/or implementation of various aspects of the system. Such decisions might concern (but are not limited to) things like the following:
+The policies and tactics that would be followed in the project are as follows:
+\subsection{Source code organization and conventions}
+The code of the project will be divided into their respective folders of frontend and backend. The frontend will comprise of the React app component of the application along with Expo.The backend will consist of a python environment as well as the libraries installed on each of our developmental machines with the division of the individual components of the backend will also be in their respective folders, such as models, core components, training data etc
+
+\subsection{User Interface}
+The user interace will be easy to use and simple, it will have accessibility settings for easy viewing by the people with disabilities and still use a color scheme that appeals to a vast majority of people and still be easy to use and learn. 
+
+\subsection{Modularity}
+The different modules of the system will utilise modularity and polymorphism with an object oriented design philosophy. This is to avoid any hardcoding and inability to add further features or change the potential machine learning models that we will be implementing. 
+
+\subsection{library management}
+All the required libraries for the python backend will be mentioned in a requirements.txt file that PIP (python package manager) will read from and install on each of our machines in order to make it easy to keep track of the libraries used.
+
+\subsection{Version control}
+We will be using GIT for the purpose of version control of the source code. We will then use Github for the hosting of the source code.
 
 
-\begin{table}[hbt]
+% \chapter{Implementation and Test Cases}
+% \label{ch:impl}
+% For each chapter, provide a paragraph of introduction and at the end, a paragraph of conclusions. (Not the programming code but the algorithmic and procedural details especially related to the hidden/ backend algorithms that are not covered in the design)
+% \section{Implementation}
+% Whatever implementation that you have done so far, please elaborate here.
+% Give clear details of the algorithms that were implemented along with the platform and the APIs which were used. 
+% \textcolor{red}{NOTE: For FYP-1, this chapter can be changed to description of prototype developed.}
+% \subsection{Implementation of First Component/Algorithm}
+% Write the implementation of the first component of your system here.
+% \section{Test case Design and description}
+% \textcolor{red}{This section will be added in FYP-II.} Summarize the common attributes of test cases. This may include input constraints that must be true for every input in the set of associated test cases, any shared environmental needs, any shared special procedural requirements, and any shared case dependencies. The following scheme is recommended for describing test cases in detail. The Sample test case is provided in table \ref{tab:3}.
+% \begin{table}[!ht]
+% \caption{Sample Test case No.1}
 
-\begin{center}
-\caption{\label{tbl:SomeTable} \textbf{Give a Caption to the Table.}}
-\begin{tabular}{|l|c|c|} 
-\hline
-\textbf{No.}&\textbf{Column 1}&\textbf{Column 2}\\
-\hline
-1.&Some data&More data\\
-\hline
-2.&Some values&More values\\
-\hline
-\end {tabular}
+% \centering
+% \begin{tabular}{|llll|}
+% \hline
+% \multicolumn{4}{|c|}{\textbf{\textless{}Software Component Name\textgreater{}}} \\ \hline
+% \multicolumn{4}{|c|}{\textbf{\textless{}Reference\textgreater{}}} \\ \hline
+% \multicolumn{1}{|l|}{\textbf{Test Case ID:}} &
+%   \multicolumn{1}{l|}{\textit{Reference Number}} &
+%   \multicolumn{1}{l|}{\textbf{QA Test Engineer:}} &
+%   \textit{Name of personnel} \\ \hline
+% \multicolumn{1}{|l|}{\textbf{Test case Version:}} &
+%   \multicolumn{1}{l|}{\textit{Version number}} &
+%   \multicolumn{1}{l|}{\textbf{Reviewed By:}} &
+%   \textit{Testing Team lead} \\ \hline
+% \multicolumn{1}{|l|}{\textbf{Test Date:}} &
+%   \multicolumn{1}{l|}{\textit{Date}} &
+%   \multicolumn{1}{l|}{\textbf{\begin{tabular}[c]{@{}l@{}}Use Case \\ Reference(s):\end{tabular}}} &
+%   \textit{Relation to use cases} \\ \hline
+% \multicolumn{1}{|l|}{\textbf{Revision History:}} &
+%   \multicolumn{3}{l|}{\textit{Refer to previous test   case identity (if any)}} \\ \hline
+% \multicolumn{1}{|l|}{\textbf{Objective:}} &
+%   \multicolumn{3}{l|}{\textit{Need and   scope of the testing}} \\ \hline
+% \multicolumn{1}{|l|}{\textbf{\begin{tabular}[c]{@{}l@{}}Product/Ver/\\ Module:\end{tabular}}} &
+%   \multicolumn{3}{l|}{\textit{Refer to overall system being built and the place of this test case in it.}} \\ \hline
+% \multicolumn{1}{|l|}{\textbf{Environment:}} &
+%   \multicolumn{3}{l|}{\textit{Necessary and desired properties of the test environment.}} \\ \hline
+% \multicolumn{1}{|l|}{\textbf{Assumptions:}} &
+%   \multicolumn{3}{l|}{\textit{Assumptions that might affect the testing process.}} \\ \hline
+% \multicolumn{1}{|l|}{\textbf{Pre-Requisite:}} &
+%   \multicolumn{3}{l|}{\textit{Necessary condition that  needs to be fulfilled before the test case.}} \\ \hline
+% \multicolumn{1}{|l|}{\textbf{Step No.}} &
+%   \multicolumn{1}{l|}{\textbf{Execution   description}} &
+%   \multicolumn{2}{l|}{\textbf{Procedure result}} \\ \hline
+% \multicolumn{1}{|l|}{} &
+%   \multicolumn{1}{l|}{\textit{Events being tested.}} &
+%   \multicolumn{2}{l|}{\textit{Mention software response.}} \\ \hline
+% \multicolumn{4}{|l|}{\textbf{Comments:}} \\ \hline
+% \multicolumn{4}{|c|}{\textbf{Passed      Failed     Not Executed}} \\ \hline
+% \end{tabular}
+% \label{tab:3}
+% \end{table}
+% \section{Test Metrics}
+% Summarize here the common ground of attributes of test case metrics as explained in Table \ref{tab:4}.
+% \begin{table}[!ht]
+% \centering
+% \caption{Sample Test case Matric.No.1}
 
-\end{center}
+% \begin{tabular}{|l|l|}
+% \hline
+% \textbf{Metric}                      & \textbf{Purpose}                                                                                                        \\ \hline
+% \textbf{Number of Test Cases}        & \begin{tabular}[c]{@{}l@{}}Total number of test cases that you have\\ developed for  your system.\end{tabular}          \\ \hline
+% \textbf{Number of Test Cases Passed} & The number of test cases that successfully passed                                                                       \\ \hline
+% \textbf{Number of Test Cases Failed} & The number of test cases that failed                                                                                    \\ \hline
+% \textbf{Test Case Defect Density}    & \begin{tabular}[c]{@{}l@{}}(No of test cases failed * 100) \\ No of test cases executed\end{tabular}                    \\ \hline
+% \textbf{Test Case Effectiveness}     & \begin{tabular}[c]{@{}l@{}}No of defects detected using test cases *100\\ Total number of defects detected\end{tabular} \\ \hline
+% \textbf{Traceability Matrix} &
+%   \begin{tabular}[c]{@{}l@{}}Traceability is the ability to determine that each\\  the feature has a source in requirements and each \\ requirement has a corresponding implemented feature.\end{tabular} \\ \hline
+% \end{tabular}
+% \label{tab:4}
+% \end{table}
+% \subsection{Sample Test case Metric.No.2}
+% Similar to the above table, add here for test metrics 2,3,4.\\
+% \chapter{User Manual}
+% \textcolor{red}{This chapter will be added in FYP-II.} Design a complete user manual of your application and add that in this chapter.
+% \textcolor{red}{NOTE: This Chapter is optional for Research projects but compulsory for Development projects.}\\
+% \chapter{Experimental Results and Discussion}
+% This chapter will be added in FYP-II. Give proper analysis and discussion of experimental results (in plain English text) along with tables of results.  For each chapter provide a paragraph of introduction and in the end a paragraph of conclusions.\\
+% \textcolor{red}{NOTE: This Chapter is optional for Development projects but compulsory for Research projects.}
 
-\end{table}
+% \chapter{Conclusions}
+% \label{ch:concl}
+% \section{aa}
+% \subsection{dfs}
+% \subsubsection{dsd}
+% {\bf This chapter is mandatory}.  
+% Give conclusions and summary of the work done.  What were your findings and what were the results?  Discuss in detail whether the scope of your project was entirely covered or not and whether the objectives of the project were met or not.  What challenges did you face and what has been left out and why.\\
+% Sum up all the conclusions of all the chapters here to make a final conclusion chapter.  Do not repeat any text, just summarize it in different words. Give recommendations for future work also.\\
+% \textbf{For FYP-1 it is mandatory to list down a plan of the work to be done for FYP-2.}
 
-\section{Pseudo Code}
-When you need to explain an existing algorithm of an algorithm you devised, then you should use pseudo code notation. Given below, algorithm  \ref{algo:one}, is an example. Note how the numbering is managed by the Latex itself.
+% {
+% \bibliographystyle{ieeetr}
+% \bibliography{fypbib} %specify your .bib file here
+% }
+% %ADD APPENDICES IF REQUIRED OTHERWISE COMMENT IT OUT
+% \appendix
+% \chapter{First Appendix if Required}
+% If you want to add appendices then make sure you provide a proper title.  Add different appendices by using the chapter command as shown for this one.  They will automatically be added to the table of contents.
 
-\begin{algorithm}[H]
- \KwData{this text}
- \KwResult{how to write algorithm with \LaTeX2e }
- initialization\;
- \While{not at end of this document}{
-  read current\;
-  \eIf{understand}{
-   go to next section\;
-   current section becomes this one\;
-   }{
-   go back to the beginning of current section\;
-  }
- }
- \caption{How to write algorithms}
- \label{algo:one}
-\end{algorithm}
+% \section{References}
+% See how .bib file is prepared.  The bibliography would be automatically added by Latex.  So here is how you cite papers (you'll need to view the .bib file to understand).  \cite{ref:Duda:2000} is the correct way to make one citation and \cite{ref:Bishop:2006,ref:SVMGuide} to make multiple citations. You can see various reference styles for manuals \cite{ref:SVMGuide}, conferences \cite{ref:guyon:2007}, websites \cite{ref:IJCNNChallenge:2007} and journal articles \cite{ref:guyon:2007a}.  Also, note that all citations appear in the order in which they appear within text.  They are not sorted according to author names.
 
-\section{Code of Programming Languages}
-If you need to add C++, Java or any other programming language's code, then you can use ``listings'' package. Following is an example. Normally, the code is only added in the appendices to avoid clutter in the document.
+% \section{Equations}
+% Make sure you use the math environment for writing equations.  Again, make sure you do not hard code equation numbers.  Use label and ref commands of Latex to number them and reference them.  Here is an example of (\ref{eq:energy})
+% \begin{equation}\label{eq:energy}
+% E = mc^2
+% \end{equation}
+% Note, how the equation is referenced by its equation number within brackets.  
 
-\begin{lstlisting}
+% \section{Figures}
+% To insert a figure, you can use the following code as template.  Here the figure is referenced using ref command of Latex.  So Figure \ref{fig:fast} is the FAST logo.  DO NOT HARD CODE FIGURE NUMBERS.  Let Latex manage them for you.
 
-#include <stdio.h>
-#define N 10
-/* Block
- * comment */
+% \begin{figure}[!hbt]
+% \centering
+% \includegraphics[width=1in]{Figures/fastlogo.png}
+% {\caption {\label{fig:fast}{\textbf{Fast Logo is the Caption.}}}}  
+% \end{figure}
 
-int main()
-{
-    int i;
+% \section{Tables}
+% Note how tables can be added in Latex.  Also, make sure you use label and ref commands to define and use table numbers.  You can use Table \ref{tbl:SomeTable} as a template to make tables, add captions to them and reference them.  DO NOT HARD CODE TABLE NUMBERS.  Let Latex manage their numbering for you.
 
-    // Line comment.
-    puts("Hello world!");
+% If you are having problems in managing Latex tables, you may use Lyx \url{https://www.lyx.org/}. 
+
+
+% \begin{table}[hbt]
+
+% \begin{center}
+% \caption{\label{tbl:SomeTable} \textbf{Give a Caption to the Table.}}
+% \begin{tabular}{|l|c|c|} 
+% \hline
+% \textbf{No.}&\textbf{Column 1}&\textbf{Column 2}\\
+% \hline
+% 1.&Some data&More data\\
+% \hline
+% 2.&Some values&More values\\
+% \hline
+% \end {tabular}
+
+% \end{center}
+
+% \end{table}
+
+% \section{Pseudo Code}
+% When you need to explain an existing algorithm of an algorithm you devised, then you should use pseudo code notation. Given below, algorithm  \ref{algo:one}, is an example. Note how the numbering is managed by the Latex itself.
+
+% \begin{algorithm}[H]
+%  \KwData{this text}
+%  \KwResult{how to write algorithm with \LaTeX2e }
+%  initialization\;
+%  \While{not at end of this document}{
+%   read current\;
+%   \eIf{understand}{
+%    go to next section\;
+%    current section becomes this one\;
+%    }{
+%    go back to the beginning of current section\;
+%   }
+%  }
+%  \caption{How to write algorithms}
+%  \label{algo:one}
+% \end{algorithm}
+
+% \section{Code of Programming Languages}
+% If you need to add C++, Java or any other programming language's code, then you can use ``listings'' package. Following is an example. Normally, the code is only added in the appendices to avoid clutter in the document.
+
+% \begin{lstlisting}
+
+% #include <stdio.h>
+% #define N 10
+% /* Block
+%  * comment */
+
+% int main()
+% {
+%     int i;
+
+%     // Line comment.
+%     puts("Hello world!");
     
-    for (i = 0; i < N; i++)
-    {
-        puts("LaTeX is also great for programmers!");
-    }
+%     for (i = 0; i < N; i++)
+%     {
+%         puts("LaTeX is also great for programmers!");
+%     }
 
-    return 0;
-}
-\end{lstlisting}
+%     return 0;
+% }
+% \end{lstlisting}
 
-\section{Recommendations for \LaTeX}
-Here we are providing you with only two Latex source files.  main.tex and fypbib.bib file. You can also start a project at \url{overleaf.com} and upload the zip file of this template there and share the Latex source between your group and supervisor.  This way all of you can work on the Latex files together online.
+% \section{Recommendations for \LaTeX}
+% Here we are providing you with only two Latex source files.  main.tex and fypbib.bib file. You can also start a project at \url{overleaf.com} and upload the zip file of this template there and share the Latex source between your group and supervisor.  This way all of you can work on the Latex files together online.
 
 
 \end{document}
