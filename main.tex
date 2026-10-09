@@ -361,6 +361,26 @@ The positives are its size and variety. The models achieved the new state of the
 \subsubsection{Relationship to the proposed research work}
 This paper is important to us because it is directly to ASL to English and because it demonstrates the power of a comprehensive and diverse data set. But if the main limitation in this field is data, and not model design, as the paper argues, then the type of data we select will guide our outcomes more than make-up changes to a model. It's also a handy demonstration of how to create a massive resource from existing content found on the internet, and the many challenges that can arise, including missing videos and inconsistent captions. We consider it a source of inspiration on the topic of thinking about data quality, scale and assessment in our own work.
 
+\subsection{Lip Reading in the Wild}
+\subsubsection{Summary of the research item}
+Chung and Zisserman \cite{ref:Chung:2016} set out to recognize the words being spoken by a talking face using only the video, with no audio at all. Their paper makes two contributions. The first is a pipeline for collecting data automatically from TV broadcasts, which they used to build the Lip Reading in the Wild (LRW) dataset. It contains up to 1000 utterances for each of 500 words, with over a million word instances in total, spoken by more than a thousand different people. The second contribution is a set of CNN architectures, based on VGG, that learn to recognize hundreds of words from this data. Both spatial and spatiotemporal versions were tried, so the study also compares different ways of handling the time dimension of the video.
+
+\subsubsection{Critical analysis of the research item}
+The most positive thing about the dataset is its size. Prior to that, lip reading datasets were limited both in the number of speakers and the size of the vocabulary, making it difficult to evaluate models on a diverse range of faces and conditions. Also, manual labelling is so expensive that large data sets are impossible, but the data is gathered by TV, so the subtitles are also very weakly aligned. LRW was adopted as a standard and subsequent reports report results routinely on LRW. However, task is only to classify isolated words from closed set of 500 words, not sentences. There are also relatively few words in the data base and the shots are English-language BBC television, which narrows the setting to a more restricted one. Later work reports no improvement by the spatiotemporal models over the spatial models, indicating that the architectures were still in early stages.
+
+\subsubsection{Relationship to the proposed research work}
+This paper is relevant to our project because lip reading is one of the visual-only recognition problems that we are interested in and it serves as an example of video based recognition without sound. The method of data collection is also common in sign language where subtitles for television have been used to provide weak labels in a similar way. That association brings into mind how to get paired data without having to do the manual effort of annotating everything. LRW is word-based and thus we use it as background information for the early stages of the field and the difficulty of visual-only recognition, rather than as a template for our complete system.
+
+\subsection{Deep Audio-Visual Speech Recognition}
+\subsubsection{Summary of the research item}
+Afouras et al. \cite{ref:Afouras:2018} is concerned with the recognition of phrases and sentences spoken by a talking face (either with or without audio). They are not limited to a few words or phrases as in previous research but rather consider lip reading as an open world problem, i.e. unconstrained natural language sentences from videos recorded in the wild. They make three main contributions. First, they compare two lip reading models designed based on the transformer self-attention architecture, one trained using a CTC loss and the second one using a sequence-to-sequence loss. Second, they attempt to see how much lip reading can assist audio speech recognition in the presence of audio noise, using a model trained on both audio and visual information and intentionally corrupting the audio stream. Thirdly they publish a new dataset, LRS2-BBC, consisting of thousands of natural sentences from British TV and the published journal version also adds LRS3-TED consisting of TED and TEDx talks from YouTube.
+
+\subsubsection{Critical analysis of the research item}
+A strong point of this paper is that it moves lip reading from isolated words to full sentences. Their models outperform all previous lip reading models on a lip reading benchmark by a large margin, the authors say, and the comparison of CTC and sequence-to-sequence models provides practical insights on the trade-offs. The study of noisy sound is also of interest; it reveals that the visual stream can help when the sound stream is not reliable, and that they're interested in what happens when the two streams are misaligned. The downside is that the training data remains the standard TV and talk video format, and the database primarily consists of good lighting, frontal shots of faces. Lip reading is also difficult in itself because some sounds may appear the same when they are made with the mouth, and thus places limits on the extent to which vision alone can reach.
+
+\subsubsection{Relationship to the proposed research work}
+This is probably the most useful of the lip reading papers, for this is what an audio-visual recognition system for sentences looks like, and how it can be used with audio. How to combine two input streams and look at the contribution of each stream to the result might be a good thought to have as we design our own input combinations. Transformers for a video-to-text task are also similar in what they do as the development of sign language translation. We believe it is a reference on how to tackle visual speech recognition beyond the single word and a measuring stick to compare with when lip reading is added to our system.
+
 \subsection{}
 \subsubsection{Summary of the research item}
 
@@ -1148,10 +1168,10 @@ We will be using GIT for the purpose of version control of the source code. We w
 % Sum up all the conclusions of all the chapters here to make a final conclusion chapter.  Do not repeat any text, just summarize it in different words. Give recommendations for future work also.\\
 % \textbf{For FYP-1 it is mandatory to list down a plan of the work to be done for FYP-2.}
 
-% {
-% \bibliographystyle{ieeetr}
-% \bibliography{fypbib} %specify your .bib file here
-% }
+{
+\bibliographystyle{ieeetr}
+\bibliography{fypbib} %specify your .bib file here
+}
 % %ADD APPENDICES IF REQUIRED OTHERWISE COMMENT IT OUT
 % \appendix
 % \chapter{First Appendix if Required}
