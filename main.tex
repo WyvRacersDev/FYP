@@ -945,7 +945,7 @@ need to be addressed before attempting to devise a complete design solution
 The assumptions and dependencies of our application that should be
 addressed for successful result are as follows:
 \begin{itemize}
-\item Installation of python 3.13 or higher.
+\item Installation of Python 3.11 or higher.
 \item Python libraries including but not limited to MediaPipe Tasks AP, OpenCV, Uvicorn, pyttsx3, PyTorch and TensorFlow. 
 \item Installation of ollama and the llama3.2 3b model for the LLM functionality.
 \item Training of the lip-reading model with the LRW dataset
@@ -1018,7 +1018,7 @@ The Lip-Reading module uses preprocessing to remove unnecessary information from
 The strategies we have chosen for the project are as follows: 
 % Explain all strategies that you use for designing of the Architecture. Describe any design decisions and/or strategies that affect the overall organization of the system and its higher-level structures. These strategies should provide insight into the key abstractions and mechanisms used in the system architecture. Describe the reasoning employed for each decision and/or strategy (possibly referring to previously stated design goals and principles) and how any design goals or priorities were balanced or traded-off. Such decisions might concern (but are not limited to) things like the following:
 \subsection{Programming language}
-For the frontend, we will be using React with npm and expo for easy testing and deployment on android devices. The backend will be made using Python 3.13 with the help of FASTapi and Uvicorn. This will enable us to create a simple and effective layered frontend and backend architecture. The backend and the frontend will communicate with one another using the FASTapi sockets and apis hosted thorugh Uvicorn. The networking will be handled through Uvicorn and the api requests will be handled through FAST api. The backend will be hosted on a desktop server which will host the lip-reading, sign language,text to speech, speech to text models as well as the corrective LLM through ollama.
+For the frontend, we will be using React with npm and expo for easy testing and deployment on android devices. The backend will be made using Python 3.11 with the help of FASTapi and Uvicorn. This will enable us to create a simple and effective layered frontend and backend architecture. The backend and the frontend will communicate with one another using the FASTapi sockets and apis hosted thorugh Uvicorn. The networking will be handled through Uvicorn and the api requests will be handled through FAST api. The backend will be hosted on a desktop server which will host the lip-reading, sign language,text to speech, speech to text models as well as the corrective LLM through ollama.
 
 \subsection{Reuse of existing software components}
 The reused components of the system involve the use of a pretrained model for the sign language detecting module. In addition, there are also built in libraries which will be used to detect faces ~\cite{lugaresi2019mediapipe} , cropping speaker mouth~\cite{googlemediapipe2026} ,emotion detection~\cite{savchenko2022hsemotion} and training of the lip-reading model ~\cite{tensorflow2015}~\cite{paszke2019pytorch}.
