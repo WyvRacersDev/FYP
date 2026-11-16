@@ -119,6 +119,7 @@ The project covers the complete development cycle, including data collection, mo
 
 
 \chapter{Introduction}
+\label{ch:intro}
 Speech is the primary way in which people exchange information, and almost every public service is designed on the assumption that the person using it can both hear and speak. For a large part of the world's population this assumption does not hold. The World Health Organization reports that more than 1.5 billion people live with some degree of hearing loss and projects that the number will rise to nearly 2.5 billion by 2050 \cite{who2021}. People with hearing or speech impairments face a daily communication barrier in classrooms, hospitals, banks and workplaces, where a trained interpreter is rarely available. In Pakistan the barrier is made worse by a shortage of trained sign language interpreters and by the high cost of aids and treatments such as cochlear implants and speech generating devices, which places them beyond the reach of most families.
 This leads to limited access to basic services, privacy and independence as well as reliance on relatives in any place that requires communication with other people who may not completely understand the disable person's communication mode.
 
@@ -164,7 +165,7 @@ In the interest of clarity, this report uses several acronyms. The following lis
 \textbf{GRID}: Audio-Visual Corpus for Speech Perception and Recognition\\
 \section{Conclusion}
 The rest of this report is organized as follows. Chapter~\ref{ch:vision} presents the project vision, including the problem statement, the goals and objectives, the scope and the sustainable development goal that the project supports. Chapter~\ref{ch:lit} reviews related research in lip reading, sign language recognition and translation, speech recognition, speech synthesis, noise suppression and facial expression detection, and summarizes them in a table. Chapter~\ref{ch:srs} lists the features, the functional and non-functional requirements, the use cases and the hardware and software requirements of the system. Chapter~\ref{ch:approach} describes the proposed approach and the methodology followed to prepare the data and train the models. Chapter~\ref{ch:design} presents the high-level and low-level design of the system, including its architecture and its modules.
-%  Chapter~\ref{ch:impl} describes the prototype that has been implemented so far and the plan for test cases. Chapter~\ref{ch:concl} concludes the report with a summary of the work done, the limitations and the plan for FYP-II.
+Chapter~\ref{ch:impl} describes the prototype that has been implemented so far and the plan for test cases. Chapter~\ref{ch:concl} concludes the report with a summary of the work done, the limitations and the plan for FYP-II.
 
 \chapter{Project Vision}
 \label{ch:vision}
@@ -1700,15 +1701,125 @@ To sum up, the prototype at the end of FYP-I is a React Native app with a screen
 % This chapter will be added in FYP-II. Give proper analysis and discussion of experimental results (in plain English text) along with tables of results.  For each chapter provide a paragraph of introduction and in the end a paragraph of conclusions.\\
 % \textcolor{red}{NOTE: This Chapter is optional for Development projects but compulsory for Research projects.}
 
-% \chapter{Conclusions}
-% \label{ch:concl}
-% \section{aa}
-% \subsection{dfs}
-% \subsubsection{dsd}
-% {\bf This chapter is mandatory}.  
-% Give conclusions and summary of the work done.  What were your findings and what were the results?  Discuss in detail whether the scope of your project was entirely covered or not and whether the objectives of the project were met or not.  What challenges did you face and what has been left out and why.\\
-% Sum up all the conclusions of all the chapters here to make a final conclusion chapter.  Do not repeat any text, just summarize it in different words. Give recommendations for future work also.\\
-% \textbf{For FYP-1 it is mandatory to list down a plan of the work to be done for FYP-2.}
+\setcounter{chapter}{9}
+\chapter{Conclusions}
+\label{ch:concl}
+This chapter closes the FYP-I report. It states what the project has produced so far, what the work has shown, how far the planned scope and objectives have been reached, what made the work difficult, what has been left for later, and how FYP-II will complete the system. Silent Signals is at the end of its first phase. The problem, requirements, approach and design are complete, and a working prototype of the app and backend exists, but the trained models are not yet built. The chapter therefore reports the state of the project as it is, and no accuracy or speed results are claimed.
+
+\section{Summary of the Work Done}
+Table~\ref{tab:concl-chapters} condenses the report chapter by chapter and shows what each one contributed to the project.
+
+\begin{table}[H]
+\centering
+\caption{What each chapter of the report established}
+\label{tab:concl-chapters}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{|l|l|X|}
+\hline
+\textbf{Ch.} & \textbf{Title} & \textbf{Main outcome} \\ \hline
+1 & Introduction & Defined the purpose of the report and the three research questions on real-time use, combining lip reading with signs, and reliable output. \\ \hline
+2 & Project Vision & Fixed the problem (no affordable two-way tool for people who cannot hear or speak clearly), the twelve objectives, the scope, the SDG links (10, 4 and 3), the constraints and the stakeholders. \\ \hline
+3 & Literature Review & Studied fifteen papers across five categories and found that no existing work combines all the parts into one tool. \\ \hline
+4 & Requirements & Turned the vision into features, functional and non-functional requirements, five use cases, GUI mock-ups and the database design. \\ \hline
+5 & Approach & Chose a 3D CNN with BiLSTM for lip reading, a pretrained I3D network for signs and a local Llama 3.2 model for correction. \\ \hline
+6 & Design & Produced a layered architecture, a class diagram built on two interfaces, and policies for code, UI, libraries and version control. \\ \hline
+7 & Implementation and Tests & Built the app screens and three backend routers, wrote the lip-reading algorithm, and designed eleven test cases with metrics and a traceability matrix. \\ \hline
+\end{tabularx}
+\end{table}
+
+Taken together, the chapters follow one line of reasoning. The problem led to requirements, the literature justified the choice of methods, and the design made each model replaceable. The prototype then tested that structure on a real phone.
+
+\section{Findings and Results}
+Because the models are not trained yet, the findings of this phase come from the literature, the design work and the prototype, and not from measurements.
+\begin{itemize}
+  \item \textbf{Recognition is hard on new speakers.} Every visual recognition study reviewed reports weaker results on unseen speakers and open vocabularies. This is why the project evaluates on unseen speakers and adds confidence scores, correction and user confirmation.
+  \item \textbf{Most parts already exist.} Speech output, noise suppression, expression detection, landmark tracking and language-model correction can be taken from mature open source components. Only lip reading needs to be trained by the team.
+  \item \textbf{The gap is integration.} No reviewed work offers lip reading, signs, correction, emergency support and two-way speech in one tool, which is the space Silent Signals fills.
+  \item \textbf{The architecture works as a prototype.} The app, the routers and the model-free emergency path run together on a physical Android phone, so the layered design and the two interfaces are practical and not only diagrams.
+  \item \textbf{Testing is ready.} Eleven test cases, eight metrics and a traceability matrix are written. None of the cases has been run on the final models, so every case is still marked Not Executed.
+\end{itemize}
+The three research questions of Chapter~\ref{ch:intro} therefore remain open. Whether a model trained on LRW can run on a live webcam, whether one interface can serve both lip readers and signers, and whether confidence scores and correction make the text reliable enough can only be answered once the models are connected and measured in FYP-II.
+
+\section{Scope and Objectives}
+Table~\ref{tab:concl-objectives} compares the twelve objectives of Chapter~\ref{ch:vision} with the state of the work. \textit{Built} means that the feature exists in the prototype. \textit{Partly built} means that the screen or route exists but the trained model or a part of the behaviour is missing. \textit{Designed} means that the feature is fully specified but not yet implemented.
+
+\begin{table}[H]
+\centering
+\caption{Status of the project objectives at the end of FYP-I}
+\label{tab:concl-objectives}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{|X|l|X|}
+\hline
+\textbf{Objective} & \textbf{Status} & \textbf{Remaining work} \\ \hline
+Lip reading from recorded video & Partly built & Screen and backend route exist; the lip-reading model must be trained on LRW. \\ \hline
+Live lip reading from a webcam & Partly built & The app records clips of up to five seconds; continuous live recognition is not done. \\ \hline
+Confidence score per word & Partly built & The response format and the low-score marking exist; real scores need the trained model. \\ \hline
+Language model correction & Designed & Set up Llama 3.2 through Ollama and build the prompt. \\ \hline
+Sign recognition as text & Partly built & Recording screen exists; the pretrained I3D model must be connected. \\ \hline
+Text to speech & Built & Typed text, quick phrases, speed and pitch work on the phone. \\ \hline
+Noise suppression & Designed & Add the module to the speech path. \\ \hline
+Expression detection & Designed & Add the expression model and store the result in the history. \\ \hline
+Emergency phrases and guardian alert & Built & Runs on its own path without any model; TC-03 and TC-04 still have to be run. \\ \hline
+Conversation history & Built & History router and screen exist; TC-11 still has to be run. \\ \hline
+Profiles and accessibility settings & Built & Profile, dark mode, high contrast and font size work. \\ \hline
+Dashboard with accuracy and time & Partly built & Counts are shown; accuracy and processing time need the models. \\ \hline
+\end{tabularx}
+\end{table}
+
+Four objectives are built, five are partly built and three are designed only. The scope has therefore been covered at the level of requirements, design and interface, but not yet at the level of working recognition. The parts that are complete are those that need no trained model, and the parts that remain are the machine learning modules that FYP-II is meant to deliver. All exclusions set in Chapter~\ref{ch:vision} still hold: English only, no special hardware, a limited sign vocabulary and no claim of use as a certified interpreting device.
+
+\section{Challenges Faced}
+\begin{itemize}
+  \item \textbf{Limited public data.} LRW covers 500 isolated words and public ASL data contains isolated signs, so the recognisers work at word level and sentences have to be formed by the correction module.
+  \item \textbf{Ambiguous lip shapes.} Different sounds look alike on the lips, which limits how accurate lip reading can become and led to the confidence and confirmation design.
+  \item \textbf{Hardware limits.} Training depends on the team's own GPU, which restricts model size and training time.
+  \item \textbf{Too many modules for the time.} Three students had to cover several models, a backend and an app next to other coursework, so the work was ordered by risk, with lip reading first.
+  \item \textbf{Testing on real devices.} The camera and microphone do not behave properly on an emulator, so every feature had to be tried on a physical phone. A wrong server address was the most common cause of failed requests.
+  \item \textbf{Privacy.} Face video is sensitive, which forced the rule that video is processed in memory and deleted after each request, and that correction runs on a local model.
+\end{itemize}
+
+\section{What Has Been Left Out and Why}
+\begin{itemize}
+  \item \textbf{Trained lip-reading and sign models.} Training needs the finished pipeline first, and it is the main task of FYP-II.
+  \item \textbf{Accuracy and speed results.} They cannot be measured before the models exist, so the metrics are defined but not reported.
+  \item \textbf{Correction, expression detection and noise suppression.} These depend on the recognisers producing output, so they are scheduled after them.
+  \item \textbf{User manual and experimental results chapters.} The template asks for them in FYP-II, when the finished system and its results are available.
+  \item \textbf{Sentence-level translation and other languages.} These were excluded in the scope because of limited data and time.
+\end{itemize}
+
+\section{Recommendations for Future Work}
+\begin{itemize}
+  \item Extend lip reading from single words to open-vocabulary sentences, using the sentence-level methods reviewed in Chapter~\ref{ch:lit}.
+  \item Move sign language from isolated signs to sentence translation with gloss-free models and larger corpora.
+  \item Add other languages, starting with Urdu, and a local sign language, so that the tool serves more users in Pakistan.
+  \item Collect additional training data from volunteers with their consent, to narrow the gap between broadcast video and everyday users.
+  \item Run trials with a school, a clinic or a bank to measure how well the tool helps in real conversations.
+  \item Study running the models on the phone, and an iOS version, to lower the need for a server and a connection.
+\end{itemize}
+
+\section{Plan for FYP-II}
+FYP-II will follow the same Scrum method in sprints of one to two weeks. The order below puts the highest-risk work first, so that problems show up early. Table~\ref{tab:concl-plan} lists the phases and what each must deliver.
+
+\begin{table}[H]
+\centering
+\caption{Planned work for FYP-II}
+\label{tab:concl-plan}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{|c|l|X|}
+\hline
+\textbf{Phase} & \textbf{Work} & \textbf{Deliverable} \\ \hline
+1 & Lip-reading model & Train the 3D CNN and BiLSTM on LRW with an unseen-speaker split and report word accuracy. \\ \hline
+2 & Integration of lip reading & Connect the model to the backend route, measure response time and support live recognition. \\ \hline
+3 & Sign language & Connect the pretrained I3D model, set the confidence threshold and evaluate it. \\ \hline
+4 & Correction module & Run Llama 3.2 through Ollama, show raw and corrected text, and keep emergency phrases outside it. \\ \hline
+5 & Supporting modules & Add noise suppression and expression detection, and store the emotion in the history. \\ \hline
+6 & Dashboard and testing & Show accuracy and time, write test cases for the new modules, run all cases and calculate the metrics. \\ \hline
+7 & Evaluation and documentation & Test with users on everyday tasks, then add the user manual and results chapters and finish the report. \\ \hline
+\end{tabularx}
+\end{table}
+
+\section{Final Remarks}
+Silent Signals has a clear problem, a justified method, a layered design and a working prototype shell that is ready to receive the trained models. FYP-I has shown that the project is feasible and well planned, and FYP-II will show how accurate and fast the finished system is for the people it is built to serve.
 
 {
 \bibliographystyle{ieeetr}
