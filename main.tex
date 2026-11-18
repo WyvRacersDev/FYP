@@ -1255,7 +1255,8 @@ This chapter has presented the design of Silent Signals. The system is organised
 
 \chapter{Implementation and Test Cases}
 \label{ch:impl}
-This chapter covers what we have built so far in FYP-I and how we plan to test it. What exists right now is a working prototype of the mobile app and a backend it talks to. The final machine learning models are not part of it yet, because those are the main job of FYP-II. So the chapter first goes through the tools we used, the screens, the backend and the steps a lip-reading request follows. After that it moves to testing: what all our test cases have in common, the test cases themselves, and the metrics we will use to report results. We wrote the test cases now, straight from the requirements in Chapter~\ref{ch:srs}, so the same ones can be run on the prototype and again on the final system. None of them has been run on the final models, so there are no accuracy numbers in this chapter.
+This chapter covers what we have built so far in FYP-I and how we plan to test it. What exists right now is a working prototype of the mobile app and a backend it talks to. The final machine learning models are not part of it yet, because those are the main job of FYP-II. So the chapter first goes through the tools we used, the screens, the backend and the steps a lip-reading request follows.
+% After that it moves to testing: what all our test cases have in common, the test cases themselves, and the metrics we will use to report results. We wrote the test cases now, straight from the requirements in Chapter~\ref{ch:srs}, so the same ones can be run on the prototype and again on the final system. None of them has been run on the final models, so there are no accuracy numbers in this chapter.
 
 \section{Implementation}
 We built the prototype following the layered architecture from Chapter~\ref{ch:design}. The user only ever touches the app. Anything that needs a model is sent to the backend, and the backend sends back plain text, so the phone itself does not need to be powerful. We built the app one screen at a time, in the sprints described in Section~\ref{sec:devmethods}, and showed each screen to our supervisor before starting the next one. That way mistakes in layout or wording were caught early and not when everything was already connected. The screens themselves are shown in Section~\ref{sec:gui}, and here we explain how they work underneath. The subsections below go through the tools we used, the frontend, the backend and then the main workflows, starting with lip reading because it is the heart of the project. The final models are not finished yet, so some workflows are described as they are designed to run once the models are connected in FYP-II, and the text says so where that is the case.
@@ -1782,7 +1783,8 @@ Table~\ref{tab:concl-chapters} condenses the report chapter by chapter and shows
 4 & Requirements & Turned the vision into features, functional and non-functional requirements, five use cases, GUI mock-ups and the database design. \\ \hline
 5 & Approach & Chose a 3D CNN with BiLSTM for lip reading, a pretrained I3D network for signs and a local Llama 3.2 model for correction. \\ \hline
 6 & Design & Produced a layered architecture, a class diagram built on two interfaces, and policies for code, UI, libraries and version control. \\ \hline
-7 & Implementation and Tests & Built the app screens and three backend routers, wrote the lip-reading algorithm, and designed eleven test cases with metrics and a traceability matrix. \\ \hline
+7 & Implementation and Tests & Built the app screens and three backend routers, wrote the lip-reading algorithm. \\ \hline
+8 & Experimental Results and Discussion & Tested the created prototype and ran some tests on the lip-reading and the text to speech component. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -1795,7 +1797,6 @@ Because the models are not trained yet, the findings of this phase come from the
   \item \textbf{Most parts already exist.} Speech output, noise suppression, expression detection, landmark tracking and language-model correction can be taken from mature open source components. Only lip reading needs to be trained by the team.
   \item \textbf{The gap is integration.} No reviewed work offers lip reading, signs, correction, emergency support and two-way speech in one tool, which is the space Silent Signals fills.
   \item \textbf{The architecture works as a prototype.} The app, the routers and the model-free emergency path run together on a physical Android phone, so the layered design and the two interfaces are practical and not only diagrams.
-  \item \textbf{Testing is ready.} Eleven test cases, eight metrics and a traceability matrix are written. None of the cases has been run on the final models, so every case is still marked Not Executed.
 \end{itemize}
 The three research questions of Chapter~\ref{ch:intro} therefore remain open. Whether a model trained on LRW can run on a live webcam, whether one interface can serve both lip readers and signers, and whether confidence scores and correction make the text reliable enough can only be answered once the models are connected and measured in FYP-II.
 
