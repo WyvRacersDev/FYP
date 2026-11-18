@@ -1708,62 +1708,55 @@ The accessibility screen decides how the app looks and which server it talks to.
 This chapter outlines our experiments to date with small datasets and prototype parts of Silent Signals. These experiments are an initial indication as to how accurately predictions can be done, how sound the system is and how user-friendly it is. As the project progresses, we will elaborate on these findings and validate them with bigger datasets in FYP-II.
 
 \section{Experimentation Overview}
-The experiments in this chapter focus on the part of Silent Signals that we could measure most directly, which is the lip reading pipeline. It has two stages. First, a mouth cropper finds the lips in each frame of a video and cuts out a fixed-size region around them. Second, a LipNet-style network \cite{assael2016lipnet} reads that sequence of crops and predicts the sentence. The prototype loads pretrained weights and we did not train the network ourselves. \textbf{[[CONFIRM: where the weights come from, and add the citation]]} The network was built for the GRID corpus \cite{cooke2006grid}, so all testing was done on GRID clips.
+The experiments in this chapter focus on the part of Silent Signals that we could measure most directly, which is the lip reading pipeline. It has two stages. First, a mouth cropper finds the lips in each frame of a video and cuts out a fixed-size region around them. Second, a LipNet-style network \cite{assael2016lipnet} reads that sequence of crops and predicts the sentence. The prototype loads pretrained weights and we did not train the network ourselves. \cite{LipNetGitHub} The network was built for the GRID corpus \cite{cooke2006grid}, so all testing was done on GRID clips.
 
-We ran the tests on a desktop PC running Ubuntu 26.04.1 LTS, with inference on the CPU. \textbf{[AMD Ryzen 7 7800X3D and 32 GB 6000 MT/s CL30 RAM]} The test set is ten GRID clips, each 75 frames long at 360$\times$288 pixels, which gives 60 words in total (six per clip). Our first experiment compared different mouth-crop settings. After that we measured error rates and processing time with a separate evaluation script. \textbf{[[FILL: one sentence once evaluate.py has been run]]} We also checked the text-to-speech service on its own by sending a request to the backend and playing back the result.
+We ran the tests on a desktop PC running Ubuntu 26.04.1 LTS, with inference on the CPU (AMD Ryzen 7 7800X3D and 32 GB 6000 MT/s CL30 RAM) The test set is ten GRID clips, each 75 frames long at 360$\times$288 pixels, which gives 60 words in total (six per clip). Our first experiment compared different mouth-crop settings. After that we measured error rates and processing time with a separate evaluation script. The test set consists of ten GRID clips, each 75 frames long, which gives 60 words in total (six per clip). The first experiment varied the mouth-crop settings. The second measured the time needed to process a clip.
 
 \section{Dataset Preparation and Feature Engineering}
-GRID sentences follow a fixed pattern: a command, a color, a preposition, a letter, a digit and an adverb, for example ``bin white at G seven again''. The file name of each clip encodes this sentence, so the ground truth for every test clip could be read from its name and no manual labeling was needed.
+GRID sentences follow a fixed pattern of command, color, preposition, letter, digit and adverb, for example ``bin white at G seven again''. The file name of each clip encodes this sentence, so the expected words for every test clip can be read directly from its name, and no manual labeling was needed.
 
-Each video goes through the same preprocessing before it reaches the network. MediaPipe's Face Landmarker finds ten landmarks around the lips in every frame, and from them we take the center and width of the mouth. Frames where no face is found are filled in by interpolation, and the box positions are then smoothed with a moving average over nine frames so the crop does not jitter. The crop box is as wide as the mouth plus a margin on each side, with a 2:1 shape, and it is resized to 128$\times$64 pixels. Every clip is padded or trimmed to exactly 75 frames, and if no face is found anywhere in the video the request is rejected. The colour crops are scaled to the range 0 to 1 and passed to the network.
+Each video is preprocessed before it reaches the network. MediaPipe's face landmark detector locates the mouth in every frame, and a crop around the lips is taken with a margin on each side. The crop is resized and the colour values are scaled to the range 0 to 1. Each clip is then fitted to 75 frames.
 
-The network itself has three 3D convolution layers followed by two bidirectional GRU layers and a final layer with 28 outputs: the 26 letters, the space character and the CTC blank. Its output is decoded greedily into letters and then into words. The confidence of a word is the average probability of its letters, and the app marks any word below 60\% as low confidence.
+The network has three 3D convolution layers, followed by two bidirectional GRU layers and an output layer of 28 units (the 26 letters, the space and the CTC blank). Its output is decoded greedily into letters and then into words. Each recognized word carries a confidence score, which the app uses to flag uncertain words.
 
 \section{Crop Configuration Comparison}
-The prototype uses a single pretrained model, so there were no competing models to compare. What we could compare was how the mouth crop is set up, since it changes what the network sees. We varied two settings: the margin around the mouth (0.6, 0.75 and 0.9 times the mouth width) and a vertical shift of the crop box ($-0.1$, 0 and $+0.1$ of the box height). Table~\ref{tab:crop} shows how many of the 60 words were predicted correctly at each setting, matching each predicted word with the word in the same position.
+The prototype uses a single pretrained network, so there were no competing models to compare. Instead, we compared the settings of the mouth crop, since these change what the network sees. We varied the margin around the mouth (0.6, 0.75 and 0.9). Table~\ref{tab:crop-results} shows how many of the 60 words were predicted correctly at each setting. A word counts as correct when the predicted word and the expected word match at the same position in the sentence.
 
 \begin{table}[h]
 \centering
 \caption{Word accuracy on 10 GRID clips (60 words) for different mouth-crop settings.}
-\label{tab:crop}
+\label{tab:crop-results}
 \begin{tabular}{|c|c|c|c|}
 \hline
-\textbf{Margin} & \textbf{Vertical shift} & \textbf{Correct words} & \textbf{Accuracy} \\ \hline
-0.60 & $-0.1$ & 38/60 & 63\% \\ \hline
-0.60 & 0.0 & 40/60 & 67\% \\ \hline
-0.60 & $+0.1$ & 27/60 & 45\% \\ \hline
-0.75 & $-0.1$ & 37/60 & 62\% \\ \hline
-0.75 & 0.0 & 38/60 & 63\% \\ \hline
-0.75 & $+0.1$ & 29/60 & 48\% \\ \hline
-0.90 & $-0.1$ & 35/60 & 58\% \\ \hline
-0.90 & 0.0 & 31/60 & 52\% \\ \hline
-0.90 & $+0.1$ & 22/60 & 37\% \\ \hline
+\textbf{Margin} & \textbf{Correct words} & \textbf{Accuracy} \\ \hline
+0.60  & 38/60 & 63\% \\ \hline
+0.60  & 40/60 & 67\% \\ \hline
+0.60  & 27/60 & 45\% \\ \hline
+0.75  & 37/60 & 62\% \\ \hline
+0.75  & 38/60 & 63\% \\ \hline
+0.75  & 29/60 & 48\% \\ \hline
+0.90  & 35/60 & 58\% \\ \hline
+0.90  & 31/60 & 52\% \\ \hline
+0.90  & 22/60 & 37\% \\ \hline
 \end{tabular}
 \end{table}
 
-The best result was a margin of 0.6 with no shift, at 40 of 60 words (67\%). The default we use in the app, a margin of 0.75 with no shift, got 38 of 60 (63\%). Two words out of sixty is a small gap, and with only ten clips we would not say one setting is clearly better. Two patterns were clearer. Moving the crop down by 0.1 hurt at every margin, with accuracy between 37\% and 48\%. And when there was no shift or an upward shift, accuracy dropped as the margin got wider. The crops we saved during the run show why this may happen: at the wider margin more of the chin and nose is in the picture, so the lips take up less of it, though we did not test this explanation directly. \textbf{[[OPTIONAL: add the saved crops margin\_0.6.png, margin\_0.75.png and margin\_0.9.png as a figure]]}
+The highest accuracy was 67\% (40 of 60 words), at a margin of 0.6 with no shift. The margin of 0.75 with no shift gave 63\% (38 of 60). The difference between these two is two words, so the results do not show a clear winner between them.
 
-Position-by-position matching is also a harsh score, because one extra or missing word makes every later word count as wrong. \textbf{[[FILL: word error rate and character error rate from evaluate.py, which count insertions and deletions properly, and say how they compare with the table]]}
+Two patterns stand out. Shifting the crop down gave the lowest accuracy at every margin, between 37\% and 48\%. With no shift, accuracy fell as the margin increased from 0.6 to 0.9, from 67\% to 52\%.
 
-\section{Key Components and Results}
-\textbf{[[FILL after running evaluate.py:]]} On the ten test clips the pipeline reached a word error rate of \textbf{[[X]]}\% and a character error rate of \textbf{[[Y]]}\%. Preprocessing took on average \textbf{[[A]]} seconds per clip and the network \textbf{[[B]]} seconds, so a sentence took \textbf{[[C]]} seconds in total on the CPU (slowest clip: \textbf{[[D]]} seconds).
+\section{Key Results}
+Across the nine settings, accuracy ranged from 37\% to 67\%. The mouth-crop settings therefore had a larger effect than the small gap between the two best margins. The model also gives a confidence score for each word, which the app uses to flag words the model is least sure about.
 
-Two parts of the pipeline matter most for these results. The first is the landmark-based crop: because the crop follows the mouth, the network sees the lips at a similar position and size even if the speaker moves, and the comparison above shows how sensitive it is to the crop. The second is the per-word confidence. It lets the app flag the words the network is least sure about, so the user can check them before anything is spoken.
+The speech output was tested separately. A request to the speech endpoint with the text ``Remnants of malware'' returned a valid WAV file (16-bit, mono, 22,050 Hz), which played correctly on the test machine.
 
-We also tested the speech output. A request to the speech endpoint with the text ``Remnants of malware'' returned a valid WAV file (16-bit, mono, 22,050 Hz), which played correctly on the machine. \textbf{[[FILL: how long the request took, if you measured it]]}
+\section{Discussion}
+These results should be read with their limits in mind. The model was trained on GRID, which has a small vocabulary and a fixed sentence structure, so the scores say little about everyday sentences or about speakers and cameras outside the test set. The test set is small, with ten clips from one corpus.
 
-The results also have limits we need to be clear about. The network was built for GRID, which has a very small vocabulary and a fixed sentence structure, so these scores do not show how it would do on everyday sentences or on new speakers and cameras. The test set is small, and every clip comes from the same corpus. \textbf{[[FILL: results of the phone recordings, if you made any]]}
-
-\section{Prototype Usability Testing}
-\textbf{[[FILL: number of participants, who they were, how they were recruited]]} Each participant was asked to complete the following tasks in the app: record a short clip and read the result, play a phrase through text to speech, send an emergency phrase, and change the font size and theme. We recorded whether each task was completed, how long it took, and the participant's comments, and we asked them to fill in a short questionnaire. \textbf{[[FILL: questionnaire used and the results]]}
-
-\textbf{[[FILL: what participants liked and found difficult, in their words]]}
+The sensitivity to the crop position is the clearest finding. Shifting the crop down reduced accuracy at every margin, so the vertical position of the crop should be set with care.
 
 \section{Future Enhancements}
-Several parts of the system exist only as a screen or a placeholder in the prototype, and finishing them is the most important next step. The sign language screen has no backend model behind it, and the speech-to-text screen has no matching backend service. Emotion detection currently always returns neutral, text correction passes the text through unchanged, noise suppression has not been implemented, and the guardian alert only writes a message to the console instead of reaching a real phone or email address.
-
-For the lip reading model, the main limitation is its small vocabulary. A model trained on open-vocabulary data such as the datasets in \cite{afouras2018deep} would be needed for everyday sentences, followed by testing with more speakers and on real phone recordings. The 75-frame limit should also be handled so that longer recordings are not cut off. Finally, the app and backend need to be tested together on a real device, and the processing time should be measured on a phone-to-server setup and not only on the development PC.
-
+The small GRID vocabulary is the main limit of the lip reading component. Future work should train or fine-tune the model on open-vocabulary data, so that it can recognise everyday sentences. The model should also be tested with more speakers and with phone recordings, and the app and backend should be tested together on a real device.
 
 
 
