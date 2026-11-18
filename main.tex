@@ -1342,366 +1342,368 @@ Every finished request adds a record to the conversation history with the source
 \subsection{Settings and Server Connection Workflow}
 The accessibility screen decides how the app looks and which server it talks to. Changes to font size, dark mode or high contrast go into the shared theme and are kept after the app is closed. The server box holds the backend address, and Test connection sends a small request to it and shows whether it answered. All other screens use this same address, so fixing it once is enough. If a request cannot reach the server, the screen that sent it shows a message and stays usable. In particular the user can still open the emergency screen, and the phrases are spoken even when the guardian cannot be notified. Nothing on this screen needs a model, so it is the first one we check when something seems wrong with a recording. A wrong server address is the most common reason for a failed request during development, and checking it first saves a lot of time.
 
-\section{Test Case Design and Description}
-We wrote the test cases from the functional and non-functional requirements and the use cases of Chapter~\ref{ch:srs}. Each one follows the project template: the component, the requirements and use case it checks, the environment, assumptions, pre-requisite, and the steps with the expected result of each. The tester, date and final status are filled in during FYP-II when the final models are connected. Some things are the same for every case:
-\begin{itemize}
-  \item \textbf{Environment:} an Android phone running the application, connected over Wi-Fi to a backend server that runs the latest version of the code from the main branch.
-  \item \textbf{Input constraints:} video clips are at most five seconds long for lip reading and six seconds for sign language, and the face or the hands are fully visible in good light.
-  \item \textbf{Shared pre-requisites:} the backend is running, the connection test on the accessibility screen succeeds, and a test user with one registered guardian exists.
-  \item \textbf{Shared dependencies:} the correction language model is optional for the tests of the lip-reading and sign language screens, and it is not needed for the emergency tests.
-  \item \textbf{Data:} test videos are recorded by team members and kept only on the test devices. No video of a person outside the team is used.
-\end{itemize}
+% \section{Test Case Design and Description}
+% We wrote the test cases from the functional and non-functional requirements and the use cases of Chapter~\ref{ch:srs}. Each one follows the project template: the component, the requirements and use case it checks, the environment, assumptions, pre-requisite, and the steps with the expected result of each. The tester, date and final status are filled in during FYP-II when the final models are connected. Some things are the same for every case:
+% \begin{itemize}
+%   \item \textbf{Environment:} an Android phone running the application, connected over Wi-Fi to a backend server that runs the latest version of the code from the main branch.
+%   \item \textbf{Input constraints:} video clips are at most five seconds long for lip reading and six seconds for sign language, and the face or the hands are fully visible in good light.
+%   \item \textbf{Shared pre-requisites:} the backend is running, the connection test on the accessibility screen succeeds, and a test user with one registered guardian exists.
+%   \item \textbf{Shared dependencies:} the correction language model is optional for the tests of the lip-reading and sign language screens, and it is not needed for the emergency tests.
+%   \item \textbf{Data:} test videos are recorded by team members and kept only on the test devices. No video of a person outside the team is used.
+% \end{itemize}
 
-The eleven test cases below are TC-01 to TC-11, in Tables~\ref{tab:tc1} to~\ref{tab:tc11}. They are grouped by feature. TC-01 and TC-02 check lip reading, TC-03 and TC-04 check the emergency path, TC-05 and TC-10 check the two directions of speech, TC-06 to TC-08 check the settings, the profile and the connection, TC-09 checks sign language and TC-11 checks the history. Most features have one normal case and one case in which something goes wrong, for example a clip without a face or an emergency without a guardian, because those are the situations in which a communication aid has to behave carefully. Every table has the Not Executed box ticked for now. When the final models are connected, the same tables are used again and the boxes are updated, so that the new results can be compared directly with this plan. Cases for the correction module, expression detection and sound optimisation are written when those modules exist.
+% The eleven test cases below are TC-01 to TC-11, in Tables~\ref{tab:tc1} to~\ref{tab:tc11}. They are grouped by feature. TC-01 and TC-02 check lip reading, TC-03 and TC-04 check the emergency path, TC-05 and TC-10 check the two directions of speech, TC-06 to TC-08 check the settings, the profile and the connection, TC-09 checks sign language and TC-11 checks the history. Most features have one normal case and one case in which something goes wrong, for example a clip without a face or an emergency without a guardian, because those are the situations in which a communication aid has to behave carefully. Every table has the Not Executed box ticked for now. When the final models are connected, the same tables are used again and the boxes are updated, so that the new results can be compared directly with this plan. Cases for the correction module, expression detection and sound optimisation are written when those modules exist.
 
-\begingroup
-\small
-\setstretch{1.1}
-\setlength{\LTpre}{6pt}
-\setlength{\LTpost}{6pt}
-\newcommand{\tcpair}[4]{\textbf{#1}&#2&\textbf{#3}&#4\\\hline}
-\newcommand{\tcwide}[2]{\textbf{#1}&\multicolumn{3}{>{\raggedright\arraybackslash}p{11.7cm}|}{#2}\\\hline}
-\newcommand{\tcstep}[3]{#1&#2&\multicolumn{2}{>{\raggedright\arraybackslash}p{6.9cm}|}{#3}\\\hline}
+% \begingroup
+% \small
+% \setstretch{1.1}
+% \setlength{\LTpre}{6pt}
+% \setlength{\LTpost}{6pt}
+% \newcommand{\tcpair}[4]{\textbf{#1}&#2&\textbf{#3}&#4\\\hline}
+% \newcommand{\tcwide}[2]{\textbf{#1}&\multicolumn{3}{>{\raggedright\arraybackslash}p{11.7cm}|}{#2}\\\hline}
+% \newcommand{\tcstep}[3]{#1&#2&\multicolumn{2}{>{\raggedright\arraybackslash}p{6.9cm}|}{#3}\\\hline}
 
-\begin{longtable}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|}
-\caption{Test case TC-01: lip reading of a recorded clip.}\label{tab:tc1}\\
-\hline \multicolumn{4}{|c|}{\textbf{Lip-Reading Screen and Lip-Reading Router}}\\ \hline
-\endfirsthead
-\multicolumn{4}{c}{\textbf{Table \thetable: continued from previous page}}\\ \hline
-\multicolumn{4}{|c|}{\textbf{Lip-Reading Screen and Lip-Reading Router}}\\ \hline
-\endhead
-\multicolumn{4}{|p{14.6cm}|}{\textbf{Requirements:} Accept live or recorded video for lip reading; display recognised text; display a confidence percentage for each word}\\ \hline
-\tcpair{Test Case ID:}{TC-01}{QA Test Engineer:}{Project team}
-\tcpair{Test case Version:}{1.0}{Reviewed By:}{Project supervisor}
-\tcpair{Test Date:}{To be set in FYP-II}{Use Case Reference(s):}{UC-01}
-\tcwide{Revision History:}{None; first version.}
-\tcwide{Objective:}{Check that a recorded clip is sent to the backend and that a word with its confidence score is shown on the screen.}
-\tcwide{Product/Ver/ Module:}{Silent Signals prototype, lip-reading module. The screen sends the clip and the router returns the word and the score.}
-\tcwide{Environment:}{An Android phone running the Silent Signals application, connected over Wi-Fi to a backend server (Python 3.11, FastAPI) that runs the latest code of the main branch. No cloud key is needed.}
-\tcwide{Assumptions:}{Face is fully visible, in good light and facing the camera. The phone has a stable Wi-Fi connection to the server.}
-\tcwide{Pre-Requisite:}{Camera permission is granted and the connection test on the Accessibility screen succeeds.}
-\textbf{Step No.}&\textbf{Execution description}&\multicolumn{2}{>{\raggedright\arraybackslash}p{6.9cm}|}{\textbf{Procedure result}}\\ \hline
-\tcstep{1}{Open Lip Reading from the home screen.}{The camera preview is shown in the square frame.}
-\tcstep{2}{Press Record and silently say one word for about two seconds.}{Recording stops when the clip ends, or at five seconds.}
-\tcstep{3}{Wait for the result.}{A word and a confidence percentage are shown, together with the time taken.}
-\multicolumn{4}{|p{14.6cm}|}{\textbf{Comments:} To be completed after the test is executed in FYP-II.}\\ \hline
-\multicolumn{4}{|c|}{\textbf{Passed [\ \ ] \quad Failed [\ \ ] \quad Not Executed [X]}}\\ \hline
-\end{longtable}
+% \begin{longtable}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|}
+% \caption{Test case TC-01: lip reading of a recorded clip.}\label{tab:tc1}\\
+% \hline \multicolumn{4}{|c|}{\textbf{Lip-Reading Screen and Lip-Reading Router}}\\ \hline
+% \endfirsthead
+% \multicolumn{4}{c}{\textbf{Table \thetable: continued from previous page}}\\ \hline
+% \multicolumn{4}{|c|}{\textbf{Lip-Reading Screen and Lip-Reading Router}}\\ \hline
+% \endhead
+% \multicolumn{4}{|p{14.6cm}|}{\textbf{Requirements:} Accept live or recorded video for lip reading; display recognised text; display a confidence percentage for each word}\\ \hline
+% \tcpair{Test Case ID:}{TC-01}{QA Test Engineer:}{Project team}
+% \tcpair{Test case Version:}{1.0}{Reviewed By:}{Project supervisor}
+% \tcpair{Test Date:}{To be set in FYP-II}{Use Case Reference(s):}{UC-01}
+% \tcwide{Revision History:}{None; first version.}
+% \tcwide{Objective:}{Check that a recorded clip is sent to the backend and that a word with its confidence score is shown on the screen.}
+% \tcwide{Product/Ver/ Module:}{Silent Signals prototype, lip-reading module. The screen sends the clip and the router returns the word and the score.}
+% \tcwide{Environment:}{An Android phone running the Silent Signals application, connected over Wi-Fi to a backend server (Python 3.11, FastAPI) that runs the latest code of the main branch. No cloud key is needed.}
+% \tcwide{Assumptions:}{Face is fully visible, in good light and facing the camera. The phone has a stable Wi-Fi connection to the server.}
+% \tcwide{Pre-Requisite:}{Camera permission is granted and the connection test on the Accessibility screen succeeds.}
+% \textbf{Step No.}&\textbf{Execution description}&\multicolumn{2}{>{\raggedright\arraybackslash}p{6.9cm}|}{\textbf{Procedure result}}\\ \hline
+% \tcstep{1}{Open Lip Reading from the home screen.}{The camera preview is shown in the square frame.}
+% \tcstep{2}{Press Record and silently say one word for about two seconds.}{Recording stops when the clip ends, or at five seconds.}
+% \tcstep{3}{Wait for the result.}{A word and a confidence percentage are shown, together with the time taken.}
+% \multicolumn{4}{|p{14.6cm}|}{\textbf{Comments:} To be completed after the test is executed in FYP-II.}\\ \hline
+% \multicolumn{4}{|c|}{\textbf{Passed [\ \ ] \quad Failed [\ \ ] \quad Not Executed [X]}}\\ \hline
+% \end{longtable}
 
-\begin{longtable}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|}
-\caption{Test case TC-02: lip reading when no face is found.}\label{tab:tc2}\\
-\hline \multicolumn{4}{|c|}{\textbf{Lip-Reading Router and Pre-processing}}\\ \hline
-\endfirsthead
-\multicolumn{4}{c}{\textbf{Table \thetable: continued from previous page}}\\ \hline
-\multicolumn{4}{|c|}{\textbf{Lip-Reading Router and Pre-processing}}\\ \hline
-\endhead
-\multicolumn{4}{|p{14.6cm}|}{\textbf{Requirements:} Quality attribute: minimal errors; alternate flow of the lip-reading use case; videos are not stored}\\ \hline
-\tcpair{Test Case ID:}{TC-02}{QA Test Engineer:}{Project team}
-\tcpair{Test case Version:}{1.0}{Reviewed By:}{Project supervisor}
-\tcpair{Test Date:}{To be set in FYP-II}{Use Case Reference(s):}{UC-01}
-\tcwide{Revision History:}{None; first version.}
-\tcwide{Objective:}{Check that the system refuses to guess a word when the face cannot be found, and that the uploaded clip is deleted.}
-\tcwide{Product/Ver/ Module:}{Silent Signals prototype, pre-processing stage of the lip-reading module.}
-\tcwide{Environment:}{An Android phone running the Silent Signals application, connected over Wi-Fi to a backend server (Python 3.11, FastAPI) that runs the latest code of the main branch. No cloud key is needed.}
-\tcwide{Assumptions:}{The test video contains no face. The phone has a stable Wi-Fi connection to the server.}
-\tcwide{Pre-Requisite:}{The backend is running.}
-\textbf{Step No.}&\textbf{Execution description}&\multicolumn{2}{>{\raggedright\arraybackslash}p{6.9cm}|}{\textbf{Procedure result}}\\ \hline
-\tcstep{1}{Press Pick a video and choose a clip that shows no face, for example a wall.}{The clip is uploaded to the backend.}
-\tcstep{2}{Wait for the result.}{No word is shown. The user is asked to record again with the face in view.}
-\tcstep{3}{Look at the temporary files of the server.}{The uploaded clip and all intermediate data have been deleted.}
-\multicolumn{4}{|p{14.6cm}|}{\textbf{Comments:} To be completed after the test is executed in FYP-II.}\\ \hline
-\multicolumn{4}{|c|}{\textbf{Passed [\ \ ] \quad Failed [\ \ ] \quad Not Executed [X]}}\\ \hline
-\end{longtable}
+% \begin{longtable}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|}
+% \caption{Test case TC-02: lip reading when no face is found.}\label{tab:tc2}\\
+% \hline \multicolumn{4}{|c|}{\textbf{Lip-Reading Router and Pre-processing}}\\ \hline
+% \endfirsthead
+% \multicolumn{4}{c}{\textbf{Table \thetable: continued from previous page}}\\ \hline
+% \multicolumn{4}{|c|}{\textbf{Lip-Reading Router and Pre-processing}}\\ \hline
+% \endhead
+% \multicolumn{4}{|p{14.6cm}|}{\textbf{Requirements:} Quality attribute: minimal errors; alternate flow of the lip-reading use case; videos are not stored}\\ \hline
+% \tcpair{Test Case ID:}{TC-02}{QA Test Engineer:}{Project team}
+% \tcpair{Test case Version:}{1.0}{Reviewed By:}{Project supervisor}
+% \tcpair{Test Date:}{To be set in FYP-II}{Use Case Reference(s):}{UC-01}
+% \tcwide{Revision History:}{None; first version.}
+% \tcwide{Objective:}{Check that the system refuses to guess a word when the face cannot be found, and that the uploaded clip is deleted.}
+% \tcwide{Product/Ver/ Module:}{Silent Signals prototype, pre-processing stage of the lip-reading module.}
+% \tcwide{Environment:}{An Android phone running the Silent Signals application, connected over Wi-Fi to a backend server (Python 3.11, FastAPI) that runs the latest code of the main branch. No cloud key is needed.}
+% \tcwide{Assumptions:}{The test video contains no face. The phone has a stable Wi-Fi connection to the server.}
+% \tcwide{Pre-Requisite:}{The backend is running.}
+% \textbf{Step No.}&\textbf{Execution description}&\multicolumn{2}{>{\raggedright\arraybackslash}p{6.9cm}|}{\textbf{Procedure result}}\\ \hline
+% \tcstep{1}{Press Pick a video and choose a clip that shows no face, for example a wall.}{The clip is uploaded to the backend.}
+% \tcstep{2}{Wait for the result.}{No word is shown. The user is asked to record again with the face in view.}
+% \tcstep{3}{Look at the temporary files of the server.}{The uploaded clip and all intermediate data have been deleted.}
+% \multicolumn{4}{|p{14.6cm}|}{\textbf{Comments:} To be completed after the test is executed in FYP-II.}\\ \hline
+% \multicolumn{4}{|c|}{\textbf{Passed [\ \ ] \quad Failed [\ \ ] \quad Not Executed [X]}}\\ \hline
+% \end{longtable}
 
-\begin{longtable}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|}
-\caption{Test case TC-03: emergency phrase and guardian notification.}\label{tab:tc3}\\
-\hline \multicolumn{4}{|c|}{\textbf{Emergency Screen and Emergency Router}}\\ \hline
-\endfirsthead
-\multicolumn{4}{c}{\textbf{Table \thetable: continued from previous page}}\\ \hline
-\multicolumn{4}{|c|}{\textbf{Emergency Screen and Emergency Router}}\\ \hline
-\endhead
-\multicolumn{4}{|p{14.6cm}|}{\textbf{Requirements:} Emergency phrase or button notifies the registered guardians; notification within 5 seconds; emergency phrases reachable in one click}\\ \hline
-\tcpair{Test Case ID:}{TC-03}{QA Test Engineer:}{Project team}
-\tcpair{Test case Version:}{1.0}{Reviewed By:}{Project supervisor}
-\tcpair{Test Date:}{To be set in FYP-II}{Use Case Reference(s):}{UC-03}
-\tcwide{Revision History:}{None; first version.}
-\tcwide{Objective:}{Check that one tap speaks the phrase aloud and notifies the guardian in time, and that the event is recorded.}
-\tcwide{Product/Ver/ Module:}{Silent Signals prototype, emergency path. This path does not use any machine learning model.}
-\tcwide{Environment:}{An Android phone running the Silent Signals application, connected over Wi-Fi to a backend server (Python 3.11, FastAPI) that runs the latest code of the main branch. No cloud key is needed.}
-\tcwide{Assumptions:}{The guardian's contact can receive the notification during the test. The phone has a stable Wi-Fi connection to the server.}
-\tcwide{Pre-Requisite:}{A guardian name and contact are saved on the Profile screen.}
-\textbf{Step No.}&\textbf{Execution description}&\multicolumn{2}{>{\raggedright\arraybackslash}p{6.9cm}|}{\textbf{Procedure result}}\\ \hline
-\tcstep{1}{Open the Emergency screen from the home screen.}{The screen opens after one tap and four phrases are visible.}
-\tcstep{2}{Tap I need help.}{The phrase is spoken aloud at once.}
-\tcstep{3}{Check the guardian's contact.}{The notification arrives within 5 seconds of the tap.}
-\tcstep{4}{Check the emergency history in the database.}{One entry exists with the phrase and the time of the event.}
-\multicolumn{4}{|p{14.6cm}|}{\textbf{Comments:} To be completed after the test is executed in FYP-II.}\\ \hline
-\multicolumn{4}{|c|}{\textbf{Passed [\ \ ] \quad Failed [\ \ ] \quad Not Executed [X]}}\\ \hline
-\end{longtable}
+% \begin{longtable}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|}
+% \caption{Test case TC-03: emergency phrase and guardian notification.}\label{tab:tc3}\\
+% \hline \multicolumn{4}{|c|}{\textbf{Emergency Screen and Emergency Router}}\\ \hline
+% \endfirsthead
+% \multicolumn{4}{c}{\textbf{Table \thetable: continued from previous page}}\\ \hline
+% \multicolumn{4}{|c|}{\textbf{Emergency Screen and Emergency Router}}\\ \hline
+% \endhead
+% \multicolumn{4}{|p{14.6cm}|}{\textbf{Requirements:} Emergency phrase or button notifies the registered guardians; notification within 5 seconds; emergency phrases reachable in one click}\\ \hline
+% \tcpair{Test Case ID:}{TC-03}{QA Test Engineer:}{Project team}
+% \tcpair{Test case Version:}{1.0}{Reviewed By:}{Project supervisor}
+% \tcpair{Test Date:}{To be set in FYP-II}{Use Case Reference(s):}{UC-03}
+% \tcwide{Revision History:}{None; first version.}
+% \tcwide{Objective:}{Check that one tap speaks the phrase aloud and notifies the guardian in time, and that the event is recorded.}
+% \tcwide{Product/Ver/ Module:}{Silent Signals prototype, emergency path. This path does not use any machine learning model.}
+% \tcwide{Environment:}{An Android phone running the Silent Signals application, connected over Wi-Fi to a backend server (Python 3.11, FastAPI) that runs the latest code of the main branch. No cloud key is needed.}
+% \tcwide{Assumptions:}{The guardian's contact can receive the notification during the test. The phone has a stable Wi-Fi connection to the server.}
+% \tcwide{Pre-Requisite:}{A guardian name and contact are saved on the Profile screen.}
+% \textbf{Step No.}&\textbf{Execution description}&\multicolumn{2}{>{\raggedright\arraybackslash}p{6.9cm}|}{\textbf{Procedure result}}\\ \hline
+% \tcstep{1}{Open the Emergency screen from the home screen.}{The screen opens after one tap and four phrases are visible.}
+% \tcstep{2}{Tap I need help.}{The phrase is spoken aloud at once.}
+% \tcstep{3}{Check the guardian's contact.}{The notification arrives within 5 seconds of the tap.}
+% \tcstep{4}{Check the emergency history in the database.}{One entry exists with the phrase and the time of the event.}
+% \multicolumn{4}{|p{14.6cm}|}{\textbf{Comments:} To be completed after the test is executed in FYP-II.}\\ \hline
+% \multicolumn{4}{|c|}{\textbf{Passed [\ \ ] \quad Failed [\ \ ] \quad Not Executed [X]}}\\ \hline
+% \end{longtable}
 
-\begin{longtable}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|}
-\caption{Test case TC-04: emergency phrase without a registered guardian.}\label{tab:tc4}\\
-\hline \multicolumn{4}{|c|}{\textbf{Emergency Screen and Emergency Router}}\\ \hline
-\endfirsthead
-\multicolumn{4}{c}{\textbf{Table \thetable: continued from previous page}}\\ \hline
-\multicolumn{4}{|c|}{\textbf{Emergency Screen and Emergency Router}}\\ \hline
-\endhead
-\multicolumn{4}{|p{14.6cm}|}{\textbf{Requirements:} Emergency feature works even when other modules fail; alternate flow of the emergency use case}\\ \hline
-\tcpair{Test Case ID:}{TC-04}{QA Test Engineer:}{Project team}
-\tcpair{Test case Version:}{1.0}{Reviewed By:}{Project supervisor}
-\tcpair{Test Date:}{To be set in FYP-II}{Use Case Reference(s):}{UC-03}
-\tcwide{Revision History:}{None; first version.}
-\tcwide{Objective:}{Check that the phrase is still spoken, and that the user is told when nobody could be notified.}
-\tcwide{Product/Ver/ Module:}{Silent Signals prototype, emergency path.}
-\tcwide{Environment:}{An Android phone running the Silent Signals application, connected over Wi-Fi to a backend server (Python 3.11, FastAPI) that runs the latest code of the main branch. No cloud key is needed.}
-\tcwide{Assumptions:}{The correction language model is switched off. The phone has a stable Wi-Fi connection to the server.}
-\tcwide{Pre-Requisite:}{The test user has no guardian saved.}
-\textbf{Step No.}&\textbf{Execution description}&\multicolumn{2}{>{\raggedright\arraybackslash}p{6.9cm}|}{\textbf{Procedure result}}\\ \hline
-\tcstep{1}{Tap I am in pain on the Emergency screen.}{The phrase is spoken aloud.}
-\tcstep{2}{Read the message on the screen.}{The user is told that no guardian is registered.}
-\tcstep{3}{Check the emergency history.}{No notification is recorded as sent.}
-\multicolumn{4}{|p{14.6cm}|}{\textbf{Comments:} To be completed after the test is executed in FYP-II.}\\ \hline
-\multicolumn{4}{|c|}{\textbf{Passed [\ \ ] \quad Failed [\ \ ] \quad Not Executed [X]}}\\ \hline
-\end{longtable}
+% \begin{longtable}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|}
+% \caption{Test case TC-04: emergency phrase without a registered guardian.}\label{tab:tc4}\\
+% \hline \multicolumn{4}{|c|}{\textbf{Emergency Screen and Emergency Router}}\\ \hline
+% \endfirsthead
+% \multicolumn{4}{c}{\textbf{Table \thetable: continued from previous page}}\\ \hline
+% \multicolumn{4}{|c|}{\textbf{Emergency Screen and Emergency Router}}\\ \hline
+% \endhead
+% \multicolumn{4}{|p{14.6cm}|}{\textbf{Requirements:} Emergency feature works even when other modules fail; alternate flow of the emergency use case}\\ \hline
+% \tcpair{Test Case ID:}{TC-04}{QA Test Engineer:}{Project team}
+% \tcpair{Test case Version:}{1.0}{Reviewed By:}{Project supervisor}
+% \tcpair{Test Date:}{To be set in FYP-II}{Use Case Reference(s):}{UC-03}
+% \tcwide{Revision History:}{None; first version.}
+% \tcwide{Objective:}{Check that the phrase is still spoken, and that the user is told when nobody could be notified.}
+% \tcwide{Product/Ver/ Module:}{Silent Signals prototype, emergency path.}
+% \tcwide{Environment:}{An Android phone running the Silent Signals application, connected over Wi-Fi to a backend server (Python 3.11, FastAPI) that runs the latest code of the main branch. No cloud key is needed.}
+% \tcwide{Assumptions:}{The correction language model is switched off. The phone has a stable Wi-Fi connection to the server.}
+% \tcwide{Pre-Requisite:}{The test user has no guardian saved.}
+% \textbf{Step No.}&\textbf{Execution description}&\multicolumn{2}{>{\raggedright\arraybackslash}p{6.9cm}|}{\textbf{Procedure result}}\\ \hline
+% \tcstep{1}{Tap I am in pain on the Emergency screen.}{The phrase is spoken aloud.}
+% \tcstep{2}{Read the message on the screen.}{The user is told that no guardian is registered.}
+% \tcstep{3}{Check the emergency history.}{No notification is recorded as sent.}
+% \multicolumn{4}{|p{14.6cm}|}{\textbf{Comments:} To be completed after the test is executed in FYP-II.}\\ \hline
+% \multicolumn{4}{|c|}{\textbf{Passed [\ \ ] \quad Failed [\ \ ] \quad Not Executed [X]}}\\ \hline
+% \end{longtable}
 
-\begin{longtable}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|}
-\caption{Test case TC-05: text to speech.}\label{tab:tc5}\\
-\hline \multicolumn{4}{|c|}{\textbf{Text to Speech Screen}}\\ \hline
-\endfirsthead
-\multicolumn{4}{c}{\textbf{Table \thetable: continued from previous page}}\\ \hline
-\multicolumn{4}{|c|}{\textbf{Text to Speech Screen}}\\ \hline
-\endhead
-\multicolumn{4}{|p{14.6cm}|}{\textbf{Requirements:} Convert typed text into spoken audio; audio begins within 1 second of the user confirming}\\ \hline
-\tcpair{Test Case ID:}{TC-05}{QA Test Engineer:}{Project team}
-\tcpair{Test case Version:}{1.0}{Reviewed By:}{Project supervisor}
-\tcpair{Test Date:}{To be set in FYP-II}{Use Case Reference(s):}{UC-02}
-\tcwide{Revision History:}{None; first version.}
-\tcwide{Objective:}{Check speaking, stopping, quick phrases and the speed and pitch settings.}
-\tcwide{Product/Ver/ Module:}{Silent Signals prototype, speech output.}
-\tcwide{Environment:}{An Android phone running the Silent Signals application, connected over Wi-Fi to a backend server (Python 3.11, FastAPI) that runs the latest code of the main branch. No cloud key is needed.}
-\tcwide{Assumptions:}{The phone volume is on and the phone is not in silent mode.}
-\tcwide{Pre-Requisite:}{None.}
-\textbf{Step No.}&\textbf{Execution description}&\multicolumn{2}{>{\raggedright\arraybackslash}p{6.9cm}|}{\textbf{Procedure result}}\\ \hline
-\tcstep{1}{Type a sentence in the box and press Speak.}{Audio starts within 1 second.}
-\tcstep{2}{Press Stop while the sentence is playing.}{The audio stops at once.}
-\tcstep{3}{Select Slow and then Fast and speak the same sentence.}{The speaking rate changes with the setting.}
-\tcstep{4}{Select Low and then High pitch and speak the same sentence.}{The pitch of the voice changes with the setting.}
-\tcstep{5}{Tap the quick phrase Hello.}{The phrase is spoken.}
-\multicolumn{4}{|p{14.6cm}|}{\textbf{Comments:} To be completed after the test is executed in FYP-II.}\\ \hline
-\multicolumn{4}{|c|}{\textbf{Passed [\ \ ] \quad Failed [\ \ ] \quad Not Executed [X]}}\\ \hline
-\end{longtable}
+% \begin{longtable}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|}
+% \caption{Test case TC-05: text to speech.}\label{tab:tc5}\\
+% \hline \multicolumn{4}{|c|}{\textbf{Text to Speech Screen}}\\ \hline
+% \endfirsthead
+% \multicolumn{4}{c}{\textbf{Table \thetable: continued from previous page}}\\ \hline
+% \multicolumn{4}{|c|}{\textbf{Text to Speech Screen}}\\ \hline
+% \endhead
+% \multicolumn{4}{|p{14.6cm}|}{\textbf{Requirements:} Convert typed text into spoken audio; audio begins within 1 second of the user confirming}\\ \hline
+% \tcpair{Test Case ID:}{TC-05}{QA Test Engineer:}{Project team}
+% \tcpair{Test case Version:}{1.0}{Reviewed By:}{Project supervisor}
+% \tcpair{Test Date:}{To be set in FYP-II}{Use Case Reference(s):}{UC-02}
+% \tcwide{Revision History:}{None; first version.}
+% \tcwide{Objective:}{Check speaking, stopping, quick phrases and the speed and pitch settings.}
+% \tcwide{Product/Ver/ Module:}{Silent Signals prototype, speech output.}
+% \tcwide{Environment:}{An Android phone running the Silent Signals application, connected over Wi-Fi to a backend server (Python 3.11, FastAPI) that runs the latest code of the main branch. No cloud key is needed.}
+% \tcwide{Assumptions:}{The phone volume is on and the phone is not in silent mode.}
+% \tcwide{Pre-Requisite:}{None.}
+% \textbf{Step No.}&\textbf{Execution description}&\multicolumn{2}{>{\raggedright\arraybackslash}p{6.9cm}|}{\textbf{Procedure result}}\\ \hline
+% \tcstep{1}{Type a sentence in the box and press Speak.}{Audio starts within 1 second.}
+% \tcstep{2}{Press Stop while the sentence is playing.}{The audio stops at once.}
+% \tcstep{3}{Select Slow and then Fast and speak the same sentence.}{The speaking rate changes with the setting.}
+% \tcstep{4}{Select Low and then High pitch and speak the same sentence.}{The pitch of the voice changes with the setting.}
+% \tcstep{5}{Tap the quick phrase Hello.}{The phrase is spoken.}
+% \multicolumn{4}{|p{14.6cm}|}{\textbf{Comments:} To be completed after the test is executed in FYP-II.}\\ \hline
+% \multicolumn{4}{|c|}{\textbf{Passed [\ \ ] \quad Failed [\ \ ] \quad Not Executed [X]}}\\ \hline
+% \end{longtable}
 
-\begin{longtable}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|}
-\caption{Test case TC-06: accessibility settings.}\label{tab:tc6}\\
-\hline \multicolumn{4}{|c|}{\textbf{Accessibility Screen and Shared Theme}}\\ \hline
-\endfirsthead
-\multicolumn{4}{c}{\textbf{Table \thetable: continued from previous page}}\\ \hline
-\multicolumn{4}{|c|}{\textbf{Accessibility Screen and Shared Theme}}\\ \hline
-\endhead
-\multicolumn{4}{|p{14.6cm}|}{\textbf{Requirements:} Quality attribute: accessible; font size, dark mode and high contrast settings}\\ \hline
-\tcpair{Test Case ID:}{TC-06}{QA Test Engineer:}{Project team}
-\tcpair{Test case Version:}{1.0}{Reviewed By:}{Project supervisor}
-\tcpair{Test Date:}{To be set in FYP-II}{Use Case Reference(s):}{UC-04}
-\tcwide{Revision History:}{None; first version.}
-\tcwide{Objective:}{Check that each setting is applied on every screen and is kept after the application is closed.}
-\tcwide{Product/Ver/ Module:}{Silent Signals prototype, frontend theme.}
-\tcwide{Environment:}{An Android phone running the Silent Signals application, connected over Wi-Fi to a backend server (Python 3.11, FastAPI) that runs the latest code of the main branch. No cloud key is needed.}
-\tcwide{Assumptions:}{None.}
-\tcwide{Pre-Requisite:}{The application is installed and opens on the home screen.}
-\textbf{Step No.}&\textbf{Execution description}&\multicolumn{2}{>{\raggedright\arraybackslash}p{6.9cm}|}{\textbf{Procedure result}}\\ \hline
-\tcstep{1}{Switch on Dark mode.}{Every screen changes to the dark theme.}
-\tcstep{2}{Switch on High contrast.}{Text and buttons show stronger contrast on every screen.}
-\tcstep{3}{Press A+ three times.}{The font size increases on all screens and the new size is shown.}
-\tcstep{4}{Close the application and open it again.}{The settings are still applied.}
-\multicolumn{4}{|p{14.6cm}|}{\textbf{Comments:} To be completed after the test is executed in FYP-II.}\\ \hline
-\multicolumn{4}{|c|}{\textbf{Passed [\ \ ] \quad Failed [\ \ ] \quad Not Executed [X]}}\\ \hline
-\end{longtable}
+% \begin{longtable}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|}
+% \caption{Test case TC-06: accessibility settings.}\label{tab:tc6}\\
+% \hline \multicolumn{4}{|c|}{\textbf{Accessibility Screen and Shared Theme}}\\ \hline
+% \endfirsthead
+% \multicolumn{4}{c}{\textbf{Table \thetable: continued from previous page}}\\ \hline
+% \multicolumn{4}{|c|}{\textbf{Accessibility Screen and Shared Theme}}\\ \hline
+% \endhead
+% \multicolumn{4}{|p{14.6cm}|}{\textbf{Requirements:} Quality attribute: accessible; font size, dark mode and high contrast settings}\\ \hline
+% \tcpair{Test Case ID:}{TC-06}{QA Test Engineer:}{Project team}
+% \tcpair{Test case Version:}{1.0}{Reviewed By:}{Project supervisor}
+% \tcpair{Test Date:}{To be set in FYP-II}{Use Case Reference(s):}{UC-04}
+% \tcwide{Revision History:}{None; first version.}
+% \tcwide{Objective:}{Check that each setting is applied on every screen and is kept after the application is closed.}
+% \tcwide{Product/Ver/ Module:}{Silent Signals prototype, frontend theme.}
+% \tcwide{Environment:}{An Android phone running the Silent Signals application, connected over Wi-Fi to a backend server (Python 3.11, FastAPI) that runs the latest code of the main branch. No cloud key is needed.}
+% \tcwide{Assumptions:}{None.}
+% \tcwide{Pre-Requisite:}{The application is installed and opens on the home screen.}
+% \textbf{Step No.}&\textbf{Execution description}&\multicolumn{2}{>{\raggedright\arraybackslash}p{6.9cm}|}{\textbf{Procedure result}}\\ \hline
+% \tcstep{1}{Switch on Dark mode.}{Every screen changes to the dark theme.}
+% \tcstep{2}{Switch on High contrast.}{Text and buttons show stronger contrast on every screen.}
+% \tcstep{3}{Press A+ three times.}{The font size increases on all screens and the new size is shown.}
+% \tcstep{4}{Close the application and open it again.}{The settings are still applied.}
+% \multicolumn{4}{|p{14.6cm}|}{\textbf{Comments:} To be completed after the test is executed in FYP-II.}\\ \hline
+% \multicolumn{4}{|c|}{\textbf{Passed [\ \ ] \quad Failed [\ \ ] \quad Not Executed [X]}}\\ \hline
+% \end{longtable}
 
-\begin{longtable}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|}
-\caption{Test case TC-07: profile and guardian details.}\label{tab:tc7}\\
-\hline \multicolumn{4}{|c|}{\textbf{Profile Screen and History Router}}\\ \hline
-\endfirsthead
-\multicolumn{4}{c}{\textbf{Table \thetable: continued from previous page}}\\ \hline
-\multicolumn{4}{|c|}{\textbf{Profile Screen and History Router}}\\ \hline
-\endhead
-\multicolumn{4}{|p{14.6cm}|}{\textbf{Requirements:} User registers one or more guardians; user profile keeps activity in one place}\\ \hline
-\tcpair{Test Case ID:}{TC-07}{QA Test Engineer:}{Project team}
-\tcpair{Test case Version:}{1.0}{Reviewed By:}{Project supervisor}
-\tcpair{Test Date:}{To be set in FYP-II}{Use Case Reference(s):}{UC-04}
-\tcwide{Revision History:}{None; first version.}
-\tcwide{Objective:}{Check that the name, the email and the guardian details are saved and shown again, and that a missing guardian contact is reported.}
-\tcwide{Product/Ver/ Module:}{Silent Signals prototype, profile and database handlers.}
-\tcwide{Environment:}{An Android phone running the Silent Signals application, connected over Wi-Fi to a backend server (Python 3.11, FastAPI) that runs the latest code of the main branch. No cloud key is needed.}
-\tcwide{Assumptions:}{The phone has a stable Wi-Fi connection to the server.}
-\tcwide{Pre-Requisite:}{The backend is running.}
-\textbf{Step No.}&\textbf{Execution description}&\multicolumn{2}{>{\raggedright\arraybackslash}p{6.9cm}|}{\textbf{Procedure result}}\\ \hline
-\tcstep{1}{Enter a name, an email, a guardian name and a guardian contact.}{The values appear in the boxes.}
-\tcstep{2}{Press Save profile.}{A confirmation is shown.}
-\tcstep{3}{Leave the screen and open it again.}{The saved values are shown.}
-\tcstep{4}{Clear the guardian contact and press Save profile.}{The user is told that a contact is needed to send notifications.}
-\multicolumn{4}{|p{14.6cm}|}{\textbf{Comments:} To be completed after the test is executed in FYP-II.}\\ \hline
-\multicolumn{4}{|c|}{\textbf{Passed [\ \ ] \quad Failed [\ \ ] \quad Not Executed [X]}}\\ \hline
-\end{longtable}
+% \begin{longtable}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|}
+% \caption{Test case TC-07: profile and guardian details.}\label{tab:tc7}\\
+% \hline \multicolumn{4}{|c|}{\textbf{Profile Screen and History Router}}\\ \hline
+% \endfirsthead
+% \multicolumn{4}{c}{\textbf{Table \thetable: continued from previous page}}\\ \hline
+% \multicolumn{4}{|c|}{\textbf{Profile Screen and History Router}}\\ \hline
+% \endhead
+% \multicolumn{4}{|p{14.6cm}|}{\textbf{Requirements:} User registers one or more guardians; user profile keeps activity in one place}\\ \hline
+% \tcpair{Test Case ID:}{TC-07}{QA Test Engineer:}{Project team}
+% \tcpair{Test case Version:}{1.0}{Reviewed By:}{Project supervisor}
+% \tcpair{Test Date:}{To be set in FYP-II}{Use Case Reference(s):}{UC-04}
+% \tcwide{Revision History:}{None; first version.}
+% \tcwide{Objective:}{Check that the name, the email and the guardian details are saved and shown again, and that a missing guardian contact is reported.}
+% \tcwide{Product/Ver/ Module:}{Silent Signals prototype, profile and database handlers.}
+% \tcwide{Environment:}{An Android phone running the Silent Signals application, connected over Wi-Fi to a backend server (Python 3.11, FastAPI) that runs the latest code of the main branch. No cloud key is needed.}
+% \tcwide{Assumptions:}{The phone has a stable Wi-Fi connection to the server.}
+% \tcwide{Pre-Requisite:}{The backend is running.}
+% \textbf{Step No.}&\textbf{Execution description}&\multicolumn{2}{>{\raggedright\arraybackslash}p{6.9cm}|}{\textbf{Procedure result}}\\ \hline
+% \tcstep{1}{Enter a name, an email, a guardian name and a guardian contact.}{The values appear in the boxes.}
+% \tcstep{2}{Press Save profile.}{A confirmation is shown.}
+% \tcstep{3}{Leave the screen and open it again.}{The saved values are shown.}
+% \tcstep{4}{Clear the guardian contact and press Save profile.}{The user is told that a contact is needed to send notifications.}
+% \multicolumn{4}{|p{14.6cm}|}{\textbf{Comments:} To be completed after the test is executed in FYP-II.}\\ \hline
+% \multicolumn{4}{|c|}{\textbf{Passed [\ \ ] \quad Failed [\ \ ] \quad Not Executed [X]}}\\ \hline
+% \end{longtable}
 
-\begin{longtable}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|}
-\caption{Test case TC-08: server connection.}\label{tab:tc8}\\
-\hline \multicolumn{4}{|c|}{\textbf{Accessibility Screen and Backend}}\\ \hline
-\endfirsthead
-\multicolumn{4}{c}{\textbf{Table \thetable: continued from previous page}}\\ \hline
-\multicolumn{4}{|c|}{\textbf{Accessibility Screen and Backend}}\\ \hline
-\endhead
-\multicolumn{4}{|p{14.6cm}|}{\textbf{Requirements:} Assumption of a stable connection; alternate flows of all use cases}\\ \hline
-\tcpair{Test Case ID:}{TC-08}{QA Test Engineer:}{Project team}
-\tcpair{Test case Version:}{1.0}{Reviewed By:}{Project supervisor}
-\tcpair{Test Date:}{To be set in FYP-II}{Use Case Reference(s):}{UC-01, UC-02, UC-03}
-\tcwide{Revision History:}{None; first version.}
-\tcwide{Objective:}{Check that connection problems are reported clearly and that the application keeps working.}
-\tcwide{Product/Ver/ Module:}{Silent Signals prototype, connection between frontend and backend.}
-\tcwide{Environment:}{An Android phone running the Silent Signals application, connected over Wi-Fi to a backend server (Python 3.11, FastAPI) that runs the latest code of the main branch. No cloud key is needed.}
-\tcwide{Assumptions:}{The server address on the Accessibility screen is correct.}
-\tcwide{Pre-Requisite:}{The backend can be started and stopped by the tester.}
-\textbf{Step No.}&\textbf{Execution description}&\multicolumn{2}{>{\raggedright\arraybackslash}p{6.9cm}|}{\textbf{Procedure result}}\\ \hline
-\tcstep{1}{With the server running, press Test connection.}{A message of success is shown.}
-\tcstep{2}{Stop the server and press Test connection.}{A clear message of failure is shown.}
-\tcstep{3}{Try to record a lip-reading clip while the server is stopped.}{The user is told that the server cannot be reached and the application does not stop working.}
-\multicolumn{4}{|p{14.6cm}|}{\textbf{Comments:} To be completed after the test is executed in FYP-II.}\\ \hline
-\multicolumn{4}{|c|}{\textbf{Passed [\ \ ] \quad Failed [\ \ ] \quad Not Executed [X]}}\\ \hline
-\end{longtable}
+% \begin{longtable}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|}
+% \caption{Test case TC-08: server connection.}\label{tab:tc8}\\
+% \hline \multicolumn{4}{|c|}{\textbf{Accessibility Screen and Backend}}\\ \hline
+% \endfirsthead
+% \multicolumn{4}{c}{\textbf{Table \thetable: continued from previous page}}\\ \hline
+% \multicolumn{4}{|c|}{\textbf{Accessibility Screen and Backend}}\\ \hline
+% \endhead
+% \multicolumn{4}{|p{14.6cm}|}{\textbf{Requirements:} Assumption of a stable connection; alternate flows of all use cases}\\ \hline
+% \tcpair{Test Case ID:}{TC-08}{QA Test Engineer:}{Project team}
+% \tcpair{Test case Version:}{1.0}{Reviewed By:}{Project supervisor}
+% \tcpair{Test Date:}{To be set in FYP-II}{Use Case Reference(s):}{UC-01, UC-02, UC-03}
+% \tcwide{Revision History:}{None; first version.}
+% \tcwide{Objective:}{Check that connection problems are reported clearly and that the application keeps working.}
+% \tcwide{Product/Ver/ Module:}{Silent Signals prototype, connection between frontend and backend.}
+% \tcwide{Environment:}{An Android phone running the Silent Signals application, connected over Wi-Fi to a backend server (Python 3.11, FastAPI) that runs the latest code of the main branch. No cloud key is needed.}
+% \tcwide{Assumptions:}{The server address on the Accessibility screen is correct.}
+% \tcwide{Pre-Requisite:}{The backend can be started and stopped by the tester.}
+% \textbf{Step No.}&\textbf{Execution description}&\multicolumn{2}{>{\raggedright\arraybackslash}p{6.9cm}|}{\textbf{Procedure result}}\\ \hline
+% \tcstep{1}{With the server running, press Test connection.}{A message of success is shown.}
+% \tcstep{2}{Stop the server and press Test connection.}{A clear message of failure is shown.}
+% \tcstep{3}{Try to record a lip-reading clip while the server is stopped.}{The user is told that the server cannot be reached and the application does not stop working.}
+% \multicolumn{4}{|p{14.6cm}|}{\textbf{Comments:} To be completed after the test is executed in FYP-II.}\\ \hline
+% \multicolumn{4}{|c|}{\textbf{Passed [\ \ ] \quad Failed [\ \ ] \quad Not Executed [X]}}\\ \hline
+% \end{longtable}
 
-\begin{longtable}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|}
-\caption{Test case TC-09: sign language recording.}\label{tab:tc9}\\
-\hline \multicolumn{4}{|c|}{\textbf{Sign Language Screen and Sign Language Request}}\\ \hline
-\endfirsthead
-\multicolumn{4}{c}{\textbf{Table \thetable: continued from previous page}}\\ \hline
-\multicolumn{4}{|c|}{\textbf{Sign Language Screen and Sign Language Request}}\\ \hline
-\endhead
-\multicolumn{4}{|p{14.6cm}|}{\textbf{Requirements:} Recognise sign language gestures from the camera and translate them into text; sign is reported as unrecognised below a threshold}\\ \hline
-\tcpair{Test Case ID:}{TC-09}{QA Test Engineer:}{Project team}
-\tcpair{Test case Version:}{1.0}{Reviewed By:}{Project supervisor}
-\tcpair{Test Date:}{To be set in FYP-II}{Use Case Reference(s):}{UC-02}
-\tcwide{Revision History:}{None; first version.}
-\tcwide{Objective:}{Check that a sign clip is recorded and sent to the backend, that the result is shown as text, and that an unclear sign is reported to the user.}
-\tcwide{Product/Ver/ Module:}{Silent Signals prototype, sign language module. The result depends on the pretrained I3D model that is connected in FYP-II.}
-\tcwide{Environment:}{An Android phone running the Silent Signals application, connected over Wi-Fi to a backend server (Python 3.11, FastAPI) that runs the latest code of the main branch. No cloud key is needed.}
-\tcwide{Assumptions:}{Both hands and the upper body are in the frame and the light is good. The phone has a stable Wi-Fi connection to the server.}
-\tcwide{Pre-Requisite:}{Camera permission is granted and the backend is reachable.}
-\textbf{Step No.}&\textbf{Execution description}&\multicolumn{2}{>{\raggedright\arraybackslash}p{6.9cm}|}{\textbf{Procedure result}}\\ \hline
-\tcstep{1}{Open Sign Language from the menu.}{The camera preview and the instruction to keep both hands in frame are shown.}
-\tcstep{2}{Press Record sign and make one sign.}{Recording stops when the sign ends, or at six seconds.}
-\tcstep{3}{Wait for the result.}{The recognised sign is shown as text with its confidence score.}
-\tcstep{4}{Record a clip with no sign, for example resting hands.}{The sign is reported as unrecognised and the user is asked to sign again.}
-\multicolumn{4}{|p{14.6cm}|}{\textbf{Comments:} To be completed after the test is executed in FYP-II.}\\ \hline
-\multicolumn{4}{|c|}{\textbf{Passed [\ \ ] \quad Failed [\ \ ] \quad Not Executed [X]}}\\ \hline
-\end{longtable}
+% \begin{longtable}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|}
+% \caption{Test case TC-09: sign language recording.}\label{tab:tc9}\\
+% \hline \multicolumn{4}{|c|}{\textbf{Sign Language Screen and Sign Language Request}}\\ \hline
+% \endfirsthead
+% \multicolumn{4}{c}{\textbf{Table \thetable: continued from previous page}}\\ \hline
+% \multicolumn{4}{|c|}{\textbf{Sign Language Screen and Sign Language Request}}\\ \hline
+% \endhead
+% \multicolumn{4}{|p{14.6cm}|}{\textbf{Requirements:} Recognise sign language gestures from the camera and translate them into text; sign is reported as unrecognised below a threshold}\\ \hline
+% \tcpair{Test Case ID:}{TC-09}{QA Test Engineer:}{Project team}
+% \tcpair{Test case Version:}{1.0}{Reviewed By:}{Project supervisor}
+% \tcpair{Test Date:}{To be set in FYP-II}{Use Case Reference(s):}{UC-02}
+% \tcwide{Revision History:}{None; first version.}
+% \tcwide{Objective:}{Check that a sign clip is recorded and sent to the backend, that the result is shown as text, and that an unclear sign is reported to the user.}
+% \tcwide{Product/Ver/ Module:}{Silent Signals prototype, sign language module. The result depends on the pretrained I3D model that is connected in FYP-II.}
+% \tcwide{Environment:}{An Android phone running the Silent Signals application, connected over Wi-Fi to a backend server (Python 3.11, FastAPI) that runs the latest code of the main branch. No cloud key is needed.}
+% \tcwide{Assumptions:}{Both hands and the upper body are in the frame and the light is good. The phone has a stable Wi-Fi connection to the server.}
+% \tcwide{Pre-Requisite:}{Camera permission is granted and the backend is reachable.}
+% \textbf{Step No.}&\textbf{Execution description}&\multicolumn{2}{>{\raggedright\arraybackslash}p{6.9cm}|}{\textbf{Procedure result}}\\ \hline
+% \tcstep{1}{Open Sign Language from the menu.}{The camera preview and the instruction to keep both hands in frame are shown.}
+% \tcstep{2}{Press Record sign and make one sign.}{Recording stops when the sign ends, or at six seconds.}
+% \tcstep{3}{Wait for the result.}{The recognised sign is shown as text with its confidence score.}
+% \tcstep{4}{Record a clip with no sign, for example resting hands.}{The sign is reported as unrecognised and the user is asked to sign again.}
+% \multicolumn{4}{|p{14.6cm}|}{\textbf{Comments:} To be completed after the test is executed in FYP-II.}\\ \hline
+% \multicolumn{4}{|c|}{\textbf{Passed [\ \ ] \quad Failed [\ \ ] \quad Not Executed [X]}}\\ \hline
+% \end{longtable}
 
-\begin{longtable}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|}
-\caption{Test case TC-10: speech to text.}\label{tab:tc10}\\
-\hline \multicolumn{4}{|c|}{\textbf{Speech to Text Screen}}\\ \hline
-\endfirsthead
-\multicolumn{4}{c}{\textbf{Table \thetable: continued from previous page}}\\ \hline
-\multicolumn{4}{|c|}{\textbf{Speech to Text Screen}}\\ \hline
-\endhead
-\multicolumn{4}{|p{14.6cm}|}{\textbf{Requirements:} Two-way conversation: the hearing partner's reply is shown as text to the user}\\ \hline
-\tcpair{Test Case ID:}{TC-10}{QA Test Engineer:}{Project team}
-\tcpair{Test case Version:}{1.0}{Reviewed By:}{Project supervisor}
-\tcpair{Test Date:}{To be set in FYP-II}{Use Case Reference(s):}{UC-01}
-\tcwide{Revision History:}{None; first version.}
-\tcwide{Objective:}{Check that the microphone is started on demand and that the speech of the partner appears as text.}
-\tcwide{Product/Ver/ Module:}{Silent Signals prototype, speech input of the conversation.}
-\tcwide{Environment:}{An Android phone running the Silent Signals application, connected over Wi-Fi to a backend server (Python 3.11, FastAPI) that runs the latest code of the main branch. No cloud key is needed.}
-\tcwide{Assumptions:}{The room is quiet and the partner speaks short sentences near the phone.}
-\tcwide{Pre-Requisite:}{Microphone permission is granted.}
-\textbf{Step No.}&\textbf{Execution description}&\multicolumn{2}{>{\raggedright\arraybackslash}p{6.9cm}|}{\textbf{Procedure result}}\\ \hline
-\tcstep{1}{Open Speech to Text from the menu.}{The microphone button and the text Tap to listen are shown.}
-\tcstep{2}{Tap the microphone button and say a short sentence.}{The application shows that it is listening.}
-\tcstep{3}{Stop speaking.}{The spoken words appear as text on the screen.}
-\tcstep{4}{Deny the microphone permission and tap the button again.}{The user is told that the microphone is needed and the application does not stop working.}
-\multicolumn{4}{|p{14.6cm}|}{\textbf{Comments:} To be completed after the test is executed in FYP-II.}\\ \hline
-\multicolumn{4}{|c|}{\textbf{Passed [\ \ ] \quad Failed [\ \ ] \quad Not Executed [X]}}\\ \hline
-\end{longtable}
+% \begin{longtable}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|}
+% \caption{Test case TC-10: speech to text.}\label{tab:tc10}\\
+% \hline \multicolumn{4}{|c|}{\textbf{Speech to Text Screen}}\\ \hline
+% \endfirsthead
+% \multicolumn{4}{c}{\textbf{Table \thetable: continued from previous page}}\\ \hline
+% \multicolumn{4}{|c|}{\textbf{Speech to Text Screen}}\\ \hline
+% \endhead
+% \multicolumn{4}{|p{14.6cm}|}{\textbf{Requirements:} Two-way conversation: the hearing partner's reply is shown as text to the user}\\ \hline
+% \tcpair{Test Case ID:}{TC-10}{QA Test Engineer:}{Project team}
+% \tcpair{Test case Version:}{1.0}{Reviewed By:}{Project supervisor}
+% \tcpair{Test Date:}{To be set in FYP-II}{Use Case Reference(s):}{UC-01}
+% \tcwide{Revision History:}{None; first version.}
+% \tcwide{Objective:}{Check that the microphone is started on demand and that the speech of the partner appears as text.}
+% \tcwide{Product/Ver/ Module:}{Silent Signals prototype, speech input of the conversation.}
+% \tcwide{Environment:}{An Android phone running the Silent Signals application, connected over Wi-Fi to a backend server (Python 3.11, FastAPI) that runs the latest code of the main branch. No cloud key is needed.}
+% \tcwide{Assumptions:}{The room is quiet and the partner speaks short sentences near the phone.}
+% \tcwide{Pre-Requisite:}{Microphone permission is granted.}
+% \textbf{Step No.}&\textbf{Execution description}&\multicolumn{2}{>{\raggedright\arraybackslash}p{6.9cm}|}{\textbf{Procedure result}}\\ \hline
+% \tcstep{1}{Open Speech to Text from the menu.}{The microphone button and the text Tap to listen are shown.}
+% \tcstep{2}{Tap the microphone button and say a short sentence.}{The application shows that it is listening.}
+% \tcstep{3}{Stop speaking.}{The spoken words appear as text on the screen.}
+% \tcstep{4}{Deny the microphone permission and tap the button again.}{The user is told that the microphone is needed and the application does not stop working.}
+% \multicolumn{4}{|p{14.6cm}|}{\textbf{Comments:} To be completed after the test is executed in FYP-II.}\\ \hline
+% \multicolumn{4}{|c|}{\textbf{Passed [\ \ ] \quad Failed [\ \ ] \quad Not Executed [X]}}\\ \hline
+% \end{longtable}
 
-\begin{longtable}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|}
-\caption{Test case TC-11: history and statistics.}\label{tab:tc11}\\
-\hline \multicolumn{4}{|c|}{\textbf{History and Stats Screen and History Router}}\\ \hline
-\endfirsthead
-\multicolumn{4}{c}{\textbf{Table \thetable: continued from previous page}}\\ \hline
-\multicolumn{4}{|c|}{\textbf{History and Stats Screen and History Router}}\\ \hline
-\endhead
-\multicolumn{4}{|p{14.6cm}|}{\textbf{Requirements:} Store conversation history with date and time; show recognition statistics on the dashboard}\\ \hline
-\tcpair{Test Case ID:}{TC-11}{QA Test Engineer:}{Project team}
-\tcpair{Test case Version:}{1.0}{Reviewed By:}{Project supervisor}
-\tcpair{Test Date:}{To be set in FYP-II}{Use Case Reference(s):}{UC-05}
-\tcwide{Revision History:}{None; first version.}
-\tcwide{Objective:}{Check that the counts on the screen follow the stored conversations.}
-\tcwide{Product/Ver/ Module:}{Silent Signals prototype, history router and the conversation history table.}
-\tcwide{Environment:}{An Android phone running the Silent Signals application, connected over Wi-Fi to a backend server (Python 3.11, FastAPI) that runs the latest code of the main branch. No cloud key is needed.}
-\tcwide{Assumptions:}{The phone has a stable Wi-Fi connection to the server.}
-\tcwide{Pre-Requisite:}{A new test user whose history is empty.}
-\textbf{Step No.}&\textbf{Execution description}&\multicolumn{2}{>{\raggedright\arraybackslash}p{6.9cm}|}{\textbf{Procedure result}}\\ \hline
-\tcstep{1}{Open History and Stats for the new user.}{Both counts, Conversations and Words recognized, show 0.}
-\tcstep{2}{Complete one lip-reading request that returns a word, then open the screen again.}{Conversations shows 1 and Words recognized shows 1.}
-\tcstep{3}{Open the Profile screen.}{The same counts are shown under Activity, with the date of the last activity.}
-\multicolumn{4}{|p{14.6cm}|}{\textbf{Comments:} To be completed after the test is executed in FYP-II.}\\ \hline
-\multicolumn{4}{|c|}{\textbf{Passed [\ \ ] \quad Failed [\ \ ] \quad Not Executed [X]}}\\ \hline
-\end{longtable}
+% \begin{longtable}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{4.4cm}|}
+% \caption{Test case TC-11: history and statistics.}\label{tab:tc11}\\
+% \hline \multicolumn{4}{|c|}{\textbf{History and Stats Screen and History Router}}\\ \hline
+% \endfirsthead
+% \multicolumn{4}{c}{\textbf{Table \thetable: continued from previous page}}\\ \hline
+% \multicolumn{4}{|c|}{\textbf{History and Stats Screen and History Router}}\\ \hline
+% \endhead
+% \multicolumn{4}{|p{14.6cm}|}{\textbf{Requirements:} Store conversation history with date and time; show recognition statistics on the dashboard}\\ \hline
+% \tcpair{Test Case ID:}{TC-11}{QA Test Engineer:}{Project team}
+% \tcpair{Test case Version:}{1.0}{Reviewed By:}{Project supervisor}
+% \tcpair{Test Date:}{To be set in FYP-II}{Use Case Reference(s):}{UC-05}
+% \tcwide{Revision History:}{None; first version.}
+% \tcwide{Objective:}{Check that the counts on the screen follow the stored conversations.}
+% \tcwide{Product/Ver/ Module:}{Silent Signals prototype, history router and the conversation history table.}
+% \tcwide{Environment:}{An Android phone running the Silent Signals application, connected over Wi-Fi to a backend server (Python 3.11, FastAPI) that runs the latest code of the main branch. No cloud key is needed.}
+% \tcwide{Assumptions:}{The phone has a stable Wi-Fi connection to the server.}
+% \tcwide{Pre-Requisite:}{A new test user whose history is empty.}
+% \textbf{Step No.}&\textbf{Execution description}&\multicolumn{2}{>{\raggedright\arraybackslash}p{6.9cm}|}{\textbf{Procedure result}}\\ \hline
+% \tcstep{1}{Open History and Stats for the new user.}{Both counts, Conversations and Words recognized, show 0.}
+% \tcstep{2}{Complete one lip-reading request that returns a word, then open the screen again.}{Conversations shows 1 and Words recognized shows 1.}
+% \tcstep{3}{Open the Profile screen.}{The same counts are shown under Activity, with the date of the last activity.}
+% \multicolumn{4}{|p{14.6cm}|}{\textbf{Comments:} To be completed after the test is executed in FYP-II.}\\ \hline
+% \multicolumn{4}{|c|}{\textbf{Passed [\ \ ] \quad Failed [\ \ ] \quad Not Executed [X]}}\\ \hline
+% \end{longtable}
 
-\endgroup
-\section{Test Metrics}
-Table~\ref{tab:metrics} lists the metrics we will use to summarise the test results. We will work them out at the end of each sprint in FYP-II. Table~\ref{tab:trace} is the traceability matrix, which links each functional requirement to the test cases that check it. It shows which requirements are covered by the cases written so far. The ones without a case yet depend on modules we build in FYP-II (facial expression detection, sound optimisation and the correction language model), so their test cases will be written when those modules are added. Defect density and effectiveness are the usual measures of how well the test cases find problems. Word accuracy and response time are specific to our system: the first tells us how good the models are on speakers they have not seen, and the second tells us whether a conversation can flow naturally.
+% \endgroup
+% \section{Test Metrics}
+% Table~\ref{tab:metrics} lists the metrics we will use to summarise the test results. We will work them out at the end of each sprint in FYP-II. Table~\ref{tab:trace} is the traceability matrix, which links each functional requirement to the test cases that check it. It shows which requirements are covered by the cases written so far. The ones without a case yet depend on modules we build in FYP-II (facial expression detection, sound optimisation and the correction language model), so their test cases will be written when those modules are added. Defect density and effectiveness are the usual measures of how well the test cases find problems. Word accuracy and response time are specific to our system: the first tells us how good the models are on speakers they have not seen, and the second tells us whether a conversation can flow naturally.
 
-\begin{table}[H]
-\centering
-\caption{Test metrics}
-\label{tab:metrics}
-\renewcommand{\arraystretch}{1.3}
-\begin{tabularx}{\textwidth}{|l|X|}
-\hline
-\textbf{Metric} & \textbf{Purpose} \\ \hline
-Number of test cases & Total number of cases designed; currently 11 \\ \hline
-Number of test cases passed & Cases whose steps all gave the expected result \\ \hline
-Number of test cases failed & Cases in which at least one step gave a different result \\ \hline
-Test case defect density & (Number of cases failed $\times$ 100) / Number of cases executed \\ \hline
-Test case effectiveness & (Defects found using test cases $\times$ 100) / Total defects found \\ \hline
-Word accuracy & Share of test clips for which the predicted word equals the true word, measured on unseen speakers \\ \hline
-Response time & Time from the end of a recording to the result appearing on the screen \\ \hline
-Traceability & Each requirement has at least one test case, and each test case refers to a requirement \\ \hline
-\end{tabularx}
-\end{table}
+% \begin{table}[H]
+% \centering
+% \caption{Test metrics}
+% \label{tab:metrics}
+% \renewcommand{\arraystretch}{1.3}
+% \begin{tabularx}{\textwidth}{|l|X|}
+% \hline
+% \textbf{Metric} & \textbf{Purpose} \\ \hline
+% Number of test cases & Total number of cases designed; currently 11 \\ \hline
+% Number of test cases passed & Cases whose steps all gave the expected result \\ \hline
+% Number of test cases failed & Cases in which at least one step gave a different result \\ \hline
+% Test case defect density & (Number of cases failed $\times$ 100) / Number of cases executed \\ \hline
+% Test case effectiveness & (Defects found using test cases $\times$ 100) / Total defects found \\ \hline
+% Word accuracy & Share of test clips for which the predicted word equals the true word, measured on unseen speakers \\ \hline
+% Response time & Time from the end of a recording to the result appearing on the screen \\ \hline
+% Traceability & Each requirement has at least one test case, and each test case refers to a requirement \\ \hline
+% \end{tabularx}
+% \end{table}
 
-\begin{table}[H]
-\centering
-\caption{Traceability matrix between functional requirements and test cases}
-\label{tab:trace}
-\renewcommand{\arraystretch}{1.3}
-\begin{tabularx}{\textwidth}{|X|l|}
-\hline
-\textbf{Functional requirement} & \textbf{Test cases} \\ \hline
-Accept live or recorded video for lip reading & TC-01, TC-02 \\ \hline
-Display recognised text on the screen & TC-01 \\ \hline
-Convert recognised or typed text into spoken audio & TC-05 \\ \hline
-Display a confidence percentage for each word & TC-01 \\ \hline
-Register guardians or family contacts & TC-07 \\ \hline
-Emergency phrase notifies the guardians & TC-03, TC-04 \\ \hline
-Accessibility settings and server connection & TC-06, TC-08 \\ \hline
-Speech to text for the hearing partner & TC-10 \\ \hline
-Conversation history and statistics & TC-11 \\ \hline
-Language model correction & To be added in FYP-II \\ \hline
-Facial expression detection & To be added in FYP-II \\ \hline
-Background noise filtering & To be added in FYP-II \\ \hline
-Sign language recording and result display & TC-09 \\ \hline
-Sign language recognition accuracy and its speech output & To be added in FYP-II \\ \hline
-\end{tabularx}
-\end{table}
+% \begin{table}[H]
+% \centering
+% \caption{Traceability matrix between functional requirements and test cases}
+% \label{tab:trace}
+% \renewcommand{\arraystretch}{1.3}
+% \begin{tabularx}{\textwidth}{|X|l|}
+% \hline
+% \textbf{Functional requirement} & \textbf{Test cases} \\ \hline
+% Accept live or recorded video for lip reading & TC-01, TC-02 \\ \hline
+% Display recognised text on the screen & TC-01 \\ \hline
+% Convert recognised or typed text into spoken audio & TC-05 \\ \hline
+% Display a confidence percentage for each word & TC-01 \\ \hline
+% Register guardians or family contacts & TC-07 \\ \hline
+% Emergency phrase notifies the guardians & TC-03, TC-04 \\ \hline
+% Accessibility settings and server connection & TC-06, TC-08 \\ \hline
+% Speech to text for the hearing partner & TC-10 \\ \hline
+% Conversation history and statistics & TC-11 \\ \hline
+% Language model correction & To be added in FYP-II \\ \hline
+% Facial expression detection & To be added in FYP-II \\ \hline
+% Background noise filtering & To be added in FYP-II \\ \hline
+% Sign language recording and result display & TC-09 \\ \hline
+% Sign language recognition accuracy and its speech output & To be added in FYP-II \\ \hline
+% \end{tabularx}
+% \end{table}
 
-\section{Conclusion}
-To sum up, the prototype at the end of FYP-I is a React Native app with a screen for each main feature, and a FastAPI backend with lip-reading, emergency and history routers. We wrote out the lip-reading request as an algorithm and kept the emergency path free of any model. We designed eleven test cases from the requirements, together with the metrics and a traceability matrix, so that the results of FYP-II can be compared against this plan. The chapter also fixes how we will judge the work in FYP-II. The test cases are written, the metrics are defined, and every requirement that already has a screen is traced to at least one case, while the requirements that depend on unfinished modules are listed as gaps to be closed. The main thing missing at this point is the trained models. The lip-reading network still has to be trained on the LRW data and the sign language model has to be connected, so all accuracy and speed results are left for FYP-II. Until then the prototype shows that the screens, the backend routes and the emergency path are in place and ready to receive the models.% \chapter{User Manual}
+% \section{Conclusion}
+% To sum up, the prototype at the end of FYP-I is a React Native app with a screen for each main feature, and a FastAPI backend with lip-reading, emergency and history routers. We wrote out the lip-reading request as an algorithm and kept the emergency path free of any model. We designed eleven test cases from the requirements, together with the metrics and a traceability matrix, so that the results of FYP-II can be compared against this plan. The chapter also fixes how we will judge the work in FYP-II. The test cases are written, the metrics are defined, and every requirement that already has a screen is traced to at least one case, while the requirements that depend on unfinished modules are listed as gaps to be closed. The main thing missing at this point is the trained models. The lip-reading network still has to be trained on the LRW data and the sign language model has to be connected, so all accuracy and speed results are left for FYP-II. Until then the prototype shows that the screens, the backend routes and the emergency path are in place and ready to receive the models.% \chapter{User Manual}
+
 % \textcolor{red}{This chapter will be added in FYP-II.} Design a complete user manual of your application and add that in this chapter.
 % \textcolor{red}{NOTE: This Chapter is optional for Research projects but compulsory for Development projects.}\\
 % \chapter{Experimental Results and Discussion}
 % This chapter will be added in FYP-II. Give proper analysis and discussion of experimental results (in plain English text) along with tables of results.  For each chapter provide a paragraph of introduction and in the end a paragraph of conclusions.\\
 % \textcolor{red}{NOTE: This Chapter is optional for Development projects but compulsory for Research projects.}
 
-\setcounter{chapter}{8}
+% \setcounter{chapter}{8}
+
 \chapter{Experimental Results and Discussion}
 This chapter outlines our experiments to date with small datasets and prototype parts of Silent Signals. These experiments are an initial indication as to how accurately predictions can be done, how sound the system is and how user-friendly it is. As the project progresses, we will elaborate on these findings and validate them with bigger datasets in FYP-II.
 
@@ -1765,7 +1767,7 @@ For the lip reading model, the main limitation is its small vocabulary. A model 
 
 
 
-\setcounter{chapter}{9}
+% \setcounter{chapter}{9}
 \chapter{Conclusions}
 \label{ch:concl}
 This chapter closes the FYP-I report. It states what the project has produced so far, what the work has shown, how far the planned scope and objectives have been reached, what made the work difficult, what has been left for later, and how FYP-II will complete the system. Silent Signals is at the end of its first phase. The problem, requirements, approach and design are complete, and a working prototype of the app and backend exists, but the trained models are not yet built. The chapter therefore reports the state of the project as it is, and no accuracy or speed results are claimed.
