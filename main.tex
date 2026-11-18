@@ -1705,7 +1705,7 @@ The accessibility screen decides how the app looks and which server it talks to.
 % \setcounter{chapter}{8}
 
 \chapter{Experimental Results and Discussion}
-This chapter outlines our experiments to date with small datasets and prototype parts of Silent Signals. These experiments are an initial indication as to how accurately predictions can be done, how sound the system is and how user-friendly it is. As the project progresses, we will elaborate on these findings and validate them with bigger datasets in FYP-II.
+This chapter outlines our experiments to date with small datasets and prototype parts of Silent Signals. These experiments are an initial indication as to how accurately predictions can be done, how sound the system is. As the project progresses, we will elaborate on these findings and validate them with bigger datasets in FYP-II.
 
 \section{Experimentation Overview}
 The experiments in this chapter focus on the part of Silent Signals that we could measure most directly, which is the lip reading pipeline. It has two stages. First, a mouth cropper finds the lips in each frame of a video and cuts out a fixed-size region around them. Second, a LipNet-style network \cite{assael2016lipnet} reads that sequence of crops and predicts the sentence. The prototype loads pretrained weights and we did not train the network ourselves. \cite{LipNetGitHub} The network was built for the GRID corpus \cite{cooke2006grid}, so all testing was done on GRID clips.
@@ -1717,7 +1717,7 @@ GRID sentences follow a fixed pattern of command, color, preposition, letter, di
 
 Each video is preprocessed before it reaches the network. MediaPipe's face landmark detector locates the mouth in every frame, and a crop around the lips is taken with a margin on each side. The crop is resized and the colour values are scaled to the range 0 to 1. Each clip is then fitted to 75 frames.
 
-The network has three 3D convolution layers, followed by two bidirectional GRU layers and an output layer of 28 units (the 26 letters, the space and the CTC blank). Its output is decoded greedily into letters and then into words. Each recognized word carries a confidence score, which the app uses to flag uncertain words.
+The network has three 3D convolution layers. Its output is decoded greedily into letters and then into words. Each recognized word carries a confidence score, which the app uses to flag uncertain words.
 
 \section{Crop Configuration Comparison}
 The prototype uses a single pretrained network, so there were no competing models to compare. Instead, we compared the settings of the mouth crop, since these change what the network sees. We varied the margin around the mouth (0.6, 0.75 and 0.9). Table~\ref{tab:crop-results} shows how many of the 60 words were predicted correctly at each setting. A word counts as correct when the predicted word and the expected word match at the same position in the sentence.
@@ -1756,7 +1756,7 @@ These results should be read with their limits in mind. The model was trained on
 The sensitivity to the crop position is the clearest finding. Shifting the crop down reduced accuracy at every margin, so the vertical position of the crop should be set with care.
 
 \section{Future Enhancements}
-The small GRID vocabulary is the main limit of the lip reading component. Future work should train or fine-tune the model on open-vocabulary data, so that it can recognise everyday sentences. The model should also be tested with more speakers and with phone recordings, and the app and backend should be tested together on a real device.
+The small GRID vocabulary is the main limit of the lip reading component. Future work should train the model on open-vocabulary data, so that it can recognise everyday sentences. The model should also be tested with more speakers and with phone recordings, and the app and backend should be tested together on a real device.
 
 
 
