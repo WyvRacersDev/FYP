@@ -302,28 +302,51 @@ Development team and supervisor & The students who build the system and the proj
 
 \subsection{Key High-Level Goals and Problems of Stakeholders}
 Table~\ref{tab:goals} lists the key goals and problems of each stakeholder. The goals column states what the stakeholder wants to achieve, and the problems column states what currently prevents it. Many requirements of the system come directly from this table. For example, the problem of a guardian who cannot be present or reached in time leads to the emergency notification feature, and the problem of noise for the hearing conversation partner leads to the sound optimization module. Problems that are shared by several stakeholders, such as the scarcity of interpreters and the failure of audio based tools in noisy places, are the main motivation for the whole project. The table also shows that the needs of the groups are connected, because a system that serves the user well but is hard for the hearing partner to follow would not enable real conversation. The design therefore considers both sides of every conversation, and the requirements and use cases in later chapters are written with these goals and problems in mind.
-\begin{table}[H]
-\centering
-\caption{Key goals and problems of the stakeholders}
-\begin{tabular}{|p{3.2cm}|p{5.4cm}|p{5.4cm}|}
+% \begin{table}[H]
+% \centering
+% \caption{Key goals and problems of the stakeholders}
+% \begin{tabular}{|p{3.2cm}|p{5.4cm}|p{5.4cm}|}
+% \hline
+% \textbf{Stakeholder} & \textbf{Key goals} & \textbf{Key problems} \\
+% \hline
+% Speech impaired user & Talk to hearing people and get help in an emergency & Interpreters are scarce and audio tools fail \\
+% \hline
+% Sign language user & Be understood by people who do not sign & Others do not understand signs \\
+% \hline
+% Hearing conversation partner & Understand the user quickly and reply naturally & Noise, unclear speech and no sign knowledge \\
+% \hline
+% Guardian & Know when the user needs help & Cannot be present or reached in time \\
+% \hline
+% Institution & Serve these users at low cost & Interpreters are costly and often unavailable \\
+% \hline
+% Development team and supervisor & Deliver an accurate working system on time & Limited data, hardware and time \\
+% \hline
+% \end{tabular}
+% \label{tab:goals}
+% \end{table}
+
+\begingroup
+\renewcommand{\arraystretch}{1.3}
+
+\noindent
+\begin{xltabular}{\linewidth}{|p{3.2cm}|X|X|}
+\caption{Key goals and problems of the stakeholders}\label{tab:goals} \\
 \hline
-\textbf{Stakeholder} & \textbf{Key goals} & \textbf{Key problems} \\
+\textbf{Stakeholder} & \textbf{Key goals} & \textbf{Key problems} \\ \hline
+\endfirsthead
+
 \hline
-Speech impaired user & Talk to hearing people and get help in an emergency & Interpreters are scarce and audio tools fail \\
-\hline
-Sign language user & Be understood by people who do not sign & Others do not understand signs \\
-\hline
-Hearing conversation partner & Understand the user quickly and reply naturally & Noise, unclear speech and no sign knowledge \\
-\hline
-Guardian & Know when the user needs help & Cannot be present or reached in time \\
-\hline
-Institution & Serve these users at low cost & Interpreters are costly and often unavailable \\
-\hline
-Development team and supervisor & Deliver an accurate working system on time & Limited data, hardware and time \\
-\hline
-\end{tabular}
-\label{tab:goals}
-\end{table}
+\textbf{Stakeholder} & \textbf{Key goals} & \textbf{Key problems} \\ \hline
+\endhead
+
+Speech impaired user & Talk to hearing people and get help in an emergency & Interpreters are scarce and audio tools fail \\ \hline
+Sign language user & Be understood by people who do not sign & Others do not understand signs \\ \hline
+Hearing conversation partner & Understand the user quickly and reply naturally & Noise, unclear speech and no sign knowledge \\ \hline
+Guardian & Know when the user needs help & Cannot be present or reached in time \\ \hline
+Institution & Serve these users at low cost & Interpreters are costly and often unavailable \\ \hline
+Development team and supervisor & Deliver an accurate working system on time & Limited data, hardware and time \\ \hline
+\end{xltabular}
+\endgroup
 
 \section{Conclusion}
 This chapter has set out the vision of Silent Signals. The problem is the daily communication barrier faced by people with hearing or speech impairments in classrooms, hospitals, banks and workplaces, where interpreters are scarce, assistive hardware is costly and audio based speech recognition does not help a user who cannot speak clearly. The proposed solution is a single affordable platform that recognises speech from lip movements and signs, speaks the result aloud, and supports the user with confidence scores, language model correction, emotional context, conversation history and an emergency mode. The goals and objectives were stated so that each can be checked by demonstration, the scope was fixed to English and to a standard camera, and the deliverables and exclusions were listed. The work supports SDG 10, SDG 4, SDG 3 and SDG 9 through specific targets on inclusion, education, access to health care and access to technology, and it is developed under constraints of time, data, hardware, language and privacy. The business opportunity lies with institutions that serve the public and cannot afford interpreters for every interaction, and the stakeholders range from the primary users and their conversation partners to guardians, institutions and the development team. The next chapter reviews the research on which each module of the system is built, so that the design choices in later chapters can be justified against the published state of the art.
